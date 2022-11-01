@@ -14,7 +14,6 @@ body {
   font-family: 'League Spartan', sans-serif;
   font-size: 62.5%;
   scroll-behavior: smooth;
-  background-color: var(--greyish);
   width: 100%;
 }
 
@@ -38,6 +37,10 @@ p {
   font-weight: 500;
 }
 
+main {
+  min-height: 100vh;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -49,4 +52,23 @@ input[type="number"]::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+/************LIGHT THEME*************/
+.header-color-light {
+background-color: #373B53;
+}
+
+.background-main-light {
+  background-color: var(--greyish);
+}
+
+/************DARK THEME*************/
+
+.header-color-dark {
+background-color: #1E2139;
+}
+
+.background-main-dark {
+  background-color: var(--blackish);
 }
