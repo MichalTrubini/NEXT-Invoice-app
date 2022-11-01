@@ -1,0 +1,52 @@
+:root {
+  --black: #0C0E16;
+  --blackish: #141625;
+  --greyish: #F8F8FB;
+  --red: #EC5757;
+  --pink: #FF9797;
+  --purple: #7C5DFA;
+  --purplish: #9277FF;
+
+}
+
+html,
+body {
+  font-family: 'League Spartan', sans-serif;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  background-color: var(--greyish);
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
