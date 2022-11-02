@@ -2,6 +2,7 @@
   --black: #0C0E16;
   --blackish: #141625;
   --greyish: #F8F8FB;
+  --darkBlue: #1E2139;
   --red: #EC5757;
   --pink: #FF9797;
   --purple: #7C5DFA;
@@ -79,6 +80,14 @@ background-color: #373B53;
   color: var(--blueGrey);
 }
 
+.background-invoice-lightTheme {
+  background-color: var(--white);
+}
+
+.text-colorThree-lightTheme {
+color: #858BB2;
+}
+
 /************DARK THEME*************/
 
 .header-color-darkTheme {
@@ -96,6 +105,14 @@ background-color: #1E2139;
 .text-colorTwo-darkTheme {
   color: var(--lightBlueGrey);
 }
+
+.background-invoice-DarkTheme {
+  background-color: var(--darkBlue);
+}
+
+.text-colorThree-darkTheme {
+  color: var(--white);
+  }
 
 @media screen and (min-width:768px) {
   main {

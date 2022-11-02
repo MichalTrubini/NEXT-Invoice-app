@@ -2,17 +2,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 3.2rem;
 }
 
 .heading {
-    font-size: 2rem;
+    font-size: 2.5rem;
     letter-spacing: -0.63px;
     line-height: 2.2rem;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.8rem;
 }
 
 .invoiceCount, .filter {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     line-height: 1.5rem;
     letter-spacing: -0.25px;
 }
@@ -48,7 +49,7 @@
 
 .addInvoice {
     color: var(--white);
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     line-height: 1.5rem;
     letter-spacing: -0.25px;
@@ -63,11 +64,14 @@
 
 @media screen and (min-width:768px) {
 
-    .heading {
-        font-size: 3.2rem;
-        letter-spacing: -1px;
+    .header {
+        margin-bottom: 5.6rem;
+    }
 
-        margin-bottom: 0.8rem;
+    .heading {
+        font-size: 4.3rem;
+        letter-spacing: -1px;
+        margin-bottom: 1.8rem;
     }
 
     .filterBlock {
@@ -80,5 +84,21 @@
 
     .addContainer {
         gap: 1.6rem;
+    }
+
+    .invoiceCount, .filter {
+        font-size: 1.6rem;
+    }
+
+    .addInvoice {
+        font-size: 1.6rem;
+    }
+}
+
+
+@media screen and (min-width:1024px) {
+
+    .header {
+        margin-bottom: 7.1rem;
     }
 }

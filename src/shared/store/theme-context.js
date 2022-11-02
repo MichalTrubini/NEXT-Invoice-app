@@ -12,12 +12,16 @@ export function ThemeProvider({ children }) {
         headerBackground: "header-color-lightTheme",
         textOne: "text-colorOne-lightTheme",
         textTwo: "text-colorTwo-lightTheme",
+        textThree: "text-colorThree-lightTheme",
+        invoiceItem: "background-invoice-lightTheme"
       },
       themeDark: {
         backgroundMain: "background-main-darkTheme",
         headerBackground: "header-color-darkTheme",
         textOne: "text-colorOne-darkTheme",
         textTwo: "text-colorTwo-darkTheme",
+        textThree: "text-colorThree-darkTheme",
+        invoiceItem: "background-invoice-DarkTheme"
       }
     };
 
