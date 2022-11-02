@@ -13,7 +13,9 @@ export function ThemeProvider({ children }) {
         textOne: "text-colorOne-lightTheme",
         textTwo: "text-colorTwo-lightTheme",
         textThree: "text-colorThree-lightTheme",
-        invoiceItem: "background-invoice-lightTheme"
+        invoiceItem: "background-invoice-lightTheme",
+        draft: 'background-draft-lightTheme',
+        draftCircle: 'background-draftCircle-lightTheme'
       },
       themeDark: {
         backgroundMain: "background-main-darkTheme",
@@ -21,7 +23,9 @@ export function ThemeProvider({ children }) {
         textOne: "text-colorOne-darkTheme",
         textTwo: "text-colorTwo-darkTheme",
         textThree: "text-colorThree-darkTheme",
-        invoiceItem: "background-invoice-DarkTheme"
+        invoiceItem: "background-invoice-DarkTheme",
+        draft: 'background-draft-darkTheme',
+        draftCircle: 'background-draftCircle-darkTheme'
       }
     };
 

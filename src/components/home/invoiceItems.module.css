@@ -34,15 +34,17 @@
 }
 
 .statusContainer {
-  padding: 1.3rem 3rem;
-  background: rgba(51, 214, 159, 0.06);
+  width: 104px;
+  padding: 1.3rem 0;
   border-radius: 6px;
   display: flex;
+  justify-content: center;
   gap: 0.8rem;
+  
 }
 
 .status {
-  color: #33d69f;
+  text-transform:capitalize;
   font-weight: 700;
 }
 
@@ -53,7 +55,7 @@
   display: block;
   position: relative;
   top: 3px;
-  background-color: #33d69f;
+  
 }
 
 .price {
@@ -61,6 +63,33 @@
   letter-spacing: -0.8px;
   font-weight: 700;
   margin-top: 0.8rem;
+}
+
+.paid {
+    background: rgba(51, 214, 159, 0.06);
+    color: #33d69f;
+}
+
+.paidCircle {
+    background-color: #33d69f;
+}
+
+.pending {
+    background: rgba(255, 143, 0, 0.06);
+    color: #FF8F00;
+}
+
+.pendingCircle {
+    background-color: #FF8F00;
+}
+
+.draft {
+    background: rgba(55, 59, 83, 0.06);
+    color: #373B53;
+}
+
+.draftCircle {
+    background-color: #373B53;
 }
 
 @media screen and (min-width: 768px) {
@@ -93,23 +122,22 @@
 }
 
 @media screen and (min-width: 1024px) {
-
-    .date {
-      margin-left: 4.3rem;
-    }
-  
-    .name {
-      margin-left: 4.8rem;
-    }
-  
-    .statusContainer {
-      margin-left: 4rem;
-      position: relative;
-    }
-  
-    .arrowIcon {
-      position: absolute;
-      right: -25px;
-    }
+  .date {
+    margin-left: 4.3rem;
   }
-  
+
+  .name {
+    margin-left: 4.8rem;
+  }
+
+  .statusContainer {
+    margin-left: 4rem;
+    position: relative;
+  }
+
+  .arrowIcon {
+    position: absolute;
+    right: -25px;
+    top: 15px;
+  }
+}

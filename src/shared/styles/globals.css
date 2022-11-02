@@ -1,21 +1,21 @@
 :root {
-  --black: #0C0E16;
+  --black: #0c0e16;
   --blackish: #141625;
-  --greyish: #F8F8FB;
-  --darkBlue: #1E2139;
-  --red: #EC5757;
-  --pink: #FF9797;
-  --purple: #7C5DFA;
-  --purplish: #9277FF;
-  --darkGrey: #373B53;
+  --greyish: #f8f8fb;
+  --darkBlue: #1e2139;
+  --red: #ec5757;
+  --pink: #ff9797;
+  --purple: #7c5dfa;
+  --purplish: #9277ff;
+  --darkGrey: #373b53;
   --white: #fff;
-  --blueGrey: #888EB0;
-  --lightBlueGrey:#DFE3FA;
+  --blueGrey: #888eb0;
+  --lightBlueGrey: #dfe3fa;
 }
 
 html,
 body {
-  font-family: 'League Spartan', sans-serif;
+  font-family: "League Spartan", sans-serif;
   font-size: 62.5%;
   scroll-behavior: smooth;
   width: 100%;
@@ -40,7 +40,9 @@ p {
   font-weight: 500;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 700;
 }
 
@@ -65,7 +67,7 @@ input[type="number"] {
 
 /************LIGHT THEME*************/
 .header-color-lightTheme {
-background-color: #373B53;
+  background-color: #373b53;
 }
 
 .background-main-lightTheme {
@@ -85,13 +87,22 @@ background-color: #373B53;
 }
 
 .text-colorThree-lightTheme {
-color: #858BB2;
+  color: #858bb2;
+}
+
+.background-draft-lightTheme {
+  background: rgba(55, 59, 83, 0.06);
+  color: #373b53;
+}
+
+.background-draftCircle-lightTheme {
+ background-color: #373B53;
 }
 
 /************DARK THEME*************/
 
 .header-color-darkTheme {
-background-color: #1E2139;
+  background-color: #1e2139;
 }
 
 .background-main-darkTheme {
@@ -112,9 +123,18 @@ background-color: #1E2139;
 
 .text-colorThree-darkTheme {
   color: var(--white);
-  }
+}
 
-@media screen and (min-width:768px) {
+.background-draft-darkTheme {
+  background: rgba(223, 227, 250, 0.06);
+  color: #DFE3FA;
+}
+
+.background-draftCircle-darkTheme {
+  background-color: #DFE3FA;
+ }
+
+@media screen and (min-width: 768px) {
   main {
     min-height: calc(100vh - 80px);
     margin-top: 80px;
@@ -122,7 +142,7 @@ background-color: #1E2139;
   }
 }
 
-@media screen and (min-width:1024px) {
+@media screen and (min-width: 1024px) {
   main {
     min-height: 100vh;
     margin: 0 auto;
