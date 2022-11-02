@@ -8,26 +8,16 @@ export function ThemeProvider({ children }) {
   const setThemeStyles = (arg) => {
     const styles = {
       themeLight: {
-        backgroundMain: "background-main-light",
-        headerBackground: "header-color-light",
-        backgroundToggle: "background-toggle-one",
-        screenProps: "screen-props-one",
-        backgroundKeyboard: "background-keyboard-one",
-        backgroundSwitcher: "background-switcher-one",
-        keyProps: "key-props-one",
-        delProps: "del-props-one",
-        resultProps: "result-props-one",
+        backgroundMain: "background-main-lightTheme",
+        headerBackground: "header-color-lightTheme",
+        textOne: "text-colorOne-lightTheme",
+        textTwo: "text-colorTwo-lightTheme",
       },
       themeDark: {
-        backgroundMain: "background-main-dark",
-        headerBackground: "header-color-dark",
-        backgroundToggle: "background-toggle-two",
-        screenProps: "screen-props-two",
-        backgroundKeyboard: "background-keyboard-two",
-        backgroundSwitcher: "background-switcher-two",
-        keyProps: "key-props-two",
-        delProps: "del-props-two",
-        resultProps: "result-props-two",
+        backgroundMain: "background-main-darkTheme",
+        headerBackground: "header-color-darkTheme",
+        textOne: "text-colorOne-darkTheme",
+        textTwo: "text-colorTwo-darkTheme",
       }
     };
 

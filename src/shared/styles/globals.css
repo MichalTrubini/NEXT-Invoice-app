@@ -7,6 +7,9 @@
   --purple: #7C5DFA;
   --purplish: #9277FF;
   --darkGrey: #373B53;
+  --white: #fff;
+  --blueGrey: #888EB0;
+  --lightBlueGrey:#DFE3FA;
 }
 
 html,
@@ -33,12 +36,17 @@ li {
 }
 
 p {
-  font-size: 1.5rem;
   font-weight: 500;
 }
 
+h1, h2, h3 {
+  font-weight: 700;
+}
+
 main {
-  min-height: 100vh;
+  min-height: calc(100vh - 73px);
+  margin-top: 73px;
+  padding: 3.2rem 2.4rem;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -55,20 +63,54 @@ input[type="number"] {
 }
 
 /************LIGHT THEME*************/
-.header-color-light {
+.header-color-lightTheme {
 background-color: #373B53;
 }
 
-.background-main-light {
+.background-main-lightTheme {
   background-color: var(--greyish);
+}
+
+.text-colorOne-lightTheme {
+  color: var(--black);
+}
+
+.text-colorTwo-lightTheme {
+  color: var(--blueGrey);
 }
 
 /************DARK THEME*************/
 
-.header-color-dark {
+.header-color-darkTheme {
 background-color: #1E2139;
 }
 
-.background-main-dark {
+.background-main-darkTheme {
   background-color: var(--blackish);
+}
+
+.text-colorOne-darkTheme {
+  color: var(--white);
+}
+
+.text-colorTwo-darkTheme {
+  color: var(--lightBlueGrey);
+}
+
+@media screen and (min-width:768px) {
+  main {
+    min-height: calc(100vh - 80px);
+    margin-top: 80px;
+    padding: 5.6rem 4.8rem;
+  }
+}
+
+@media screen and (min-width:1024px) {
+  main {
+    min-height: 100vh;
+    margin: 0 auto;
+    max-width: 73rem;
+    padding: 0;
+    padding-top: 7.7rem;
+  }
 }

@@ -1,0 +1,84 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.heading {
+    font-size: 2rem;
+    letter-spacing: -0.63px;
+    line-height: 2.2rem;
+    margin-bottom: 0.4rem;
+}
+
+.invoiceCount, .filter {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    letter-spacing: -0.25px;
+}
+
+.filter {
+    font-weight: 700;
+}
+
+.filterBlock {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.addContainer {
+    background-color: var(--purple);
+    padding: 0.6rem;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.plusContainer {
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+}
+
+.addInvoice {
+    color: var(--white);
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+    letter-spacing: -0.25px;
+    padding-right: 0.8rem;
+    padding-top: 0.2rem;
+}
+
+.right {
+    display: flex;
+    gap: 1.8rem;
+}
+
+@media screen and (min-width:768px) {
+
+    .heading {
+        font-size: 3.2rem;
+        letter-spacing: -1px;
+
+        margin-bottom: 0.8rem;
+    }
+
+    .filterBlock {
+        gap: 1.6rem;
+    }
+
+    .right {
+        gap: 4rem;
+    }
+
+    .addContainer {
+        gap: 1.6rem;
+    }
+}
