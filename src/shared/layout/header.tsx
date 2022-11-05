@@ -7,7 +7,6 @@ import Image from "next/image";
 import { useContext } from "react";
 import ThemeContext from '../store/theme-context'
 
-
 const Header = () => {
 
   const {setDarkTheme} = useContext(ThemeContext);
@@ -29,7 +28,7 @@ const Header = () => {
         </div>
         <div className={styles.divider}></div>
         <div className={`${styles.imageContainer} ${styles.imageAvatar}`}>
-          <Image src={avatar} alt="avatar" layout="fill" />
+          <Image src={avatar} alt="avatar" layout="fill"/>
         </div>
       </div>
     </header>

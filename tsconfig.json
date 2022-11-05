@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/home/invoiceItems.jsx", "pages/index.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/home/invoiceHeader.jsx", "src/components/home/invoiceItems.jsx", "pages/index.jsx"],
   "exclude": ["node_modules"]
 }
