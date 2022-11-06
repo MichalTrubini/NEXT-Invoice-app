@@ -9,15 +9,20 @@ const Home = ({ invoiceItems }) => {
   const [pendingSelected, setPending] = useState(false);
   const [paidSelected, setPaid] = useState(false);
 
-  const draft = draftSelected === true ? 'draft' : '';
-  const pending = pendingSelected === true ? 'pending' : '';
-  const paid = paidSelected === true ? 'paid' : '';
+  const draft = draftSelected ? 'draft' : '';
+  const pending = pendingSelected ? 'pending' : '';
+  const paid = paidSelected ? 'paid' : '';
 
-  const arraySelected = [draft, pending, paid];
+  const selectedByFilter = [draft, pending, paid];
+  const data = invoiceItems.filter((item) => selectedByFilter.includes(item.status));
 
-  const data = invoiceItems.filter((item) => arraySelected.includes(item.status));
+  const sourceData = () => {
+    if(draftSelected === false & pendingSelected === false & paidSelected === false) return invoiceItems;
+    else return data
+  }
 
-  console.log(data);
+
+  console.log(sourceData());
 
   return (
     <div>
@@ -31,7 +36,7 @@ const Home = ({ invoiceItems }) => {
         pending={() => setPending((prevValue) => !prevValue)}
         paid={() => setPaid((prevValue) => !prevValue)}
       />
-      <InvoiceItems invoiceItems={data} />
+      <InvoiceItems invoiceItems={sourceData()} />
     </div>
   );
 };
