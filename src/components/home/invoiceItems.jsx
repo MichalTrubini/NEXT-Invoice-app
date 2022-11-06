@@ -4,6 +4,7 @@ import { useContext } from "react";
 import arrow from "../../../public/assets/icon-arrow-right.svg";
 import Image from "next/image";
 import { useMediaQuery } from "../../shared/utils/hooks";
+import Link from "next/link";
 
 const InvoiceItems = (props) => {
   const { setThemeStyles } = useContext(ThemeContext);
@@ -13,7 +14,7 @@ const InvoiceItems = (props) => {
   return (
     <div className={styles.invoiceItems}>
       {props.invoiceItems.map((item) => (
-        <div className={`${styles.invoiceItem} ${setThemeStyles("invoiceItem")}`} key={item._id}>
+        <Link href={item._id}><div className={`${styles.invoiceItem} ${setThemeStyles("invoiceItem")}`} key={item._id}>
           <div className={styles.topRow}>
             <h2 className={styles.invoiceHeader}>
               <span className={setThemeStyles("textTwo")}>#</span>
@@ -39,7 +40,7 @@ const InvoiceItems = (props) => {
               )}
             </div>
           </div>
-        </div>
+        </div></Link>
       ))}
     </div>
   );

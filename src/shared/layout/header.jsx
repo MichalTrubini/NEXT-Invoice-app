@@ -6,6 +6,7 @@ import avatar from "../../../public/assets/image-avatar.jpg";
 import Image from "next/image";
 import { useContext } from "react";
 import ThemeContext from '../store/theme-context'
+import Link from "next/link";
 
 const Header = () => {
 
@@ -14,13 +15,13 @@ const Header = () => {
   const {setThemeStyles} = useContext(ThemeContext);
 
   const themeHandler = () => {
-    setDarkTheme((prevValue:Boolean) => !prevValue)
+    setDarkTheme(prevValue => !prevValue)
   }
 
   return (
     <header className={`${styles.header} ${setThemeStyles('headerBackground')}`}>
       <div className={`${styles.imageContainer} ${styles.imageLogoContainer}`}>
-        <Image src={logo} alt="invoice app" className={styles.imageLogo} />
+        <Link href='/'><Image src={logo} alt="invoice app" className={styles.imageLogo} /></Link>
       </div>
       <div className={styles.rightBlock}>
         <div className={`${styles.imageContainer} ${styles.imageTheme}`} onClick={themeHandler}>

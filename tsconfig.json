@@ -22,7 +22,8 @@
     "src/components/home/invoiceHeader.jsx",
     "src/components/home/invoiceItems.jsx",
     "pages/index.jsx",
-    "src/shared/utils/hooks.jsx"
+    "src/shared/utils/hooks.jsx",
+    "src/shared/layout/header.jsx"
   ],
   "exclude": ["node_modules"]
 }

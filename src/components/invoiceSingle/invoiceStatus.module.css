@@ -1,0 +1,65 @@
+.container {
+  padding: 2.4rem;
+  background-color: var(--white);
+  box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statusContainer {
+  width: 104px;
+  padding: 1.3rem 0;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.status {
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  display: block;
+  position: relative;
+  top: 3px;
+}
+
+.paid {
+  background: rgba(51, 214, 159, 0.06);
+  color: #33d69f;
+}
+
+.paidCircle {
+  background-color: #33d69f;
+}
+
+.pending {
+  background: rgba(255, 143, 0, 0.06);
+  color: #ff8f00;
+}
+
+.pendingCircle {
+  background-color: #ff8f00;
+}
+
+.draft {
+  background: rgba(55, 59, 83, 0.06);
+  color: #373b53;
+}
+
+.draftCircle {
+  background-color: #373b53;
+}
+
+.title {
+    font-size: 1.5rem;
+    color: #858BB2;
+}
