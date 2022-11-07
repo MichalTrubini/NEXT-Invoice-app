@@ -9,18 +9,17 @@ const Home = ({ invoiceItems }) => {
   const [pendingSelected, setPending] = useState(false);
   const [paidSelected, setPaid] = useState(false);
 
-  const draft = draftSelected ? 'draft' : '';
-  const pending = pendingSelected ? 'pending' : '';
-  const paid = paidSelected ? 'paid' : '';
+  const draft = draftSelected ? "draft" : "";
+  const pending = pendingSelected ? "pending" : "";
+  const paid = paidSelected ? "paid" : "";
 
   const selectedByFilter = [draft, pending, paid];
   const data = invoiceItems.filter((item) => selectedByFilter.includes(item.status));
 
   const sourceData = () => {
-    if(draftSelected === false & pendingSelected === false & paidSelected === false) return invoiceItems;
-    else return data
-  }
-
+    if ((draftSelected === false) & (pendingSelected === false) & (paidSelected === false)) return invoiceItems;
+    else return data;
+  };
 
   console.log(sourceData());
 
@@ -31,12 +30,14 @@ const Home = ({ invoiceItems }) => {
         <meta name="description" content="Invoice app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <InvoiceHeader
-        draft={() => setDraft((prevValue) => !prevValue)}
-        pending={() => setPending((prevValue) => !prevValue)}
-        paid={() => setPaid((prevValue) => !prevValue)}
-      />
-      <InvoiceItems invoiceItems={sourceData()} />
+      <div className='wrapper'>
+        <InvoiceHeader
+          draft={() => setDraft((prevValue) => !prevValue)}
+          pending={() => setPending((prevValue) => !prevValue)}
+          paid={() => setPaid((prevValue) => !prevValue)}
+        />
+        <InvoiceItems invoiceItems={sourceData()} />
+      </div>
     </div>
   );
 };

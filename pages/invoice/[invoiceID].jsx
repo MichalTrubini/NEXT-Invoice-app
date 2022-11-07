@@ -1,10 +1,10 @@
 import Head from "next/head";
 import { MongoClient } from "mongodb";
-import GoBack from "../src/components/invoiceSingle/goBack";
-import InvoiceStatus from "../src/components/invoiceSingle/invoiceStatus";
+import GoBack from "../../src/components/invoiceSingle/goBack";
+import InvoiceStatus from "../../src/components/invoiceSingle/invoiceStatus";
+import InvoiceCTA from "../../src/components/invoiceSingle/invoiceCTA";
 
 const InvoiceSingle = ({ invoiceItem }) => {
-  console.log(invoiceItem);
   return (
     <>
       <Head>
@@ -12,8 +12,12 @@ const InvoiceSingle = ({ invoiceItem }) => {
         <meta name="description" content="Invoice app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <GoBack />
-      <InvoiceStatus status={invoiceItem.status}/>
+      <div className="wrapper">
+        <GoBack />
+        <InvoiceStatus status={invoiceItem.status} />
+
+      </div>
+      <InvoiceCTA />
     </>
   );
 };
@@ -37,7 +41,7 @@ export const getServerSideProps = async (context) => {
 
   return {
     props: {
-      invoiceItem: invoiceItem
+      invoiceItem: invoiceItem,
     },
   };
 };

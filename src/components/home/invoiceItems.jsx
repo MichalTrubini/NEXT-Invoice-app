@@ -14,7 +14,7 @@ const InvoiceItems = (props) => {
   return (
     <div className={styles.invoiceItems}>
       {props.invoiceItems.map((item) => (
-        <Link href={item._id}><div className={`${styles.invoiceItem} ${setThemeStyles("invoiceItem")}`} key={item._id}>
+        <Link href={`/invoice/${item._id}`} key={item._id}><div className={`${styles.invoiceItem} ${setThemeStyles("invoiceItem")}`} >
           <div className={styles.topRow}>
             <h2 className={styles.invoiceHeader}>
               <span className={setThemeStyles("textTwo")}>#</span>
