@@ -4,7 +4,7 @@
     width: 100%;
     position: absolute;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 0.8rem;
 }
@@ -31,4 +31,13 @@
     padding: 1.7rem 2.7rem;
     background-color: var(--purple);
     color: var(--white);
+}
+
+@media screen and (min-width:768px) {
+    .container {
+        padding: 0;
+        position: relative;
+        width: auto;
+    }
+      
 }

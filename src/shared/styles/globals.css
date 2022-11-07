@@ -37,7 +37,7 @@ li {
 }
 
 p {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 h1,
@@ -53,7 +53,7 @@ main {
 }
 
 .wrapper {
-  padding: 3.2rem 2.4rem;
+  padding: 3.2rem 2.4rem 5.6rem;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -138,12 +138,34 @@ input[type="number"] {
   background-color: #dfe3fa;
 }
 
+.statusCTA {
+  padding: 2.4rem;
+  background-color: var(--white);
+  box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
+  border-radius: 8px;
+  margin-bottom: 1.6rem;
+}
+
 @media screen and (min-width: 768px) {
   main {
     min-height: calc(100vh - 80px);
     margin-top: 80px;
-    padding: 5.6rem 4.8rem;
   }
+
+  .statusCTA {
+    padding: 2rem 3.2rem;
+    background-color: var(--white);
+    box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .wrapper {
+    padding: 4.8rem 4rem 13.5rem;
+  }
+
 }
 
 @media screen and (min-width: 1024px) {
@@ -151,6 +173,9 @@ input[type="number"] {
     min-height: 100vh;
     margin: 0 auto;
     max-width: 73rem;
+  }
+
+  .wrapper {
     padding: 0;
     padding-top: 7.7rem;
   }

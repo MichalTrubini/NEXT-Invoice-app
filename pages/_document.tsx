@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <link
-          href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;700&display=swap"
           rel="stylesheet"
         />
         <link rel="icon" href="/favicon.ico" />

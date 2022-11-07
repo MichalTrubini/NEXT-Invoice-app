@@ -1,11 +1,8 @@
 .container {
-  padding: 2.4rem;
-  background-color: var(--white);
-  box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
-  border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1.6rem;
 }
 
 .statusContainer {

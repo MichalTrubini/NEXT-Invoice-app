@@ -3,8 +3,13 @@ import { MongoClient } from "mongodb";
 import GoBack from "../../src/components/invoiceSingle/goBack";
 import InvoiceStatus from "../../src/components/invoiceSingle/invoiceStatus";
 import InvoiceCTA from "../../src/components/invoiceSingle/invoiceCTA";
+import { useMediaQuery } from "../../src/shared/utils/hooks";
+import InvoiceDetails from "../../src/components/invoiceSingle/invoiceDetails";
 
 const InvoiceSingle = ({ invoiceItem }) => {
+  const tabletBreakpoint = 768;
+  const matches = useMediaQuery(tabletBreakpoint);
+  console.log(matches);
   return (
     <>
       <Head>
@@ -14,10 +19,28 @@ const InvoiceSingle = ({ invoiceItem }) => {
       </Head>
       <div className="wrapper">
         <GoBack />
-        <InvoiceStatus status={invoiceItem.status} />
-
+        <div className="statusCTA">
+          <InvoiceStatus status={invoiceItem.status} />
+          {matches && <InvoiceCTA />}
+        </div>
+        <InvoiceDetails
+          _id={invoiceItem._id}
+          description={invoiceItem.description}
+          senderStreet={invoiceItem.senderAddress.street}
+          senderCity={invoiceItem.senderAddress.city}
+          senderPostCode={invoiceItem.senderAddress.postCode}
+          senderCountry={invoiceItem.senderAddress.country}
+          createdAt={invoiceItem.createdAt}
+          paymentDue={invoiceItem.paymentDue}
+          clientName={invoiceItem.clientName}
+          clientStreet={invoiceItem.clientAddress.street}
+          clientCity={invoiceItem.clientAddress.city}
+          clientPostCode={invoiceItem.clientAddress.postCode}
+          clientCountry={invoiceItem.clientAddress.country}
+          clientEmail={invoiceItem.clientEmail}
+        />
       </div>
-      <InvoiceCTA />
+      {!matches && <InvoiceCTA />}
     </>
   );
 };
