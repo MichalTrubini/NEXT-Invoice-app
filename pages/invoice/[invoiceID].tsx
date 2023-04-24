@@ -5,8 +5,9 @@ import InvoiceStatus from "../../src/components/invoiceSingle/invoiceStatus";
 import InvoiceCTA from "../../src/components/invoiceSingle/invoiceCTA";
 import { useMediaQuery } from "../../src/shared/utils/hooks";
 import InvoiceDetails from "../../src/components/invoiceSingle/invoiceDetails";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
-const InvoiceSingle = ({ invoiceItem }) => {
+const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const tabletBreakpoint = 768;
   const matches = useMediaQuery(tabletBreakpoint);
   console.log(matches);
@@ -47,10 +48,14 @@ const InvoiceSingle = ({ invoiceItem }) => {
 
 export default InvoiceSingle;
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context:any) => {
   const page = String(context.params.invoiceID);
 
-  const databaseConnection = process.env.DB_URL;
+  const databaseConnection: string | undefined = process.env.DB_URL;
+
+  if (!databaseConnection) {
+    throw new Error("Database connection string not found");
+  }
 
   const client = await MongoClient.connect(databaseConnection);
 

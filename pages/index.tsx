@@ -36,6 +36,9 @@ const Home = ({ invoiceItems }: InferGetServerSidePropsType<typeof getServerSide
           draft={() => setDraft((prevValue: boolean) => !prevValue)}
           pending={() => setPending((prevValue: boolean) => !prevValue)}
           paid={() => setPaid((prevValue: boolean) => !prevValue)}
+          draftSelected={draftSelected}
+          pendingSelected={pendingSelected}
+          paidSelected={paidSelected}
         />
         <InvoiceItems invoiceItems={sourceData()} />
       </div>
