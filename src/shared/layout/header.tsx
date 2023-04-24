@@ -15,7 +15,7 @@ const Header = () => {
   const {setThemeStyles} = useContext(ThemeContext);
 
   const themeHandler = () => {
-    setDarkTheme(prevValue => !prevValue)
+    setDarkTheme((prevValue:boolean) => !prevValue)
   }
 
   return (

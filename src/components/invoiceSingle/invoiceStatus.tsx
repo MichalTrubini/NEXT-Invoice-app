@@ -2,7 +2,7 @@ import styles from './invoiceStatus.module.css'
 import ThemeContext from "../../shared/store/theme-context";
 import { useContext } from "react";
 
-const InvoiceStatus = (props) => {
+const InvoiceStatus: React.FC<{status: string}> = (props) => {
 
     const { setThemeStyles } = useContext(ThemeContext);
 

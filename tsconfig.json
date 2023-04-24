@@ -19,11 +19,11 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/home/invoiceHeader.jsx",
-    "src/components/home/invoiceItems.jsx",
-    "pages/index.jsx",
-    "src/shared/utils/hooks.jsx",
-    "src/shared/layout/header.jsx"
-  ],
+    "src/components/home/invoiceHeader.tsx",
+    "src/components/home/invoiceItems.tsx",
+    "pages/index.tsx",
+    "src/shared/utils/hooks.ts",
+    "src/shared/layout/header.tsx"
+, "src/shared/store/theme-context.js"  ],
   "exclude": ["node_modules"]
 }

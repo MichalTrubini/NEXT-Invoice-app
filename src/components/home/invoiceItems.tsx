@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useMediaQuery } from "../../shared/utils/hooks";
 import Link from "next/link";
 
-const InvoiceItems = (props) => {
+const InvoiceItems: React.FC<{invoiceItems: {_id: string, clientName: string, total: number, status: string}[]}> = (props) => {
   const { setThemeStyles } = useContext(ThemeContext);
   const tabletBreakpoint = 768;
   const matches = useMediaQuery(tabletBreakpoint)

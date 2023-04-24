@@ -6,7 +6,7 @@ import arrow from "../../../public/assets/icon-arrow-down.svg";
 import plus from "../../../public/assets/icon-plus.svg";
 import { useScreenWidth } from "../../shared/utils/hooks";
 
-const InvoiceHeader = (props) => {
+const InvoiceHeader:React.FC<{draft:()=>void, pending: ()=>void, paid: ()=>void}> = (props) => {
   const { setThemeStyles } = useContext(ThemeContext);
   const tabletBreakpoint = 768;
 

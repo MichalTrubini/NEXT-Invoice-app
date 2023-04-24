@@ -3,8 +3,9 @@ import InvoiceHeader from "../src/components/home/invoiceHeader";
 import { MongoClient } from "mongodb";
 import InvoiceItems from "../src/components/home/invoiceItems";
 import { useState } from "react";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
-const Home = ({ invoiceItems }) => {
+const Home = ({ invoiceItems }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [draftSelected, setDraft] = useState(false);
   const [pendingSelected, setPending] = useState(false);
   const [paidSelected, setPaid] = useState(false);
@@ -14,14 +15,14 @@ const Home = ({ invoiceItems }) => {
   const paid = paidSelected ? "paid" : "";
 
   const selectedByFilter = [draft, pending, paid];
-  const data = invoiceItems.filter((item) => selectedByFilter.includes(item.status));
+  const data = invoiceItems.filter((item: any) => selectedByFilter.includes(item.status));
 
   const sourceData = () => {
-    if ((draftSelected === false) & (pendingSelected === false) & (paidSelected === false)) return invoiceItems;
+    if (draftSelected === false && pendingSelected === false && paidSelected === false) return invoiceItems;
     else return data;
   };
 
-  console.log(sourceData());
+  console.log(invoiceItems);
 
   return (
     <div>
@@ -30,11 +31,11 @@ const Home = ({ invoiceItems }) => {
         <meta name="description" content="Invoice app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className='wrapper'>
+      <div className="wrapper">
         <InvoiceHeader
-          draft={() => setDraft((prevValue) => !prevValue)}
-          pending={() => setPending((prevValue) => !prevValue)}
-          paid={() => setPaid((prevValue) => !prevValue)}
+          draft={() => setDraft((prevValue: boolean) => !prevValue)}
+          pending={() => setPending((prevValue: boolean) => !prevValue)}
+          paid={() => setPaid((prevValue: boolean) => !prevValue)}
         />
         <InvoiceItems invoiceItems={sourceData()} />
       </div>
@@ -42,8 +43,12 @@ const Home = ({ invoiceItems }) => {
   );
 };
 
-export const getServerSideProps = async () => {
-  const databaseConnection = process.env.DB_URL;
+export const getServerSideProps: GetServerSideProps = async () => {
+  const databaseConnection: string | undefined = process.env.DB_URL;
+
+  if (!databaseConnection) {
+    throw new Error("Database connection string not found");
+  }
 
   const client = await MongoClient.connect(databaseConnection);
 

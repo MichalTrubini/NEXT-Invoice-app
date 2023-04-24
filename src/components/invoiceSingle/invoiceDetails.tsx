@@ -1,6 +1,6 @@
 import styles from "./invoiceDetails.module.css";
-
-const InvoiceDetails = (props) => {
+import  IDetails  from "../../shared/types/types";
+const InvoiceDetails: React.FC<IDetails> = (props) => {
   return (
     <div className={styles.invoiceContainer}>
       <div className={styles.top}>
@@ -44,9 +44,7 @@ const InvoiceDetails = (props) => {
           <p className={styles.textBold}>{props.clientEmail}</p>
         </div>
       </div>
-      <div className={styles.bottom}>
-
-      </div>
+      <div className={styles.bottom}></div>
     </div>
   );
 };
