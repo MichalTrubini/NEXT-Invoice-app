@@ -64,7 +64,7 @@ const InvoiceDetails: React.FC<IDetails> = (props) => {
                   <p className={`${styles.item} ${setThemeStyles("textOne")}`}>{item.name}</p>
                   <p className={`${styles.item} ${setThemeStyles("textFour")}`}>{`${
                     item.quantity
-                  } x € ${item.price.toFixed(2).toLocaleString("sk")}`}</p>
+                  } x € ${item.price.toLocaleString("sk")}`}</p>
                 </div>
                 <div>
                   <p className={`${styles.item} ${setThemeStyles("textOne")}`}>{`€ ${(
@@ -76,7 +76,7 @@ const InvoiceDetails: React.FC<IDetails> = (props) => {
           </div>
           <div className={`${styles.bottomContentBottom} ${setThemeStyles("invoiceTotal")}`}>
             <p className={styles.grandTotalText}>Grand Total</p>
-            <p className={styles.grandTotal}>{`€ ${totalPrice.toFixed(2)}`}</p>
+            <p className={styles.grandTotal}>{`€ ${totalPrice.toLocaleString("sk")}`}</p>
           </div>
         </div>
       </div>

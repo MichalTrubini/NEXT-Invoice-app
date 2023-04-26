@@ -140,5 +140,26 @@ margin-bottom: 0.8rem;
   .middleTop {
     justify-content: space-between;
     gap: 10rem;
+    margin-bottom: 0;
+  }
+
+  .invoiceContainer {
+    padding: 3.2rem;
+  }
+
+  .bottom {
+    margin-top: 4.8rem;
+  }
+
+  .grandTotal {
+    font-size: 2.4rem;
+  }
+
+  .bottomContentBottom {
+    padding: 2.4rem 3.2rem;
+  }
+
+  .bottomContentTop {
+    padding: 3.2rem;
   }
 }
