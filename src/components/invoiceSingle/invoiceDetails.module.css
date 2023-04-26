@@ -43,7 +43,7 @@
 }
 
 .marginFixThree {
-margin-bottom: 0.8rem;
+  margin-bottom: 0.8rem;
 }
 
 .left {
@@ -91,17 +91,11 @@ margin-bottom: 0.8rem;
 }
 
 .bottomContentTop {
-  padding: 2.4rem;
+  padding: 0 2.4rem;
   border-radius: 8px 8px 0 0;
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
-}
-
-.itemRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .item {
@@ -110,10 +104,13 @@ margin-bottom: 0.8rem;
   letter-spacing: -0.25px;
 }
 
-.itemDescription {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+.subtotal {
+  text-align: right;
+}
+
+.tableBody {
+  border-collapse: separate;
+  border-spacing: 0 2.4rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -160,6 +157,38 @@ margin-bottom: 0.8rem;
   }
 
   .bottomContentTop {
-    padding: 3.2rem;
+    padding: 0 3.2rem;
+  }
+
+  .itemsHeader {
+    display: flex;
+  }
+
+  .tableHeader {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  .tableHeader:nth-child(1) {
+    text-align: left;
+  }
+  .tableHeader:nth-child(2) {
+    text-align: center;
+  }
+
+  .tableHeader:nth-child(3) {
+    text-align: right;
+  }
+
+  .tableHeader:nth-child(4) {
+    text-align: right;
+  }
+
+  .itemQty {
+    text-align: center;
+  }
+
+  .itemPrice {
+    text-align: right;
   }
 }

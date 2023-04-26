@@ -2,14 +2,18 @@ import styles from "./invoiceDetails.module.css";
 import IDetails from "../../shared/types/types";
 import { useContext } from "react";
 import ThemeContext from "../../shared/store/theme-context";
+import { useMediaQuery } from "../../shared/utils/hooks";
+import { Size } from "../../shared/types/enums";
 
 const InvoiceDetails: React.FC<IDetails> = (props) => {
   const { setThemeStyles } = useContext(ThemeContext);
 
   const totalPrice = props.items.reduce((total, item) => {
     return total + item.quantity * item.price;
-}, 0);
+  }, 0);
 
+  const matches = useMediaQuery(Size.tabletBreakpoint);
+  console.log(matches);
   return (
     <div className={`${styles.invoiceContainer} ${setThemeStyles("invoiceItem")}`}>
       <div className={styles.top}>
@@ -58,21 +62,42 @@ const InvoiceDetails: React.FC<IDetails> = (props) => {
       <div className={styles.bottom}>
         <div className={styles.bottomContent}>
           <div className={`${styles.bottomContentTop} ${setThemeStyles("invoiceItems")}`}>
-            {props.items.map((item, id) => (
-              <div className={styles.itemRow} key={id}>
-                <div className={styles.itemDescription}>
-                  <p className={`${styles.item} ${setThemeStyles("textOne")}`}>{item.name}</p>
-                  <p className={`${styles.item} ${setThemeStyles("textFour")}`}>{`${
-                    item.quantity
-                  } x € ${item.price.toLocaleString("sk")}`}</p>
-                </div>
-                <div>
-                  <p className={`${styles.item} ${setThemeStyles("textOne")}`}>{`€ ${(
-                    item.quantity * item.price
-                  ).toLocaleString("sk")}`}</p>
-                </div>
-              </div>
-            ))}
+            <table className={styles.tableBody}>
+              {matches && (
+                <thead>
+                  <tr>
+                    <th className={`${styles.tableHeader} ${setThemeStyles("textTwo")}`}>Item Name</th>
+                    <th className={`${styles.tableHeader} ${setThemeStyles("textTwo")}`}>QTY.</th>
+                    <th className={`${styles.tableHeader} ${setThemeStyles("textTwo")}`}>Price</th>
+                    <th className={`${styles.tableHeader} ${setThemeStyles("textTwo")}`}>Total</th>
+                  </tr>
+                </thead>
+              )}
+              <tbody>
+                {props.items.map((item, id) => (
+                  <tr className={styles.itemRow} key={id}>
+                    {!matches && (
+                      <td >
+                        <div>
+                          <p className={`${styles.item} ${styles.marginFix} ${setThemeStyles("textOne")}`}>{item.name}</p>
+                          <p className={`${styles.item} ${setThemeStyles("textFour")}`}>{`${item.quantity} x € ${item.price}`}</p>
+                        </div>
+                      </td>
+                    )}
+                    {matches && <td className={`${styles.item} ${setThemeStyles("textOne")}`}>{item.name}</td>}
+                    {matches && <td className={`${styles.item} ${styles.itemQty} ${setThemeStyles("textFour")}`}>{item.quantity}</td>}
+                    {matches && (
+                      <td className={`${styles.item} ${styles.itemPrice} ${setThemeStyles("textFour")}`}>{`€ ${item.price.toLocaleString(
+                        "sk"
+                      )}`}</td>
+                    )}
+                    <td className={`${styles.item} ${styles.subtotal} ${setThemeStyles("textOne")}`}>{`€ ${(
+                      item.quantity * item.price
+                    ).toLocaleString("sk")}`}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
           <div className={`${styles.bottomContentBottom} ${setThemeStyles("invoiceTotal")}`}>
             <p className={styles.grandTotalText}>Grand Total</p>

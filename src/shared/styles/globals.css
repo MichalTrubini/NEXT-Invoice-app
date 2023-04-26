@@ -183,7 +183,6 @@ input[type="number"] {
 
   .statusCTA {
     padding: 2rem 3.2rem;
-    background-color: var(--light100);
     box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
     border-radius: 8px;
     display: flex;
