@@ -1,17 +1,22 @@
 import styles from "./invoiceDetails.module.css";
-import  IDetails  from "../../shared/types/types";
+import IDetails from "../../shared/types/types";
+import { useContext } from "react";
+import ThemeContext from "../../shared/store/theme-context";
+
 const InvoiceDetails: React.FC<IDetails> = (props) => {
+  const { setThemeStyles } = useContext(ThemeContext);
+
   return (
-    <div className={styles.invoiceContainer}>
+    <div className={`${styles.invoiceContainer} ${setThemeStyles("invoiceItem")}`}>
       <div className={styles.top}>
         <div>
           <p className={styles.invoiceNumber}>
-            <span className={styles.hash}>#</span>
-            <span className={styles.invoiceID}>{props._id}</span>
+            <span className={`${styles.hash} ${setThemeStyles("textTwo")}`}>#</span>
+            <span className={`${styles.invoiceID} ${setThemeStyles("textOne")}`}>{props._id}</span>
           </p>
-          <p className={styles.text}>{props.description}</p>
+          <p className={`${styles.text} ${setThemeStyles("textTwo")}`}>{props.description}</p>
         </div>
-        <div className={styles.text}>
+        <div className={`${styles.text} ${setThemeStyles("textTwo")}`}>
           <p className={styles.marginFix}>{props.senderStreet}</p>
           <p className={styles.marginFix}>{props.senderCity}</p>
           <p className={styles.marginFix}>{props.senderPostCode}</p>
@@ -22,29 +27,51 @@ const InvoiceDetails: React.FC<IDetails> = (props) => {
         <div className={styles.middleTop}>
           <div className={styles.left}>
             <div className={styles.invoiceDateContainer}>
-              <p className={`${styles.marginFixTwo} ${styles.text}`}>Invoice Date</p>
-              <p className={styles.textBold}>{props.createdAt}</p>
+              <p className={`${styles.marginFixTwo} ${styles.text} ${setThemeStyles("textTwo")}`}>Invoice Date</p>
+              <p className={`${styles.textBold} ${setThemeStyles("textOne")}`}>{props.createdAt}</p>
             </div>
             <div className={styles.invoiceDateContainer}>
-              <p className={`${styles.marginFixTwo} ${styles.text}`}>Payment Due</p>
-              <p className={styles.textBold}>{props.paymentDue}</p>
+              <p className={`${styles.marginFixTwo} ${styles.text} ${setThemeStyles("textTwo")}`}>Payment Due</p>
+              <p className={`${styles.textBold} ${setThemeStyles("textOne")}`}>{props.paymentDue}</p>
             </div>
           </div>
           <div className={styles.right}>
-            <p className={`${styles.marginFixTwo} ${styles.text}`}>Bill to</p>
-            <p className={styles.textBold}>{props.clientName}</p>
-            <p className={`${styles.marginFix} ${styles.text}`}>{props.clientStreet}</p>
-            <p className={`${styles.marginFix} ${styles.text}`}>{props.clientCity}</p>
-            <p className={`${styles.marginFix} ${styles.text}`}>{props.clientPostCode}</p>
-            <p className={`${styles.marginFix} ${styles.text}`}>{props.clientCountry}</p>
+            <p className={`${styles.marginFixTwo} ${styles.text} ${setThemeStyles("textTwo")}`}>Bill to</p>
+            <p className={`${styles.textBold} ${styles.marginFixThree} ${setThemeStyles("textOne")}`}>
+              {props.clientName}
+            </p>
+            <p className={`${styles.marginFix} ${styles.text} ${setThemeStyles("textTwo")}`}>{props.clientStreet}</p>
+            <p className={`${styles.marginFix} ${styles.text} ${setThemeStyles("textTwo")}`}>{props.clientCity}</p>
+            <p className={`${styles.marginFix} ${styles.text} ${setThemeStyles("textTwo")}`}>{props.clientPostCode}</p>
+            <p className={`${styles.marginFix} ${styles.text} ${setThemeStyles("textTwo")}`}>{props.clientCountry}</p>
           </div>
         </div>
         <div>
-          <p className={`${styles.marginFixTwo} ${styles.text}`}>Sent To</p>
-          <p className={styles.textBold}>{props.clientEmail}</p>
+          <p className={`${styles.marginFixTwo} ${styles.text} ${setThemeStyles("textTwo")}`}>Sent To</p>
+          <p className={`${styles.textBold} ${setThemeStyles("textOne")}`}>{props.clientEmail}</p>
         </div>
       </div>
-      <div className={styles.bottom}></div>
+      <div className={styles.bottom}>
+        <div className={styles.bottomContent}>
+          <div className={styles.bottomContentTop}>
+            {props.items.map((item) => (
+              <div>
+                <div>
+                  <p>{item.name}</p>
+                  <p>{`${item.quantity} x ${item.price}`}</p>
+                </div>
+                <div>
+                  <p>{item.quantity * item.price}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className={`${styles.bottomContentBottom} ${setThemeStyles("invoiceTotal")}`}>
+            <p className={styles.grandTotalText}>Grand Total</p>
+            <p className={styles.grandTotal}>556.00</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

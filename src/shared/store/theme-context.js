@@ -85,7 +85,8 @@ export function ThemeProvider({ children }) {
         textThree: "text-colorThree-lightTheme",
         invoiceItem: "background-invoice-lightTheme",
         draft: 'background-draft-lightTheme',
-        draftCircle: 'background-draftCircle-lightTheme'
+        draftCircle: 'background-draftCircle-lightTheme',
+        invoiceTotal: 'background-invoiceTotal-lightTheme'
       },
       themeDark: {
         backgroundMain: "background-main-darkTheme",
@@ -95,7 +96,8 @@ export function ThemeProvider({ children }) {
         textThree: "text-colorThree-darkTheme",
         invoiceItem: "background-invoice-DarkTheme",
         draft: 'background-draft-darkTheme',
-        draftCircle: 'background-draftCircle-darkTheme'
+        draftCircle: 'background-draftCircle-darkTheme',
+        invoiceTotal: 'background-invoiceTotal-darkTheme'
       }
     };
 

@@ -6,11 +6,14 @@ import InvoiceCTA from "../../src/components/invoiceSingle/invoiceCTA";
 import { useMediaQuery } from "../../src/shared/utils/hooks";
 import InvoiceDetails from "../../src/components/invoiceSingle/invoiceDetails";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { useContext } from "react";
+import ThemeContext from "../../src/shared/store/theme-context";
 
 const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const tabletBreakpoint = 768;
   const matches = useMediaQuery(tabletBreakpoint);
-  console.log(matches);
+  const { setThemeStyles } = useContext(ThemeContext);
+  console.log(invoiceItem)
   return (
     <>
       <Head>
@@ -20,7 +23,7 @@ const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getSe
       </Head>
       <div className="wrapper">
         <GoBack />
-        <div className="statusCTA">
+        <div className={`${setThemeStyles("invoiceItem")} statusCTA`}>
           <InvoiceStatus status={invoiceItem.status} />
           {matches && <InvoiceCTA />}
         </div>
@@ -39,6 +42,7 @@ const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getSe
           clientPostCode={invoiceItem.clientAddress.postCode}
           clientCountry={invoiceItem.clientAddress.country}
           clientEmail={invoiceItem.clientEmail}
+          items={invoiceItem.items}
         />
       </div>
       {!matches && <InvoiceCTA />}

@@ -1,6 +1,5 @@
 .container {
     padding: 2.4rem;
-    background-color: var(--white);
     width: 100%;
     position: absolute;
     display: flex;

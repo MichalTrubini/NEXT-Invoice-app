@@ -103,6 +103,10 @@ input[type="number"] {
   background-color: #373b53;
 }
 
+.background-invoiceTotal-lightTheme {
+  background-color: var(--darkGrey);
+}
+
 /************DARK THEME*************/
 
 .header-color-darkTheme {
@@ -115,6 +119,10 @@ input[type="number"] {
 
 .text-colorOne-darkTheme {
   color: var(--white);
+}
+
+.background-invoiceTotal-darkTheme {
+  background-color: var(--black);
 }
 
 .text-colorTwo-darkTheme {
@@ -140,7 +148,6 @@ input[type="number"] {
 
 .statusCTA {
   padding: 2.4rem;
-  background-color: var(--white);
   box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
   border-radius: 8px;
   margin-bottom: 1.6rem;
