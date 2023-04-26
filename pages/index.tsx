@@ -22,7 +22,9 @@ const Home = ({ invoiceItems }: InferGetServerSidePropsType<typeof getServerSide
     else return data;
   };
 
-  console.log(invoiceItems);
+  const invoiceQty = sourceData().length
+
+  console.log(invoiceQty)
 
   return (
     <div>
@@ -39,6 +41,7 @@ const Home = ({ invoiceItems }: InferGetServerSidePropsType<typeof getServerSide
           draftSelected={draftSelected}
           pendingSelected={pendingSelected}
           paidSelected={paidSelected}
+          invoiceQty={invoiceQty}
         />
         <InvoiceItems invoiceItems={sourceData()} />
       </div>

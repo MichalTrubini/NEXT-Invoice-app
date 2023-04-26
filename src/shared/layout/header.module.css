@@ -20,6 +20,10 @@
   position: relative;
 }
 
+.mode:hover {
+  cursor: pointer;
+}
+
 .imageLogoContainer {
   padding: 2.3rem;
   background: #7c5dfa;

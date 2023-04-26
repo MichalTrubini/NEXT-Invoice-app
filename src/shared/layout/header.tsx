@@ -25,7 +25,7 @@ const Header = () => {
       </div>
       <div className={styles.rightBlock}>
         <div className={`${styles.imageContainer} ${styles.imageTheme}`} onClick={themeHandler}>
-          <Image src={!darkTheme ? moon : sun} alt={!darkTheme ? 'light theme' : 'dark theme'} />
+          <Image src={!darkTheme ? moon : sun} alt={!darkTheme ? 'light theme' : 'dark theme'} className={styles.mode}/>
         </div>
         <div className={styles.divider}></div>
         <div className={`${styles.imageContainer} ${styles.imageAvatar}`}>

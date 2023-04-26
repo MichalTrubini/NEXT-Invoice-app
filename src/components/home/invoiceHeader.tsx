@@ -6,7 +6,7 @@ import arrow from "../../../public/assets/icon-arrow-down.svg";
 import plus from "../../../public/assets/icon-plus.svg";
 import { useScreenWidth } from "../../shared/utils/hooks";
 
-const InvoiceHeader:React.FC<{draft:()=>void, pending: ()=>void, paid: ()=>void, draftSelected:boolean, pendingSelected:boolean, paidSelected:boolean}> = (props) => {
+const InvoiceHeader:React.FC<{draft:()=>void, pending: ()=>void, paid: ()=>void, draftSelected:boolean, pendingSelected:boolean, paidSelected:boolean, invoiceQty: number}> = (props) => {
   const { setThemeStyles } = useContext(ThemeContext);
   const tabletBreakpoint = 768;
 
@@ -39,10 +39,10 @@ const InvoiceHeader:React.FC<{draft:()=>void, pending: ()=>void, paid: ()=>void,
         <div>
           <h1 className={`${styles.heading} ${setThemeStyles("textOne")}`}>Invoices</h1>
           {useScreenWidth() < tabletBreakpoint && (
-            <p className={`${styles.invoiceCount} ${setThemeStyles("textTwo")}`}>7 invoices</p>
+            <p className={`${styles.invoiceCount} ${setThemeStyles("textTwo")}`}>{props.invoiceQty === 1 ? `${props.invoiceQty} invoice` : `${props.invoiceQty} invoices`}</p>
           )}
           {useScreenWidth() > tabletBreakpoint - 1 && (
-            <p className={`${styles.invoiceCount} ${setThemeStyles("textTwo")}`}>There are 7 total invoices</p>
+            <p className={`${styles.invoiceCount} ${setThemeStyles("textTwo")}`}>{props.invoiceQty === 1 ? `There is ${props.invoiceQty} invoice in total` : `There are ${props.invoiceQty} total invoices`}</p>
           )}
         </div>
         <div className={styles.right} ref={refFilter}>
