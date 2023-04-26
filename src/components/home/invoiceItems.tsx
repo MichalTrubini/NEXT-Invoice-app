@@ -30,7 +30,7 @@ const InvoiceItems: React.FC<{invoiceItems: {_id: string, clientName: string, to
               {!matches && (
                 <p className={`${styles.date} ${setThemeStyles("textTwo")}`}>Due 19 Aug 2021</p>
               )}
-              <p className={`${styles.price} ${setThemeStyles("textOne")}`}>{`£ ${item.total.toLocaleString("en-US")}`}</p>
+              <p className={`${styles.price} ${setThemeStyles("textOne")}`}>{`€ ${item.total.toLocaleString("sk")}`}</p>
             </div>
             <div className={`${styles.statusContainer} ${item.status === 'paid' ? styles.paid : item.status === 'pending' ? styles.pending : setThemeStyles("draft")}`}>
               <div className={`${styles.circle} ${item.status === 'paid' ? styles.paidCircle : item.status === 'pending' ? styles.pendingCircle : setThemeStyles("draftCircle")}`}></div>

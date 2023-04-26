@@ -69,7 +69,6 @@ margin-bottom: 0.8rem;
 }
 
 .bottom {
-  padding: 0 2.4rem;
   margin-top: 4rem;
 }
 
@@ -78,7 +77,7 @@ margin-bottom: 0.8rem;
   justify-content: space-between;
   align-items: center;
   padding: 2.4rem;
-  border-radius: 0 0 0.8rem 0.8rem;
+  border-radius: 0 0 8px 8px;
   color: white;
 }
 
@@ -89,6 +88,32 @@ margin-bottom: 0.8rem;
 
 .grandTotalText {
   font-size: 1.1rem;
+}
+
+.bottomContentTop {
+  padding: 2.4rem;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.itemRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.25px;
+}
+
+.itemDescription {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
 @media screen and (min-width: 768px) {

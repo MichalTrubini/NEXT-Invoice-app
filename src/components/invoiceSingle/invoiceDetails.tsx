@@ -6,6 +6,10 @@ import ThemeContext from "../../shared/store/theme-context";
 const InvoiceDetails: React.FC<IDetails> = (props) => {
   const { setThemeStyles } = useContext(ThemeContext);
 
+  const totalPrice = props.items.reduce((total, item) => {
+    return total + item.quantity * item.price;
+}, 0);
+
   return (
     <div className={`${styles.invoiceContainer} ${setThemeStyles("invoiceItem")}`}>
       <div className={styles.top}>
@@ -53,22 +57,26 @@ const InvoiceDetails: React.FC<IDetails> = (props) => {
       </div>
       <div className={styles.bottom}>
         <div className={styles.bottomContent}>
-          <div className={styles.bottomContentTop}>
-            {props.items.map((item) => (
-              <div>
-                <div>
-                  <p>{item.name}</p>
-                  <p>{`${item.quantity} x ${item.price}`}</p>
+          <div className={`${styles.bottomContentTop} ${setThemeStyles("invoiceItems")}`}>
+            {props.items.map((item, id) => (
+              <div className={styles.itemRow} key={id}>
+                <div className={styles.itemDescription}>
+                  <p className={`${styles.item} ${setThemeStyles("textOne")}`}>{item.name}</p>
+                  <p className={`${styles.item} ${setThemeStyles("textFour")}`}>{`${
+                    item.quantity
+                  } x € ${item.price.toFixed(2).toLocaleString("sk")}`}</p>
                 </div>
                 <div>
-                  <p>{item.quantity * item.price}</p>
+                  <p className={`${styles.item} ${setThemeStyles("textOne")}`}>{`€ ${(
+                    item.quantity * item.price
+                  ).toLocaleString("sk")}`}</p>
                 </div>
               </div>
             ))}
           </div>
           <div className={`${styles.bottomContentBottom} ${setThemeStyles("invoiceTotal")}`}>
             <p className={styles.grandTotalText}>Grand Total</p>
-            <p className={styles.grandTotal}>556.00</p>
+            <p className={styles.grandTotal}>{`€ ${totalPrice.toFixed(2)}`}</p>
           </div>
         </div>
       </div>

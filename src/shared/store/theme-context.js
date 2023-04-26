@@ -83,10 +83,13 @@ export function ThemeProvider({ children }) {
         textOne: "text-colorOne-lightTheme",
         textTwo: "text-colorTwo-lightTheme",
         textThree: "text-colorThree-lightTheme",
+        textFour: 'text-colorFour-lightTheme',
         invoiceItem: "background-invoice-lightTheme",
         draft: 'background-draft-lightTheme',
         draftCircle: 'background-draftCircle-lightTheme',
-        invoiceTotal: 'background-invoiceTotal-lightTheme'
+        invoiceTotal: 'background-invoiceTotal-lightTheme',
+        invoiceItems: 'background-invoiceItems-lightTheme',
+        
       },
       themeDark: {
         backgroundMain: "background-main-darkTheme",
@@ -94,10 +97,13 @@ export function ThemeProvider({ children }) {
         textOne: "text-colorOne-darkTheme",
         textTwo: "text-colorTwo-darkTheme",
         textThree: "text-colorThree-darkTheme",
+        textFour: 'text-colorFour-darkTheme',
         invoiceItem: "background-invoice-DarkTheme",
         draft: 'background-draft-darkTheme',
         draftCircle: 'background-draftCircle-darkTheme',
-        invoiceTotal: 'background-invoiceTotal-darkTheme'
+        invoiceTotal: 'background-invoiceTotal-darkTheme',
+        invoiceItems: 'background-invoiceItems-darkTheme',
+        
       }
     };
 

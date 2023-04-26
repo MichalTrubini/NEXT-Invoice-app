@@ -1,16 +1,22 @@
 :root {
-  --black: #0c0e16;
-  --blackish: #141625;
-  --greyish: #f8f8fb;
-  --darkBlue: #1e2139;
-  --red: #ec5757;
-  --pink: #ff9797;
-  --purple: #7c5dfa;
-  --purplish: #9277ff;
-  --darkGrey: #373b53;
-  --white: #fff;
-  --blueGrey: #888eb0;
-  --lightBlueGrey: #dfe3fa;
+  --dark100: #0c0e16;
+  --dark200: #141625;
+  --dark300: #1e2139;
+  --dark400: #252945;
+  --dark500: #373b53;
+  
+  --light100: #fff;
+  --light200: #F9FAFE;
+  --light300: #dfe3fa;
+  --light400: #f8f8fb;
+
+  --red100: #ec5757;
+  --red200: #ff9797;
+
+  --purple100: #7c5dfa;
+  --purple200: #9277ff;
+  --purple300: #7E88C3;
+  --purple400: #888eb0;
 }
 
 html,
@@ -75,19 +81,19 @@ input[type="number"] {
 }
 
 .background-main-lightTheme {
-  background-color: var(--greyish);
+  background-color: var(--light400);
 }
 
 .text-colorOne-lightTheme {
-  color: var(--black);
+  color: var(--dark100);
 }
 
 .text-colorTwo-lightTheme {
-  color: var(--blueGrey);
+  color: var(--purple400);
 }
 
 .background-invoice-lightTheme {
-  background-color: var(--white);
+  background-color: var(--light100);
 }
 
 .text-colorThree-lightTheme {
@@ -104,37 +110,53 @@ input[type="number"] {
 }
 
 .background-invoiceTotal-lightTheme {
-  background-color: var(--darkGrey);
+  background-color: var(--dark500);
+}
+
+.background-invoiceItems-lightTheme {
+  background-color: var(--light200);
+}
+
+.text-colorFour-lightTheme {
+  color: var(--purple300);
 }
 
 /************DARK THEME*************/
+
+.text-colorFour-darkTheme {
+  color: var(--purple400);
+}
+
+.background-invoiceItems-darkTheme {
+  background-color: var(--dark400);
+}
 
 .header-color-darkTheme {
   background-color: #1e2139;
 }
 
 .background-main-darkTheme {
-  background-color: var(--blackish);
+  background-color: var(--dark200);
 }
 
 .text-colorOne-darkTheme {
-  color: var(--white);
+  color: var(--light100);
 }
 
 .background-invoiceTotal-darkTheme {
-  background-color: var(--black);
+  background-color: var(--dark100);
 }
 
 .text-colorTwo-darkTheme {
-  color: var(--lightBlueGrey);
+  color: var(--light300);
 }
 
 .background-invoice-DarkTheme {
-  background-color: var(--darkBlue);
+  background-color: var(--dark300);
 }
 
 .text-colorThree-darkTheme {
-  color: var(--white);
+  color: var(--light100);
 }
 
 .background-draft-darkTheme {
@@ -161,7 +183,7 @@ input[type="number"] {
 
   .statusCTA {
     padding: 2rem 3.2rem;
-    background-color: var(--white);
+    background-color: var(--light100);
     box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
     border-radius: 8px;
     display: flex;
