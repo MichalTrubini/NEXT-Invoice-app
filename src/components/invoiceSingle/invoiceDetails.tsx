@@ -15,7 +15,7 @@ const InvoiceDetails: React.FC<IDetails> = (props) => {
   const matches = useMediaQuery(Size.tabletBreakpoint);
   console.log(matches);
   return (
-    <div className={`${styles.invoiceContainer} ${setThemeStyles("invoiceItem")}`}>
+    <div className={`${styles.invoiceContainer} ${setThemeStyles("backgroundThree")}`}>
       <div className={styles.top}>
         <div>
           <p className={styles.invoiceNumber}>
@@ -61,7 +61,7 @@ const InvoiceDetails: React.FC<IDetails> = (props) => {
       </div>
       <div className={styles.bottom}>
         <div className={styles.bottomContent}>
-          <div className={`${styles.bottomContentTop} ${setThemeStyles("invoiceItems")}`}>
+          <div className={`${styles.bottomContentTop} ${setThemeStyles("backgroundFive")}`}>
             <table className={styles.tableBody}>
               {matches && (
                 <thead>
@@ -99,7 +99,7 @@ const InvoiceDetails: React.FC<IDetails> = (props) => {
               </tbody>
             </table>
           </div>
-          <div className={`${styles.bottomContentBottom} ${setThemeStyles("invoiceTotal")}`}>
+          <div className={`${styles.bottomContentBottom} ${setThemeStyles("backgroundSix")}`}>
             <p className={styles.grandTotalText}>Grand Total</p>
             <p className={styles.grandTotal}>{`€ ${totalPrice.toLocaleString("sk")}`}</p>
           </div>

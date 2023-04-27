@@ -78,31 +78,34 @@ export function ThemeProvider({ children }) {
   const setThemeStyles = (arg) => {
     const styles = {
       themeLight: {
-        backgroundMain: "background-main-lightTheme",
-        headerBackground: "header-color-lightTheme",
-        textOne: "text-colorOne-lightTheme",
-        textTwo: "text-colorTwo-lightTheme",
-        textThree: "text-colorThree-lightTheme",
-        textFour: 'text-colorFour-lightTheme',
-        invoiceItem: "background-invoice-lightTheme",
+        backgroundOne: "b-f8f8fb",
+        backgroundTwo: "b-373b53",
+        backgroundThree: "b-ffffff",
+        backgroundFour: 'b-ffffff',
+        backgroundFive: 'b-F9FAFE',
+        backgroundSix: 'b-373b53',
+        textOne: "c-0c0e16",
+        textTwo: "c-888eb0",
+        textThree: "c-858bb2",
+        textFour: 'c-7E88C3',
         draft: 'background-draft-lightTheme',
         draftCircle: 'background-draftCircle-lightTheme',
-        invoiceTotal: 'background-invoiceTotal-lightTheme',
-        invoiceItems: 'background-invoiceItems-lightTheme',
         
       },
       themeDark: {
-        backgroundMain: "background-main-darkTheme",
-        headerBackground: "header-color-darkTheme",
-        textOne: "text-colorOne-darkTheme",
-        textTwo: "text-colorTwo-darkTheme",
-        textThree: "text-colorThree-darkTheme",
-        textFour: 'text-colorFour-darkTheme',
-        invoiceItem: "background-invoice-DarkTheme",
+        backgroundOne: "b-141625",
+        backgroundTwo: "b-1e2139",
+        backgroundThree: "b-1e2139",
+        backgroundFour: 'b-252945',
+        backgroundFive: 'b-252945',
+        backgroundSix: 'b-0c0e16',
+        textOne: "c-ffffff",
+        textTwo: "c-dfe3fa",
+        textThree: "c-ffffff",
+        textFour: 'c-888eb0',
         draft: 'background-draft-darkTheme',
         draftCircle: 'background-draftCircle-darkTheme',
-        invoiceTotal: 'background-invoiceTotal-darkTheme',
-        invoiceItems: 'background-invoiceItems-darkTheme',
+        
         
       }
     };

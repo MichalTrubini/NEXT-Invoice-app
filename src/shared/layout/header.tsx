@@ -19,7 +19,7 @@ const Header = () => {
   }
 
   return (
-    <header className={`${styles.header} ${setThemeStyles('headerBackground')}`}>
+    <header className={`${styles.header} ${setThemeStyles('backgroundTwo')}`}>
       <div className={`${styles.imageContainer} ${styles.imageLogoContainer}`}>
         <Link href='/'><Image src={logo} alt="invoice app" className={styles.imageLogo} /></Link>
       </div>

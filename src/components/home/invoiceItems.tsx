@@ -14,7 +14,7 @@ const InvoiceItems: React.FC<{invoiceItems: {_id: string, clientName: string, to
   return (
     <div className={styles.invoiceItems}>
       {props.invoiceItems.map((item) => (
-        <Link href={`/invoice/${item._id}`} key={item._id}><div className={`${styles.invoiceItem} ${setThemeStyles("invoiceItem")}`} >
+        <Link href={`/invoice/${item._id}`} key={item._id}><div className={`${styles.invoiceItem} ${setThemeStyles("backgroundThree")}`} >
           <div className={styles.topRow}>
             <h2 className={styles.invoiceHeader}>
               <span className={setThemeStyles("textTwo")}>#</span>

@@ -11,7 +11,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
    const {setThemeStyles} =  useContext(ThemeContext);
 
   return (
-    <div className={setThemeStyles('backgroundMain')}>
+    <div className={setThemeStyles('backgroundOne')}>
       <Header />
       <main>{props.children}</main>
     </div>

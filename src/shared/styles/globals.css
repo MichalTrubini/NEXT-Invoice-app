@@ -4,7 +4,8 @@
   --dark300: #1e2139;
   --dark400: #252945;
   --dark500: #373b53;
-  
+  --dark600: #858bb2;
+
   --light100: #fff;
   --light200: #F9FAFE;
   --light300: #dfe3fa;
@@ -75,97 +76,146 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-/************LIGHT THEME*************/
-.header-color-lightTheme {
-  background-color: #373b53;
-}
+/*THEME COLORS*/
 
-.background-main-lightTheme {
-  background-color: var(--light400);
-}
-
-.text-colorOne-lightTheme {
+.c-0c0e16 {
   color: var(--dark100);
 }
 
-.text-colorTwo-lightTheme {
+.c-141625 {
+  color: var(--dark200);
+}
+
+.c-1e2139 {
+  color: var(--dark300);
+}
+
+.c-252945{
+  color: var(--dark400);
+}
+
+.c-373b53 {
+  color: var(--dark500);
+}
+
+.c-858bb2 {
+  color: var(--dark600);
+}
+
+.c-ffffff {
+  color: var(--light100);
+}
+.c-F9FAFE {
+  color: var(--light200);
+}
+.c-dfe3fa{
+  color: var(--light300);
+}
+.c-f8f8fb {
+  color: var(--light400);
+}
+
+.c-ec5757 {
+  color: var(--red100);
+}
+
+.c-ff9797{
+  color: var(--red200);
+}
+
+.c-7c5dfa{
+  color: var(--purple100);
+}
+
+.c-9277ff{
+  color: var(--purple200);
+}
+
+.c-7E88C3{
+  color: var(--purple300);
+}
+
+.c-888eb0{
   color: var(--purple400);
 }
 
-.background-invoice-lightTheme {
-  background-color: var(--light100);
+.b-0c0e16 {
+  background-color: var(--dark100);
 }
 
-.text-colorThree-lightTheme {
-  color: #858bb2;
+.b-141625 {
+  background-color: var(--dark200);
+}
+
+.b-1e2139 {
+  background-color: var(--dark300);
+}
+
+.b-252945{
+  background-color: var(--dark400);
+}
+
+.b-373b53 {
+  background-color: var(--dark500);
+}
+
+.b-858bb2 {
+  background-color: var(--dark600);
+}
+
+.b-ffffff {
+  background-color: var(--light100);
+}
+.b-F9FAFE {
+  background-color: var(--light200);
+}
+.b-dfe3fa{
+  background-color: var(--light300);
+}
+.b-f8f8fb {
+  background-color: var(--light400);
+}
+
+.b-ec5757 {
+  background-color: var(--red100);
+}
+
+.b-ff9797{
+  background-color: var(--red200);
+}
+
+.b-7c5dfa{
+  background-color: var(--purple100);
+}
+
+.b-9277ff{
+  background-color: var(--purple200);
+}
+
+.b-7E88C3{
+  background-color: var(--purple300);
+}
+
+.b-888eb0{
+  background-color: var(--purple400);
 }
 
 .background-draft-lightTheme {
   background: rgba(55, 59, 83, 0.06);
-  color: #373b53;
+  color: var(--dark500);
 }
 
 .background-draftCircle-lightTheme {
-  background-color: #373b53;
-}
-
-.background-invoiceTotal-lightTheme {
   background-color: var(--dark500);
-}
-
-.background-invoiceItems-lightTheme {
-  background-color: var(--light200);
-}
-
-.text-colorFour-lightTheme {
-  color: var(--purple300);
-}
-
-/************DARK THEME*************/
-
-.text-colorFour-darkTheme {
-  color: var(--purple400);
-}
-
-.background-invoiceItems-darkTheme {
-  background-color: var(--dark400);
-}
-
-.header-color-darkTheme {
-  background-color: #1e2139;
-}
-
-.background-main-darkTheme {
-  background-color: var(--dark200);
-}
-
-.text-colorOne-darkTheme {
-  color: var(--light100);
-}
-
-.background-invoiceTotal-darkTheme {
-  background-color: var(--dark100);
-}
-
-.text-colorTwo-darkTheme {
-  color: var(--light300);
-}
-
-.background-invoice-DarkTheme {
-  background-color: var(--dark300);
-}
-
-.text-colorThree-darkTheme {
-  color: var(--light100);
 }
 
 .background-draft-darkTheme {
   background: rgba(223, 227, 250, 0.06);
-  color: #dfe3fa;
+  color: var(--light300);
 }
 
 .background-draftCircle-darkTheme {
-  background-color: #dfe3fa;
+  background-color: var(--light300);
 }
 
 .statusCTA {

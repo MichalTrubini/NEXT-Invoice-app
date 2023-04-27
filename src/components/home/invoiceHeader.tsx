@@ -57,7 +57,7 @@ const InvoiceHeader:React.FC<{draft:()=>void, pending: ()=>void, paid: ()=>void,
               <Image src={arrow} alt="arrow" className={showCheckbox ? `${styles.arrowUp} ${styles.filter}` : `${styles.arrowDown} ${styles.filter}`} onClick={showCheckboxHandler} />
             </div>
             {showCheckbox && (
-              <form className={styles.checkboxContainer} ref={ref}>
+              <form className={`${styles.checkboxContainer} ${setThemeStyles("backgroundFour")}`} ref={ref}>
                 <div className={styles.inputContainer}>
                   <input type="checkbox" id="draft" name="draft" className={styles.input} onClick={props.draft} defaultChecked={props.draftSelected}/>
                   <label htmlFor="draft" className={styles.label}>
