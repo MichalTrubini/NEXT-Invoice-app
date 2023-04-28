@@ -32,7 +32,7 @@ const InvoiceItems: React.FC<{invoiceItems: {_id: string, clientName: string, to
               )}
               <p className={`${styles.price} ${setThemeStyles("textOne")}`}>{`€ ${item.total.toLocaleString("sk")}`}</p>
             </div>
-            <div className={`${styles.statusContainer} ${item.status === 'paid' ? styles.paid : item.status === 'pending' ? styles.pending : setThemeStyles("draft")}`}>
+            <div className={`${styles.statusContainer} ${item.status === 'paid' ? styles.paid : item.status === 'pending' ? styles.pending : (setThemeStyles("textFive"), setThemeStyles("draft"))}`}>
               <div className={`${styles.circle} ${item.status === 'paid' ? styles.paidCircle : item.status === 'pending' ? styles.pendingCircle : setThemeStyles("draftCircle")}`}></div>
               <p className={styles.status}>{item.status}</p>
               {matches && (

@@ -23,7 +23,7 @@ const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getSe
       </Head>
       <div className="wrapper">
         <GoBack />
-        <div className={`${setThemeStyles("invoiceItem")} statusCTA`}>
+        <div className={`${setThemeStyles("backgroundThree")} statusCTA`}>
           <InvoiceStatus status={invoiceItem.status} />
           {matches && <InvoiceCTA />}
         </div>

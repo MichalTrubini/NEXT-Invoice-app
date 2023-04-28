@@ -88,6 +88,7 @@ export function ThemeProvider({ children }) {
         textTwo: "c-888eb0",
         textThree: "c-858bb2",
         textFour: 'c-7E88C3',
+        textFive:'c-373b53',
         draft: 'background-draft-lightTheme',
         draftCircle: 'background-draftCircle-lightTheme',
         
@@ -103,6 +104,7 @@ export function ThemeProvider({ children }) {
         textTwo: "c-dfe3fa",
         textThree: "c-ffffff",
         textFour: 'c-888eb0',
+        textFive:'c-dfe3fa',
         draft: 'background-draft-darkTheme',
         draftCircle: 'background-draftCircle-darkTheme',
         

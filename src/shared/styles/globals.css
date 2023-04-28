@@ -201,8 +201,7 @@ input[type="number"] {
 }
 
 .background-draft-lightTheme {
-  background: rgba(55, 59, 83, 0.06);
-  color: var(--dark500);
+  background: #373b530f;
 }
 
 .background-draftCircle-lightTheme {
@@ -210,8 +209,7 @@ input[type="number"] {
 }
 
 .background-draft-darkTheme {
-  background: rgba(223, 227, 250, 0.06);
-  color: var(--light300);
+  background: rgb(223, 227, 250);
 }
 
 .background-draftCircle-darkTheme {
