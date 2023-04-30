@@ -1,0 +1,40 @@
+.label,
+.formHeader {
+  display: block;
+  font-size: 1.2rem;
+  letter-spacing: -0.25px;
+}
+
+.formHeader {
+  margin-bottom: 2.4rem;
+}
+
+.label {
+  margin-bottom: 1rem;
+}
+
+.input {
+    width: 100%;
+    font-size: 1.2rem;
+    letter-spacing: -0.25px;
+    padding: 1.7rem 2rem 1.6rem;
+}
+
+.billBlock {
+  display: grid;
+  grid-template-areas:
+    "a b"
+    "c c";
+}
+
+.city {
+    grid-area: a;
+}
+
+.postCode {
+    grid-area: b;
+}
+
+.country{
+    grid-area: c;
+}

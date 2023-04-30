@@ -1,10 +1,10 @@
 import Head from "next/head";
 import { MongoClient } from "mongodb";
-import GoBack from "../../src/components/invoiceSingle/goBack";
-import InvoiceStatus from "../../src/components/invoiceSingle/invoiceStatus";
-import InvoiceCTA from "../../src/components/invoiceSingle/invoiceCTA";
+import GoBack from "../../src/components/invoiceView/goBack";
+import InvoiceStatus from "../../src/components/invoiceView/invoiceStatus";
+import InvoiceCTA from "../../src/components/invoiceView/invoiceCTA";
 import { useMediaQuery } from "../../src/shared/utils/hooks";
-import InvoiceDetails from "../../src/components/invoiceSingle/invoiceDetails";
+import InvoiceDetails from "../../src/components/invoiceView/invoiceDetails";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useContext } from "react";
 import ThemeContext from "../../src/shared/store/theme-context";
