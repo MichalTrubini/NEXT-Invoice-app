@@ -84,6 +84,7 @@ export function ThemeProvider({ children }) {
         backgroundFour: 'b-ffffff',
         backgroundFive: 'b-F9FAFE',
         backgroundSix: 'b-373b53',
+        backgroundSeven: 'b-ffffff',
         textOne: "c-0c0e16",
         textTwo: "c-888eb0",
         textThree: "c-858bb2",
@@ -91,7 +92,7 @@ export function ThemeProvider({ children }) {
         textFive:'c-373b53',
         draft: 'background-draft-lightTheme',
         draftCircle: 'background-draftCircle-lightTheme',
-        
+        borderOne:'br-DFE3FA'
       },
       themeDark: {
         backgroundOne: "b-141625",
@@ -100,6 +101,7 @@ export function ThemeProvider({ children }) {
         backgroundFour: 'b-252945',
         backgroundFive: 'b-252945',
         backgroundSix: 'b-0c0e16',
+        backgroundSeven: 'b-141625',
         textOne: "c-ffffff",
         textTwo: "c-dfe3fa",
         textThree: "c-ffffff",
@@ -107,7 +109,7 @@ export function ThemeProvider({ children }) {
         textFive:'c-dfe3fa',
         draft: 'background-draft-darkTheme',
         draftCircle: 'background-draftCircle-darkTheme',
-        
+        borderOne:'br-252945'
         
       }
     };

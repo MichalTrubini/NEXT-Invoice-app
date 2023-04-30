@@ -200,6 +200,14 @@ input[type="number"] {
   background-color: var(--purple400);
 }
 
+.br-DFE3FA{
+  border: 1px solid var(--light300);
+}
+
+.br-252945 {
+  border: 1px solid var(--dark400);
+}
+
 .background-draft-lightTheme {
   background: #373b530f;
 }
