@@ -23,7 +23,8 @@
     "src/components/home/invoiceItems.tsx",
     "pages/index.tsx",
     "src/shared/utils/hooks.ts",
-    "src/shared/layout/header.tsx"
-, "src/shared/store/theme-context.js"  ],
+    "src/shared/layout/header.tsx",
+    "src/shared/store/site-context.js"
+  ],
   "exclude": ["node_modules"]
 }

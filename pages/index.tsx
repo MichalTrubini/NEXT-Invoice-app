@@ -4,7 +4,6 @@ import { MongoClient } from "mongodb";
 import InvoiceItems from "../src/components/home/invoiceItems";
 import { useState } from "react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import InvoiceForm from "../src/components/invoiceCreate/InvoiceForm";
 
 const Home = ({ invoiceItems }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [draftSelected, setDraft] = useState(false);

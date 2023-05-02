@@ -1,9 +1,9 @@
-import ThemeContext from "../../shared/store/theme-context";
+import SiteContext from "../../shared/store/site-context";
 import styles from "./invoiceCTA.module.css";
 import { useContext } from "react";
 
 const invoiceCTA = () => {
-  const { setThemeStyles } = useContext(ThemeContext);
+  const { setThemeStyles } = useContext(SiteContext);
 
   return (
     <div className={`${styles.container} ${setThemeStyles("invoiceItem")}`}>

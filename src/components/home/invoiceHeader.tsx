@@ -1,5 +1,5 @@
 import styles from "./invoiceHeader.module.css";
-import ThemeContext from "../../shared/store/theme-context";
+import SiteContext from "../../shared/store/site-context";
 import { useContext, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import arrow from "../../../public/assets/icon-arrow-down.svg";
@@ -17,7 +17,7 @@ const InvoiceHeader: React.FC<{
   paidSelected: boolean;
   invoiceQty: number;
 }> = (props) => {
-  const { setThemeStyles } = useContext(ThemeContext);
+  const { setThemeStyles } = useContext(SiteContext);
   const tabletBreakpoint = 768;
 
   const [showCheckbox, setShowCheckbox] = useState(false);

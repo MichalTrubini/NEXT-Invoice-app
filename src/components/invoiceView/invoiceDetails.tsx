@@ -1,12 +1,12 @@
 import styles from "./invoiceDetails.module.css";
 import IDetails from "../../shared/types/types";
 import { useContext } from "react";
-import ThemeContext from "../../shared/store/theme-context";
+import SiteContext from "../../shared/store/site-context";
 import { useMediaQuery } from "../../shared/utils/hooks";
 import { Size } from "../../shared/types/enums";
 
 const InvoiceDetails: React.FC<IDetails> = (props) => {
-  const { setThemeStyles } = useContext(ThemeContext);
+  const { setThemeStyles } = useContext(SiteContext);
 
   const totalPrice = props.items.reduce((total, item) => {
     return total + item.quantity * item.price;
@@ -77,19 +77,27 @@ const InvoiceDetails: React.FC<IDetails> = (props) => {
                 {props.items.map((item, id) => (
                   <tr className={styles.itemRow} key={id}>
                     {!matches && (
-                      <td >
+                      <td>
                         <div>
-                          <p className={`${styles.item} ${styles.marginFix} ${setThemeStyles("textOne")}`}>{item.name}</p>
-                          <p className={`${styles.item} ${setThemeStyles("textFour")}`}>{`${item.quantity} x € ${item.price}`}</p>
+                          <p className={`${styles.item} ${styles.marginFix} ${setThemeStyles("textOne")}`}>
+                            {item.name}
+                          </p>
+                          <p
+                            className={`${styles.item} ${setThemeStyles("textFour")}`}
+                          >{`${item.quantity} x € ${item.price}`}</p>
                         </div>
                       </td>
                     )}
                     {matches && <td className={`${styles.item} ${setThemeStyles("textOne")}`}>{item.name}</td>}
-                    {matches && <td className={`${styles.item} ${styles.itemQty} ${setThemeStyles("textFour")}`}>{item.quantity}</td>}
                     {matches && (
-                      <td className={`${styles.item} ${styles.itemPrice} ${setThemeStyles("textFour")}`}>{`€ ${item.price.toLocaleString(
-                        "sk"
-                      )}`}</td>
+                      <td className={`${styles.item} ${styles.itemQty} ${setThemeStyles("textFour")}`}>
+                        {item.quantity}
+                      </td>
+                    )}
+                    {matches && (
+                      <td
+                        className={`${styles.item} ${styles.itemPrice} ${setThemeStyles("textFour")}`}
+                      >{`€ ${item.price.toLocaleString("sk")}`}</td>
                     )}
                     <td className={`${styles.item} ${styles.subtotal} ${setThemeStyles("textOne")}`}>{`€ ${(
                       item.quantity * item.price

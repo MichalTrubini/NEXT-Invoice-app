@@ -1,15 +1,15 @@
 import "../src/shared/styles/globals.css";
 import type { AppProps } from "next/app";
 import Layout from "../src/shared/layout/layout";
-import { ThemeProvider } from "../src/shared/store/theme-context";
+import { SiteProvider } from "../src/shared/store/site-context";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider>
+    <SiteProvider>
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </ThemeProvider>
+    </SiteProvider>
   );
 }
 

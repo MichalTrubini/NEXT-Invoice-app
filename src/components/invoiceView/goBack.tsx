@@ -3,11 +3,10 @@ import Image from "next/image";
 import arrow from "../../../public/assets/icon-arrow-left.svg";
 import Link from "next/link";
 import { useContext } from "react";
-import ThemeContext from "../../shared/store/theme-context";
+import SiteContext from "../../shared/store/site-context";
 
 const GoBack = () => {
-
-  const { setThemeStyles } = useContext(ThemeContext);
+  const { setThemeStyles } = useContext(SiteContext);
 
   return (
     <Link href="/">

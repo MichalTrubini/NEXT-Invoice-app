@@ -70,10 +70,11 @@ export default ThemeContext;
 
 import React, { useState } from "react";
 
-const ThemeContext = React.createContext();
+const SiteContext = React.createContext();
 
-export function ThemeProvider({ children }) {
+export function SiteProvider({ children }) {
   const [darkTheme, setDarkTheme] = useState(false);
+  const [newInvoice, setNewInvoice] = useState(false);
 
   const setThemeStyles = (arg) => {
     const styles = {
@@ -122,7 +123,7 @@ export function ThemeProvider({ children }) {
     }
   };
 
-  return <ThemeContext.Provider value={{ darkTheme, setDarkTheme, setThemeStyles }}>{children}</ThemeContext.Provider>;
+  return <SiteContext.Provider value={{ darkTheme, newInvoice, setDarkTheme, setThemeStyles, setNewInvoice }}>{children}</SiteContext.Provider>;
 }
 
-export default ThemeContext;
+export default SiteContext;

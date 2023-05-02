@@ -2,10 +2,10 @@ import { useContext } from "react";
 import GoBack from "../invoiceView/goBack";
 import InvoiceForm from "./InvoiceForm";
 import styles from "./invoiceBody.module.css";
-import ThemeContext from "../../shared/store/theme-context";
+import SiteContext from "../../shared/store/site-context";
 
 const InvoiceBody: React.FC = () => {
-  const { setThemeStyles } = useContext(ThemeContext);
+  const { setThemeStyles } = useContext(SiteContext);
 
   return (
     <div className={`${styles.invoice} ${setThemeStyles("backgroundSeven")}`}>

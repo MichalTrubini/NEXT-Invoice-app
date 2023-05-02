@@ -1,5 +1,5 @@
 import Header from "./header";
-import ThemeContext from '../store/theme-context';
+import SiteContext from "../store/site-context";
 import { useContext } from "react";
 
 interface LayoutProps {
@@ -7,11 +7,10 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = (props) => {
-
-   const {setThemeStyles} =  useContext(ThemeContext);
+  const { setThemeStyles } = useContext(SiteContext);
 
   return (
-    <div className={setThemeStyles('backgroundOne')}>
+    <div className={setThemeStyles("backgroundOne")}>
       <Header />
       <main>{props.children}</main>
     </div>

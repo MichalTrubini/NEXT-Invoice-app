@@ -7,13 +7,13 @@ import { useMediaQuery } from "../../src/shared/utils/hooks";
 import InvoiceDetails from "../../src/components/invoiceView/invoiceDetails";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useContext } from "react";
-import ThemeContext from "../../src/shared/store/theme-context";
+import SiteContext from "../../src/shared/store/site-context";
 
 const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const tabletBreakpoint = 768;
   const matches = useMediaQuery(tabletBreakpoint);
-  const { setThemeStyles } = useContext(ThemeContext);
-  console.log(invoiceItem)
+  const { setThemeStyles } = useContext(SiteContext);
+  console.log(invoiceItem);
   return (
     <>
       <Head>
@@ -52,7 +52,7 @@ const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getSe
 
 export default InvoiceSingle;
 
-export const getServerSideProps: GetServerSideProps = async (context:any) => {
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const page = String(context.params.invoiceID);
 
   const databaseConnection: string | undefined = process.env.DB_URL;
