@@ -3,7 +3,7 @@ import Image from "next/image";
 import arrow from "../../../public/assets/icon-arrow-left.svg";
 import Link from "next/link";
 import { useContext } from "react";
-import SiteContext from "../../shared/store/site-context";
+import SiteContext from "../../store/site-context";
 
 const GoBack = () => {
   const { setThemeStyles } = useContext(SiteContext);

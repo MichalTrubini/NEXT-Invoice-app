@@ -1,5 +1,5 @@
 import styles from "./invoiceStatus.module.css";
-import SiteContext from "../../shared/store/site-context";
+import SiteContext from "../../store/site-context";
 import { useContext } from "react";
 
 const InvoiceStatus: React.FC<{ status: string }> = (props) => {

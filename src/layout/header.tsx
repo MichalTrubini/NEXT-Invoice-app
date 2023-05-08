@@ -1,8 +1,8 @@
 import styles from "./header.module.css";
-import logo from "../../../public/assets/logo.svg";
-import moon from "../../../public/assets/icon-moon.svg";
-import sun from "../../../public/assets/icon-sun.svg";
-import avatar from "../../../public/assets/image-avatar.jpg";
+import logo from "../../public/assets/logo.svg";
+import moon from "../../public/assets/icon-moon.svg";
+import sun from "../../public/assets/icon-sun.svg";
+import avatar from "../../public/assets/image-avatar.jpg";
 import Image from "next/image";
 import { useContext } from "react";
 import SiteContext from "../store/site-context";

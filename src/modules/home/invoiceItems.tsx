@@ -1,11 +1,11 @@
 import styles from "./invoiceItems.module.css";
-import SiteContext from "../../shared/store/site-context";
+import SiteContext from "../../store/site-context";
 import { useContext } from "react";
 import arrow from "../../../public/assets/icon-arrow-right.svg";
 import Image from "next/image";
-import { useMediaQuery } from "../../shared/utils/hooks";
+import { useMediaQuery } from "../../utils/hooks";
 import Link from "next/link";
-import { Size } from "../../shared/types/enums";
+import { Size } from "../../types/enums";
 
 const InvoiceItems: React.FC<{ invoiceItems: { _id: string; clientName: string; total: number; status: string }[] }> = (
   props

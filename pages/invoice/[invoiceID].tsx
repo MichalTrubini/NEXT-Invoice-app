@@ -1,13 +1,13 @@
 import Head from "next/head";
 import { MongoClient } from "mongodb";
-import GoBack from "../../src/components/invoiceView/goBack";
-import InvoiceStatus from "../../src/components/invoiceView/invoiceStatus";
-import InvoiceCTA from "../../src/components/invoiceView/invoiceCTA";
-import { useMediaQuery } from "../../src/shared/utils/hooks";
-import InvoiceDetails from "../../src/components/invoiceView/invoiceDetails";
+import GoBack from "../../src/modules/invoiceView/goBack";
+import InvoiceStatus from "../../src/modules/invoiceView/invoiceStatus";
+import InvoiceCTA from "../../src/modules/invoiceView/invoiceCTA";
+import { useMediaQuery } from "../../src/utils/hooks";
+import InvoiceDetails from "../../src/modules/invoiceView/invoiceDetails";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useContext } from "react";
-import SiteContext from "../../src/shared/store/site-context";
+import SiteContext from "../../src/store/site-context";
 
 const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const tabletBreakpoint = 768;

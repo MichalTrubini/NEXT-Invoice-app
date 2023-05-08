@@ -1,7 +1,7 @@
-import SiteContext from "../../shared/store/site-context";
+import SiteContext from "../../store/site-context";
 import styles from "./invoiceCTA.module.css";
 import { useContext } from "react";
-import Button from "../shared/button";
+import Button from "../../components/button";
 
 const invoiceCTA = () => {
   const { setThemeStyles } = useContext(SiteContext);

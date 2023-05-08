@@ -1,11 +1,11 @@
 import styles from "./invoiceHeader.module.css";
-import SiteContext from "../../shared/store/site-context";
+import SiteContext from "../../store/site-context";
 import { useContext, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import arrow from "../../../public/assets/icon-arrow-down.svg";
 import plus from "../../../public/assets/icon-plus.svg";
-import { useScreenWidth } from "../../shared/utils/hooks";
-import Portal from "../../shared/layout/portal";
+import { useScreenWidth } from "../../utils/hooks";
+import Portal from "../../layout/portal";
 import InvoiceBody from "../invoiceCreate/invoiceBody";
 
 const InvoiceHeader: React.FC<{

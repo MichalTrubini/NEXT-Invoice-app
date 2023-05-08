@@ -1,9 +1,9 @@
 import styles from "./invoiceDetails.module.css";
-import IDetails from "../../shared/types/types";
+import IDetails from "../../types/types";
 import { useContext } from "react";
-import SiteContext from "../../shared/store/site-context";
-import { useMediaQuery } from "../../shared/utils/hooks";
-import { Size } from "../../shared/types/enums";
+import SiteContext from "../../store/site-context";
+import { useMediaQuery } from "../../utils/hooks";
+import { Size } from "../../types/enums";
 
 const InvoiceDetails: React.FC<IDetails> = (props) => {
   const { setThemeStyles } = useContext(SiteContext);

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import GoBack from "../invoiceView/goBack";
 import InvoiceForm from "./InvoiceForm";
 import styles from "./invoiceBody.module.css";
-import SiteContext from "../../shared/store/site-context";
+import SiteContext from "../../store/site-context";
 
 const InvoiceBody: React.FC = () => {
   const { setThemeStyles } = useContext(SiteContext);

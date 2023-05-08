@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./invoiceForm.module.css";
 import { useContext } from "react";
-import SiteContext from "../../shared/store/site-context";
+import SiteContext from "../../store/site-context";
 
 type Inputs = {
   streetAddress: string;
