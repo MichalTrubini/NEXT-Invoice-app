@@ -1,7 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./invoiceForm.module.css";
-import { useContext } from "react";
+import { forwardRef, useContext } from "react";
 import SiteContext from "../../store/site-context";
+import FormElement from "../../components/form/formElement";
 
 type Inputs = {
   streetAddress: string;
@@ -10,6 +11,10 @@ type Inputs = {
   country: string;
   clientName: string;
   clientEmail: string;
+  clientStreetAddress: string;
+  clientCity: string;
+  clientPostcode: string;
+  clientCountry: string;
   invoiceDate: string;
   paymentTerms: string;
   project: string;
@@ -25,6 +30,7 @@ const InvoiceForm = () => {
     watch,
     formState: { errors },
   } = useForm<Inputs>();
+
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   const { setThemeStyles } = useContext(SiteContext);
@@ -32,107 +38,29 @@ const InvoiceForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h3 className={styles.formHeader}>Bill From</h3>
-      <label className={`${styles.label} ${setThemeStyles("textFour")}`}>Street Address</label>
-      <input
-        className={`${styles.input} ${setThemeStyles("backgroundThree")} ${setThemeStyles("textOne")} ${setThemeStyles(
-          "borderOne"
-        )}`}
-        {...register("streetAddress", { required: true })}
-      />
+      <FormElement label="Street Address" {...register("streetAddress")} />
       <div className={styles.billBlock}>
         <div className={styles.city}>
-          <label className={`${styles.label} ${setThemeStyles("textFour")}`}>City</label>
-          <input
-            className={`${styles.input} ${setThemeStyles("backgroundThree")} ${setThemeStyles(
-              "textOne"
-            )} ${setThemeStyles("borderOne")}`}
-            {...register("city", { required: true })}
-          />
+          <FormElement label="City" {...register("city")} />
         </div>
         <div className={styles.postCode}>
-          <label className={`${styles.label} ${setThemeStyles("textFour")}`}>Post Code</label>
-          <input
-            className={`${styles.input} ${setThemeStyles("backgroundThree")} ${setThemeStyles(
-              "textOne"
-            )} ${setThemeStyles("borderOne")}`}
-            {...register("postcode", { required: true })}
-          />
+          <FormElement label="Post Code" {...register("postcode")} />
         </div>
         <div className={styles.country}>
-          <label className={`${styles.label} ${setThemeStyles("textFour")}`}>Country</label>
-          <input
-            className={`${styles.input} ${setThemeStyles("backgroundThree")} ${setThemeStyles(
-              "textOne"
-            )} ${setThemeStyles("borderOne")}`}
-            {...register("country", { required: true })}
-          />
+          <FormElement label="Country" {...register("country")} />
         </div>
       </div>
 
       <h3 className={styles.formHeader}>Bill To</h3>
-      <label className={`${styles.label} ${setThemeStyles("textFour")}`}>Client's Name</label>
-      <input
-        className={`${styles.input} ${setThemeStyles("backgroundThree")} ${setThemeStyles("textOne")} ${setThemeStyles(
-          "borderOne"
-        )}`}
-        {...register("clientName", { required: true })}
-      />
-      <label className={`${styles.label} ${setThemeStyles("textFour")}`}>Client's Email</label>
-      <input
-        className={`${styles.input} ${setThemeStyles("backgroundThree")} ${setThemeStyles("textOne")} ${setThemeStyles(
-          "borderOne"
-        )}`}
-        {...register("clientEmail", { required: true })}
-      />
-      <label className={`${styles.label} ${setThemeStyles("textFour")}`}>Street Address</label>
-      <input
-        className={`${styles.input} ${setThemeStyles("backgroundThree")} ${setThemeStyles("textOne")} ${setThemeStyles(
-          "borderOne"
-        )}`}
-        {...register("streetAddress", { required: true })}
-      />
-      <label className={`${styles.label} ${setThemeStyles("textFour")}`}>City</label>
-      <input
-        className={`${styles.input} ${setThemeStyles("backgroundThree")} ${setThemeStyles("textOne")} ${setThemeStyles(
-          "borderOne"
-        )}`}
-        {...register("city", { required: true })}
-      />
-      <label className={`${styles.label} ${setThemeStyles("textFour")}`}>Post Code</label>
-      <input
-        className={`${styles.input} ${setThemeStyles("backgroundThree")} ${setThemeStyles("textOne")} ${setThemeStyles(
-          "borderOne"
-        )}`}
-        {...register("postcode", { required: true })}
-      />
-      <label className={`${styles.label} ${setThemeStyles("textFour")}`}>Country</label>
-      <input
-        className={`${styles.input} ${setThemeStyles("backgroundThree")} ${setThemeStyles("textOne")} ${setThemeStyles(
-          "borderOne"
-        )}`}
-        {...register("country", { required: true })}
-      />
-      <label className={`${styles.label} ${setThemeStyles("textFour")}`}>Invoice Date</label>
-      <input
-        className={`${styles.input} ${setThemeStyles("backgroundThree")} ${setThemeStyles("textOne")} ${setThemeStyles(
-          "borderOne"
-        )}`}
-        {...register("invoiceDate", { required: true })}
-      />
-      <label className={`${styles.label} ${setThemeStyles("textFour")}`}>Payment Terms</label>
-      <input
-        className={`${styles.input} ${setThemeStyles("backgroundThree")} ${setThemeStyles("textOne")} ${setThemeStyles(
-          "borderOne"
-        )}`}
-        {...register("paymentTerms", { required: true })}
-      />
-      <label className={`${styles.label} ${setThemeStyles("textFour")}`}>Project Description</label>
-      <input
-        className={`${styles.input} ${setThemeStyles("backgroundThree")} ${setThemeStyles("textOne")} ${setThemeStyles(
-          "borderOne"
-        )}`}
-        {...register("project", { required: true })}
-      />
+      <FormElement label="Client's Name" {...register("clientName")} />
+      <FormElement label="Client's Email" {...register("clientEmail")} />
+      <FormElement label="Street Address" {...register("clientStreetAddress")} />
+      <FormElement label="City" {...register("clientCity")} />
+      <FormElement label="Post Code" {...register("clientPostcode")} />
+      <FormElement label="Country" {...register("clientCountry")} />
+      <FormElement label="Invoice Date" {...register("invoiceDate")} />
+      <FormElement label="Payment Terms" {...register("paymentTerms")} />
+      <FormElement label="Project Description" {...register("project")} />
 
       <h3>Item List</h3>
 

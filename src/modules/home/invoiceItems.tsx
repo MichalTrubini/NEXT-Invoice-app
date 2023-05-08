@@ -39,7 +39,7 @@ const InvoiceItems: React.FC<{ invoiceItems: { _id: string; clientName: string; 
                     ? styles.paid
                     : item.status === "pending"
                     ? styles.pending
-                    : (setThemeStyles("textFive"), setThemeStyles("draft"))
+                    : setThemeStyles("backgroundEight")
                 }`}
               >
                 <div
@@ -48,10 +48,16 @@ const InvoiceItems: React.FC<{ invoiceItems: { _id: string; clientName: string; 
                       ? styles.paidCircle
                       : item.status === "pending"
                       ? styles.pendingCircle
-                      : setThemeStyles("draftCircle")
+                      : setThemeStyles("backgroundNine")
                   }`}
                 ></div>
-                <p className={styles.status}>{item.status}</p>
+                <p className={`${styles.status} ${
+                    item.status === "paid"
+                      ? styles.paid
+                      : item.status === "pending"
+                      ? styles.pending
+                      : setThemeStyles("textFive")
+                  }`}>{item.status}</p>
                 {matches && <Image src={arrow} alt="arrow" className={styles.arrowIcon} />}
               </div>
             </div>

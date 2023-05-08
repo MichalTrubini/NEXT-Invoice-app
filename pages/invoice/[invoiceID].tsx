@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { MongoClient } from "mongodb";
-import GoBack from "../../src/modules/invoiceView/goBack";
+import GoBack from "../../src/components/goBack";
 import InvoiceStatus from "../../src/modules/invoiceView/invoiceStatus";
 import InvoiceCTA from "../../src/modules/invoiceView/invoiceCTA";
 import { useMediaQuery } from "../../src/utils/hooks";

@@ -10,6 +10,7 @@
   --light200: #F9FAFE;
   --light300: #dfe3fa;
   --light400: #f8f8fb;
+  --light500: #f3f3f3;
 
   --red100: #ec5757;
   --red200: #ff9797;
@@ -162,6 +163,9 @@ input[type="number"] {
 .b-858bb2 {
   background-color: var(--dark600);
 }
+.b-f3f3f3 {
+  background-color: var(--light500);
+}
 
 .b-ffffff {
   background-color: var(--light100);
@@ -206,22 +210,6 @@ input[type="number"] {
 
 .br-252945 {
   border: 1px solid var(--dark400);
-}
-
-.background-draft-lightTheme {
-  background: #373b530f;
-}
-
-.background-draftCircle-lightTheme {
-  background-color: var(--dark500);
-}
-
-.background-draft-darkTheme {
-  background: rgb(223, 227, 250);
-}
-
-.background-draftCircle-darkTheme {
-  background-color: var(--light300);
 }
 
 .statusCTA {
