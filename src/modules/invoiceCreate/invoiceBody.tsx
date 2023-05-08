@@ -9,8 +9,10 @@ const InvoiceBody: React.FC = () => {
 
   return (
     <div className={`${styles.invoice} ${setThemeStyles("backgroundSeven")}`}>
-      <GoBack />
-      <h2 className={`${styles.header} ${setThemeStyles("textOne")}`}>New Invoice</h2>
+      <div className={styles.pdg}>
+        <GoBack />
+        <h2 className={`${styles.header} ${setThemeStyles("textOne")}`}>New Invoice</h2>
+      </div>
       <InvoiceForm />
     </div>
   );

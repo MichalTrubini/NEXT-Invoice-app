@@ -2,7 +2,11 @@
     position: absolute;
     top: 0;
     width: 100%;
-    padding: 10.5rem 2.4rem;
+    padding-top: 10.5rem
+}
+
+.pdg {
+    padding: 0 2.4rem;
 }
 
 .header {

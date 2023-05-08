@@ -1,8 +1,9 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./invoiceForm.module.css";
-import { forwardRef, useContext } from "react";
-import SiteContext from "../../store/site-context";
 import FormElement from "../../components/form/formElement";
+import Button from "../../components/button";
+import { useContext } from "react";
+import SiteContext from "../../store/site-context";
 
 type Inputs = {
   streetAddress: string;
@@ -27,7 +28,6 @@ const InvoiceForm = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -35,38 +35,68 @@ const InvoiceForm = () => {
 
   const { setThemeStyles } = useContext(SiteContext);
 
+  const handleDiscardInvoice = () => {
+    console.log();
+  };
+  const handleSaveDraft = () => {
+    console.log();
+  };
+  const handleCreateInvoice = () => {
+    console.log();
+  };
+
+  const addItemHandler = () => {
+    console.log();
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h3 className={styles.formHeader}>Bill From</h3>
-      <FormElement label="Street Address" {...register("streetAddress")} />
-      <div className={styles.billBlock}>
-        <div className={styles.city}>
-          <FormElement label="City" {...register("city")} />
+      <div className={styles.formTop}>
+        <h3 className={styles.formHeader}>Bill From</h3>
+        <FormElement label="Street Address" {...register("streetAddress")} />
+        <div className={styles.billBlock}>
+          <div className={styles.city}>
+            <FormElement label="City" {...register("city")} />
+          </div>
+          <div className={styles.postCode}>
+            <FormElement label="Post Code" {...register("postcode")} />
+          </div>
+          <div className={styles.country}>
+            <FormElement label="Country" {...register("country")} />
+          </div>
         </div>
-        <div className={styles.postCode}>
-          <FormElement label="Post Code" {...register("postcode")} />
+        <div className={styles.billToSection}>
+          <h3 className={styles.formHeader}>Bill To</h3>
+          <FormElement label="Client's Name" {...register("clientName")} />
+          <FormElement label="Client's Email" {...register("clientEmail")} />
+          <FormElement label="Street Address" {...register("clientStreetAddress")} />
+          <FormElement label="City" {...register("clientCity")} />
+          <FormElement label="Post Code" {...register("clientPostcode")} />
+          <FormElement label="Country" {...register("clientCountry")} />
+          <FormElement label="Invoice Date" {...register("invoiceDate")} />
+          <FormElement label="Payment Terms" {...register("paymentTerms")} />
+          <FormElement label="Project Description" {...register("project")} />
         </div>
-        <div className={styles.country}>
-          <FormElement label="Country" {...register("country")} />
+        <div className={styles.addItemSection}>
+          <h3 className={styles.listHeader}>Item List</h3>
+          <Button description="+ Add New Item" buttonType={`${styles.addItem} ${setThemeStyles("backgroundFive")} ${setThemeStyles("textFour")}`} onClick={addItemHandler} />
         </div>
+        {errors.city && <span>This field is required</span>}
       </div>
-
-      <h3 className={styles.formHeader}>Bill To</h3>
-      <FormElement label="Client's Name" {...register("clientName")} />
-      <FormElement label="Client's Email" {...register("clientEmail")} />
-      <FormElement label="Street Address" {...register("clientStreetAddress")} />
-      <FormElement label="City" {...register("clientCity")} />
-      <FormElement label="Post Code" {...register("clientPostcode")} />
-      <FormElement label="Country" {...register("clientCountry")} />
-      <FormElement label="Invoice Date" {...register("invoiceDate")} />
-      <FormElement label="Payment Terms" {...register("paymentTerms")} />
-      <FormElement label="Project Description" {...register("project")} />
-
-      <h3>Item List</h3>
-
-      {errors.city && <span>This field is required</span>}
-
-      <input type="submit" />
+      <div className={styles.shader}></div>
+      <div className={`${styles.formBottom} ${setThemeStyles("backgroundThree")}`}>
+        <Button
+          description="Discard"
+          buttonType={`${setThemeStyles("backgroundFive")} ${setThemeStyles("textSix")} ${styles.discard}`}
+          onClick={handleDiscardInvoice}
+        />
+        <Button
+          description="Save as Draft"
+          buttonType={`${setThemeStyles("textTwo")} ${styles.saveDraft}`}
+          onClick={handleSaveDraft}
+        />
+        <Button description="Create invoice" buttonType={styles.saveInvoice} onClick={handleCreateInvoice} />
+      </div>
     </form>
   );
 };
