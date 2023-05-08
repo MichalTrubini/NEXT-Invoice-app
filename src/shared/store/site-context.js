@@ -91,6 +91,7 @@ export function SiteProvider({ children }) {
         textThree: "c-858bb2",
         textFour: 'c-7E88C3',
         textFive:'c-373b53',
+        textSix:'c-7E88C3',
         draft: 'background-draft-lightTheme',
         draftCircle: 'background-draftCircle-lightTheme',
         borderOne:'br-DFE3FA'
@@ -108,6 +109,7 @@ export function SiteProvider({ children }) {
         textThree: "c-ffffff",
         textFour: 'c-888eb0',
         textFive:'c-dfe3fa',
+        textSix:'c-dfe3fa',
         draft: 'background-draft-darkTheme',
         draftCircle: 'background-draftCircle-darkTheme',
         borderOne:'br-252945'
