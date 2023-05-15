@@ -2,8 +2,10 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./invoiceForm.module.css";
 import FormElement from "../../components/form/formElement";
 import Button from "../../components/button";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import SiteContext from "../../store/site-context";
+import { Size } from "../../types/enums";
+import { useScreenWidth } from "../../utils/hooks";
 
 type Inputs = {
   streetAddress: string;
@@ -24,19 +26,27 @@ type Inputs = {
   price: number;
 };
 
-const InvoiceForm = () => {
+const InvoiceForm: React.FC<{ close: any }> = (props) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
 
+  const [formHeight, setFormHeight] = useState(0)
+
+  useEffect(()=>{
+    const appHeaderHeight = document.getElementById('appHeader')!.clientHeight
+    const invoiceHeaderHeight = document.getElementById('invoiceHeader')!.clientHeight
+    setFormHeight(window.innerHeight - appHeaderHeight - invoiceHeaderHeight)
+  },[])
+
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
-  const { setThemeStyles } = useContext(SiteContext);
+  const { setThemeStyles, darkTheme } = useContext(SiteContext);
 
   const handleDiscardInvoice = () => {
-    console.log();
+    props.close();
   };
   const handleSaveDraft = () => {
     console.log();
@@ -44,47 +54,63 @@ const InvoiceForm = () => {
   const handleCreateInvoice = () => {
     console.log();
   };
-
   const addItemHandler = () => {
     console.log();
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)} style={useScreenWidth() > Size.modalBreakpoint ? {'height': formHeight} : {'height': 'auto'}}>
       <div className={styles.formTop}>
-        <h3 className={styles.formHeader}>Bill From</h3>
-        <FormElement label="Street Address" {...register("streetAddress")} />
-        <div className={styles.billBlock}>
-          <div className={styles.city}>
-            <FormElement label="City" {...register("city")} />
-          </div>
-          <div className={styles.postCode}>
-            <FormElement label="Post Code" {...register("postcode")} />
-          </div>
-          <div className={styles.country}>
-            <FormElement label="Country" {...register("country")} />
+        <div className={styles.mgBottom}>
+          <h3 className={styles.formHeader}>Bill From</h3>
+          <FormElement label="Street Address" {...register("streetAddress")} />
+          <div className={styles.gridArea}>
+            <div className={styles.city}>
+              <FormElement label="City" {...register("city")} />
+            </div>
+            <div className={styles.postCode}>
+              <FormElement label="Post Code" {...register("postcode")} />
+            </div>
+            <div className={styles.country}>
+              <FormElement label="Country" {...register("country")} />
+            </div>
           </div>
         </div>
-        <div className={styles.billToSection}>
+        <div className={styles.mgBottom}>
           <h3 className={styles.formHeader}>Bill To</h3>
           <FormElement label="Client's Name" {...register("clientName")} />
           <FormElement label="Client's Email" {...register("clientEmail")} />
           <FormElement label="Street Address" {...register("clientStreetAddress")} />
-          <FormElement label="City" {...register("clientCity")} />
-          <FormElement label="Post Code" {...register("clientPostcode")} />
-          <FormElement label="Country" {...register("clientCountry")} />
-          <FormElement label="Invoice Date" {...register("invoiceDate")} />
-          <FormElement label="Payment Terms" {...register("paymentTerms")} />
+          <div className={styles.gridArea}>
+            <div className={styles.city}>
+              <FormElement label="City" {...register("clientCity")} />
+            </div>
+            <div className={styles.postCode}>
+              <FormElement label="Post Code" {...register("clientPostcode")} />
+            </div>
+            <div className={styles.country}>
+              <FormElement label="Country" {...register("clientCountry")} />
+            </div>
+          </div>
+        </div>
+        <div className={styles.mgBottom}>
+          <div className={styles.wrapper}>
+            <FormElement label="Invoice Date" {...register("invoiceDate")} />
+            <FormElement label="Payment Terms" {...register("paymentTerms")} />
+          </div>
           <FormElement label="Project Description" {...register("project")} />
         </div>
         <div className={styles.addItemSection}>
           <h3 className={styles.listHeader}>Item List</h3>
-          <Button description="+ Add New Item" buttonType={`${styles.addItem} ${setThemeStyles("backgroundFive")} ${setThemeStyles("textFour")}`} onClick={addItemHandler} />
+          <Button
+            description="+ Add New Item"
+            buttonType={`${styles.addItem} ${setThemeStyles("backgroundFive")} ${setThemeStyles("textFour")}`}
+            onClick={addItemHandler}
+          />
         </div>
         {errors.city && <span>This field is required</span>}
       </div>
-      <div className={styles.shader}></div>
-      <div className={`${styles.formBottom} ${setThemeStyles("backgroundThree")}`}>
+      <div className={`${styles.formBottom} ${setThemeStyles("backgroundThree")} ${!darkTheme ? styles.formBottomShadow : null}`}>
         <Button
           description="Discard"
           buttonType={`${setThemeStyles("backgroundFive")} ${setThemeStyles("textSix")} ${styles.discard}`}

@@ -1,17 +1,67 @@
 .invoice {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    padding-top: 10.5rem
+  position: absolute;
+  z-index: 59;
+  top: 0;
+  width: 100%;
+  max-width: 61.6rem;
 }
 
-.pdg {
-    padding: 0 2.4rem;
+.animationIn {
+  transform: translatex(-100%);
+  animation-name: slideRight;
+  animation-duration: 0.25s;
+  animation-fill-mode: forwards;
+}
+
+.animationOut {
+  transform: translatex(0%);
+  animation-name: slideLeft;
+  animation-duration: 0.25s;
+  animation-fill-mode: forwards;
+}
+
+.section {
+  padding: 3.2rem 2.4rem 2.4rem;
 }
 
 .header {
-    font-size: 2.4rem;
-    line-height: 3.2rem;
-    letter-spacing: -0.5px;
-    margin: 2.4rem 0;
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+  letter-spacing: -0.5px;
+  margin-top: 2.4rem;
+}
+
+@keyframes slideRight {
+  from {
+    transform: translatex(-100%);
+  }
+
+  to {
+    transform: translatex(0);
+  }
+}
+
+@keyframes slideLeft {
+    from {
+      transform: translatex(0%);
+    }
+  
+    to {
+      transform: translatex(-100%);
+    }
+  }
+
+@media screen and (min-width: 616px) {
+  .invoice {
+    position: fixed;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .section {
+    padding: 3.2rem 5.6rem 4.8rem;
+  }
+  .header {
+    margin-top: 4.8rem;
+  }
+
 }
