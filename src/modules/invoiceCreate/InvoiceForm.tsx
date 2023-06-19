@@ -34,12 +34,19 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
   } = useForm<Inputs>();
 
   const [formHeight, setFormHeight] = useState(0)
+  const [bottomWidth, setBottomWidth] = useState(0)
+  const [bottomPaddingLeft, setBottomPaddingLeft] = useState(0)
+
+  const screenWidth = useScreenWidth()
 
   useEffect(()=>{
     const appHeaderHeight = document.getElementById('appHeader')!.clientHeight
+    const appHeaderWidth = document.getElementById('appHeader')!.clientWidth;
     const invoiceHeaderHeight = document.getElementById('invoiceHeader')!.clientHeight
-    setFormHeight(window.innerHeight - appHeaderHeight - invoiceHeaderHeight)
-  },[])
+    setFormHeight(screenWidth < Size.desktopBreakpoint ? window.innerHeight - appHeaderHeight - invoiceHeaderHeight : window.innerHeight - invoiceHeaderHeight)
+    setBottomWidth(screenWidth < Size.desktopBreakpoint ? 616 : 616 +  appHeaderWidth)
+    setBottomPaddingLeft(screenWidth < Size.desktopBreakpoint ? 24 : appHeaderWidth+24)
+  },[screenWidth])
 
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
@@ -57,9 +64,9 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
   const addItemHandler = () => {
     console.log();
   };
-
+console.log(useScreenWidth() > Size.modalBreakpoint)
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)} style={useScreenWidth() > Size.modalBreakpoint ? {'height': formHeight} : {'height': 'auto'}}>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)} style={screenWidth > Size.modalBreakpoint ? {'height': formHeight} : {'height': 'auto'}}>
       <div className={styles.formTop}>
         <div className={styles.mgBottom}>
           <h3 className={styles.formHeader}>Bill From</h3>
@@ -110,7 +117,8 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
         </div>
         {errors.city && <span>This field is required</span>}
       </div>
-      <div className={`${styles.formBottom} ${setThemeStyles("backgroundThree")} ${!darkTheme ? styles.formBottomShadow : null}`}>
+      <div style={{'maxWidth': bottomWidth+'px'}}>
+        <div style={{'left': '0px', 'paddingLeft': bottomPaddingLeft+'px'}} className={`${styles.formBottom} ${setThemeStyles("backgroundThree")} ${!darkTheme ? styles.formBottomShadow : null}`}>
         <Button
           description="Discard"
           buttonType={`${setThemeStyles("backgroundFive")} ${setThemeStyles("textSix")} ${styles.discard}`}
@@ -122,6 +130,7 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
           onClick={handleSaveDraft}
         />
         <Button description="Create invoice" buttonType={styles.saveInvoice} onClick={handleCreateInvoice} />
+        </div>
       </div>
     </form>
   );

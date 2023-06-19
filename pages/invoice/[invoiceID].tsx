@@ -13,7 +13,7 @@ const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getSe
   const tabletBreakpoint = 768;
   const matches = useMediaQuery(tabletBreakpoint);
   const { setThemeStyles } = useContext(SiteContext);
-  console.log(invoiceItem);
+
   return (
     <>
       <Head>
