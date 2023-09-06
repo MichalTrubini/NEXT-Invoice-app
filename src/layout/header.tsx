@@ -5,20 +5,18 @@ import sun from "../../public/assets/icon-sun.svg";
 import avatar from "../../public/assets/image-avatar.jpg";
 import Image from "next/image";
 import { useContext } from "react";
-import SiteContext from "../store/site-context";
+import { SiteContext } from "../store/site-context";
 import Link from "next/link";
 
 const Header = () => {
-  const { setDarkTheme } = useContext(SiteContext);
-  const { darkTheme } = useContext(SiteContext);
-  const { setThemeStyles } = useContext(SiteContext);
+  const { setDarkTheme, darkTheme, setThemeStyles } = useContext(SiteContext)!;
 
   const themeHandler = () => {
-    setDarkTheme((prevValue: boolean) => !prevValue);
+    setDarkTheme(!darkTheme);
   };
 
   return (
-    <header id='appHeader' className={`${styles.header} ${setThemeStyles("backgroundTwo")}`}>
+    <header id="appHeader" className={`${styles.header} ${setThemeStyles("backgroundTwo")}`}>
       <div className={`${styles.imageContainer} ${styles.imageLogoContainer}`}>
         <Link href="/">
           <Image src={logo} alt="invoice app" className={styles.imageLogo} />

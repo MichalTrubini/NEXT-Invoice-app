@@ -1,5 +1,5 @@
 import styles from "./invoiceItems.module.css";
-import SiteContext from "../../store/site-context";
+import { SiteContext} from "../../store/site-context";
 import { useContext } from "react";
 import arrow from "../../../public/assets/icon-arrow-right.svg";
 import Image from "next/image";
@@ -10,7 +10,7 @@ import { Size } from "../../types/enums";
 const InvoiceItems: React.FC<{ invoiceItems: { _id: string; clientName: string; total: number; status: string }[] }> = (
   props
 ) => {
-  const { setThemeStyles } = useContext(SiteContext);
+  const { setThemeStyles } = useContext(SiteContext)!;
   const matches = useMediaQuery(Size.tabletBreakpoint);
 
   return (

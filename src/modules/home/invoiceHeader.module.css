@@ -176,4 +176,8 @@
   .header {
     margin-bottom: 7.1rem;
   }
+
+  .addContainer:hover {
+    cursor: pointer;
+  }
 }

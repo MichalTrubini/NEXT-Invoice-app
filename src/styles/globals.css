@@ -5,10 +5,10 @@
   --dark400: #252945;
   --dark500: #373b53;
   --dark600: #858bb2;
-  --dark700: #777F98;
+  --dark700: #777f98;
 
   --light100: #fff;
-  --light200: #F9FAFE;
+  --light200: #f9fafe;
   --light300: #dfe3fa;
   --light400: #f8f8fb;
   --light500: #f3f3f3;
@@ -18,7 +18,7 @@
 
   --purple100: #7c5dfa;
   --purple200: #9277ff;
-  --purple300: #7E88C3;
+  --purple300: #7e88c3;
   --purple400: #888eb0;
 }
 
@@ -92,7 +92,7 @@ input[type="number"] {
   color: var(--dark300);
 }
 
-.c-252945{
+.c-252945 {
   color: var(--dark400);
 }
 
@@ -110,7 +110,7 @@ input[type="number"] {
 .c-F9FAFE {
   color: var(--light200);
 }
-.c-dfe3fa{
+.c-dfe3fa {
   color: var(--light300);
 }
 .c-f8f8fb {
@@ -121,23 +121,23 @@ input[type="number"] {
   color: var(--red100);
 }
 
-.c-ff9797{
+.c-ff9797 {
   color: var(--red200);
 }
 
-.c-7c5dfa{
+.c-7c5dfa {
   color: var(--purple100);
 }
 
-.c-9277ff{
+.c-9277ff {
   color: var(--purple200);
 }
 
-.c-7E88C3{
+.c-7E88C3 {
   color: var(--purple300);
 }
 
-.c-888eb0{
+.c-888eb0 {
   color: var(--purple400);
 }
 
@@ -153,7 +153,7 @@ input[type="number"] {
   background-color: var(--dark300);
 }
 
-.b-252945{
+.b-252945 {
   background-color: var(--dark400);
 }
 
@@ -174,7 +174,7 @@ input[type="number"] {
 .b-F9FAFE {
   background-color: var(--light200);
 }
-.b-dfe3fa{
+.b-dfe3fa {
   background-color: var(--light300);
 }
 .b-f8f8fb {
@@ -185,27 +185,27 @@ input[type="number"] {
   background-color: var(--red100);
 }
 
-.b-ff9797{
+.b-ff9797 {
   background-color: var(--red200);
 }
 
-.b-7c5dfa{
+.b-7c5dfa {
   background-color: var(--purple100);
 }
 
-.b-9277ff{
+.b-9277ff {
   background-color: var(--purple200);
 }
 
-.b-7E88C3{
+.b-7E88C3 {
   background-color: var(--purple300);
 }
 
-.b-888eb0{
+.b-888eb0 {
   background-color: var(--purple400);
 }
 
-.br-DFE3FA{
+.br-DFE3FA {
   border: 1px solid var(--light300);
 }
 
@@ -219,6 +219,12 @@ input[type="number"] {
   border-radius: 8px;
   margin-bottom: 1.6rem;
   margin-top: 3.2rem;
+}
+
+@media screen and (min-width: 616px) {
+  .displayNone {
+    display: none!important;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -239,7 +245,6 @@ input[type="number"] {
   .wrapper {
     padding: 4.8rem 4rem 13.5rem;
   }
-
 }
 
 @media screen and (min-width: 1024px) {

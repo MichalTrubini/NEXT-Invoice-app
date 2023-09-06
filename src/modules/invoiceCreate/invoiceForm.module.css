@@ -69,6 +69,7 @@
   letter-spacing: -0.38px;
   font-weight: 700;
   color: var(--dark700);
+  margin-bottom: 2.4rem;
 }
 
 .addItem {
@@ -78,8 +79,61 @@
   margin-bottom: 2.4rem;
 }
 
-@media screen and (min-width: 616px) {
+.addItem:hover {
+  cursor: pointer;
+}
 
+.itemRow {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemFlexRow {
+  display: flex;
+  flex-direction: row;
+  gap: 1.6rem;
+  position: relative;
+}
+
+.label {
+  display: block;
+  font-size: 1.2rem;
+  letter-spacing: -0.25px;
+  margin-bottom: 1rem;
+}
+
+.itemPriceTotal {
+  min-width: 5rem;
+  font-size: 1.2rem;
+  letter-spacing: -0.25px;
+  padding: 1.7rem 0 1.6rem;
+  margin-bottom: 2.4rem;
+}
+
+.itemQty {
+  max-width: 6.4rem;
+}
+
+.itemPrice {
+  max-width: 10rem;
+}
+
+.itemList {
+  display: flex;
+  flex-direction: column;
+  gap: 4.8rem;
+}
+
+.deleteRow {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media screen and (min-width: 616px) {
   .form {
     overflow: scroll;
   }
@@ -96,8 +150,7 @@
   }
   .gridArea {
     display: grid;
-    grid-template-areas:
-      "a b c";
+    grid-template-areas: "a b c";
     gap: 0 2.4rem;
   }
 
@@ -115,4 +168,8 @@
     width: 100%;
   }
 
+  .itemRow {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
