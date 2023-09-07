@@ -5,12 +5,12 @@ import Link from "next/link";
 import { useContext } from "react";
 import { SiteContext } from "../store/site-context";
 
-const GoBack = () => {
+const GoBack: React.FC<{onClick?: () => void}> = (props) => {
   const { setThemeStyles } = useContext(SiteContext)!;
 
   return (
     <Link href="/">
-      <div className={styles.container}>
+      <div className={styles.container} onClick={props.onClick}>
         <div>
           <Image src={arrow} alt="arrow" />
         </div>

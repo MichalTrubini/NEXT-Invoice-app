@@ -9,7 +9,7 @@ const Home = ({ invoiceItems }: InferGetServerSidePropsType<typeof getServerSide
   const [draftSelected, setDraft] = useState(false);
   const [pendingSelected, setPending] = useState(false);
   const [paidSelected, setPaid] = useState(false);
-
+  console.log(invoiceItems)
   const draft = draftSelected ? "draft" : "";
   const pending = pendingSelected ? "pending" : "";
   const paid = paidSelected ? "paid" : "";

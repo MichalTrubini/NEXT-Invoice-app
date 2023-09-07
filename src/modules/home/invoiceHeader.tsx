@@ -36,7 +36,7 @@ const InvoiceHeader: React.FC<{
   };
 
   const modalCloseHandler = () => {
-    setTimeout(()=>{setNewInvoice(false);},500)
+    setTimeout(()=>{setNewInvoice(false);},200)
     setAnimate(false);
     window.scrollTo(0, 0);
   }

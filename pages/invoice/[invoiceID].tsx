@@ -7,12 +7,12 @@ import { useMediaQuery } from "../../src/utils/hooks";
 import InvoiceDetails from "../../src/modules/invoiceView/invoiceDetails";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useContext } from "react";
-import SiteContext from "../../src/store/site-context";
+import { SiteContext } from "../../src/store/site-context";
 
 const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const tabletBreakpoint = 768;
   const matches = useMediaQuery(tabletBreakpoint);
-  const { setThemeStyles } = useContext(SiteContext);
+  const { setThemeStyles } = useContext(SiteContext)!;
 
   return (
     <>

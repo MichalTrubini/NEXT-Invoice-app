@@ -73,7 +73,13 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
       return [...prevItems, { name: "", qty: "", price: "" }];
     });
   };
-  const deleteItemHandler = () => {};
+  const deleteItemHandler = (index: number) => {
+    setNewItems((prevItems) => {
+      console.log(index)
+        const newItems = [...prevItems.slice(0, index), ...prevItems.slice(index + 1)];
+        return newItems;
+    });
+  };
 
   console.log(newItems);
   return (
@@ -140,15 +146,15 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
                   <div>
                     <label className={`${styles.label} displayNone ${setThemeStyles("textSix")}`}>Total</label>
                     <p
-                      className={`${styles.itemPriceTotal} ${setThemeStyles("backgroundThree")} ${setThemeStyles(
-                        "textOne"
+                      className={`${styles.itemPriceTotal} ${setThemeStyles(
+                        "textTwo"
                       )}`}
                     >
-                      100
+                      0.00
                     </p>
                   </div>
                   <div className={styles.deleteRow}>
-                    <Image src={Bin} alt="delete row" onClick={deleteItemHandler} />
+                    <Image src={Bin} alt="delete row" onClick={()=>deleteItemHandler(index)} />
                   </div>
                 </div>
               </li>

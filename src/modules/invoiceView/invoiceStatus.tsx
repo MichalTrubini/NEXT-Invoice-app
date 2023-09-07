@@ -1,9 +1,9 @@
 import styles from "./invoiceStatus.module.css";
-import SiteContext from "../../store/site-context";
+import { SiteContext } from "../../store/site-context";
 import { useContext } from "react";
 
 const InvoiceStatus: React.FC<{ status: string }> = (props) => {
-  const { setThemeStyles } = useContext(SiteContext);
+  const { setThemeStyles } = useContext(SiteContext)!;
 
   return (
     <div className={styles.container}>

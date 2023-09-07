@@ -24,7 +24,7 @@ const InvoiceBody: React.FC<{close:any; animation: boolean}> = (props) => {
   return (
     <div style={{'marginTop':headerHeight, 'paddingLeft': headerWidth, 'maxWidth': invoiceWidth+'px'}} className={`${styles.invoice} ${setThemeStyles("backgroundSeven")} ${props.animation ? styles.animationIn : styles.animationOut}`}>
       <div className={styles.section} id='invoiceHeader'>
-        <GoBack />
+        <GoBack onClick={props.close}/>
         <h2 className={`${styles.header} ${setThemeStyles("textOne")}`}>New Invoice</h2>
       </div>
       <InvoiceForm close={props.close}/>
