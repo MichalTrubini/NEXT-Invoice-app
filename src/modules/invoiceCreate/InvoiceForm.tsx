@@ -75,9 +75,9 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
   };
   const deleteItemHandler = (index: number) => {
     setNewItems((prevItems) => {
-      console.log(index)
-        const newItems = [...prevItems.slice(0, index), ...prevItems.slice(index + 1)];
-        return newItems;
+      console.log(index);
+      const newItems = [...prevItems.slice(0, index), ...prevItems.slice(index + 1)];
+      return newItems;
     });
   };
 
@@ -91,7 +91,9 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
       <div className={styles.formTop}>
         <div className={styles.mgBottom}>
           <h3 className={styles.formHeader}>Bill From</h3>
-          <FormElement label="Street Address" {...register("streetAddress")} />
+          <div className={styles.formElementWrapper}>
+            <FormElement label="Street Address" {...register("streetAddress")} />
+          </div>
           <div className={styles.gridArea}>
             <div className={styles.city}>
               <FormElement label="City" {...register("city")} />
@@ -106,9 +108,15 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
         </div>
         <div className={styles.mgBottom}>
           <h3 className={styles.formHeader}>Bill To</h3>
-          <FormElement label="Client's Name" {...register("clientName")} />
-          <FormElement label="Client's Email" {...register("clientEmail")} />
-          <FormElement label="Street Address" {...register("clientStreetAddress")} />
+          <div className={styles.formElementWrapper}>
+            <FormElement label="Client's Name" {...register("clientName")} />
+          </div>
+          <div className={styles.formElementWrapper}>
+            <FormElement label="Client's Email" {...register("clientEmail")} />
+          </div>
+          <div className={styles.formElementWrapper}>
+            <FormElement label="Street Address" {...register("clientStreetAddress")} />
+          </div>
           <div className={styles.gridArea}>
             <div className={styles.city}>
               <FormElement label="City" {...register("clientCity")} />
@@ -123,8 +131,12 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
         </div>
         <div className={styles.mgBottom}>
           <div className={styles.wrapper}>
-            <FormElement label="Invoice Date" {...register("invoiceDate")} />
-            <FormElement label="Payment Terms" {...register("paymentTerms")} />
+            <div className={styles.formElementWrapper}>
+              <FormElement label="Invoice Date" {...register("invoiceDate")} />
+            </div>
+            <div className={styles.formElementWrapper}>
+              <FormElement label="Payment Terms" {...register("paymentTerms")} />
+            </div>
           </div>
           <FormElement label="Project Description" {...register("project")} />
         </div>
@@ -133,28 +145,22 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
           <ul className={styles.itemList}>
             {newItems.map((item, index) => (
               <li key={index} className={styles.itemRow}>
-                <div>
-                  <FormElement classNameCustom="displayNone" label="Item Name" {...register("itemName")} />
+                <div className={styles.itemName}>
+                  <FormElement classNameCustom={screenWidth < Size.modalBreakpoint ? 'displayBlock' : (screenWidth > Size.modalBreakpoint && index === 0) ? 'displayBlock' : 'displayNone'} label="Item Name" {...register("itemName")} />
                 </div>
                 <div className={styles.itemFlexRow}>
                   <div className={styles.itemQty}>
-                    <FormElement classNameCustom="displayNone" label="Qty." {...register("itemQty")} />
+                    <FormElement classNameCustom={screenWidth < Size.modalBreakpoint ? 'displayBlock' : (screenWidth > Size.modalBreakpoint && index === 0) ? 'displayBlock' : 'displayNone'} label="Qty" {...register("itemQty")} />
                   </div>
                   <div className={styles.itemPrice}>
-                    <FormElement classNameCustom="displayNone" label="Price" {...register("itemPrice")} />
+                    <FormElement classNameCustom={screenWidth < Size.modalBreakpoint ? 'displayBlock' : (screenWidth > Size.modalBreakpoint && index === 0) ? 'displayBlock' : 'displayNone'} label="Price" {...register("itemPrice")} />
                   </div>
                   <div>
-                    <label className={`${styles.label} displayNone ${setThemeStyles("textSix")}`}>Total</label>
-                    <p
-                      className={`${styles.itemPriceTotal} ${setThemeStyles(
-                        "textTwo"
-                      )}`}
-                    >
-                      0.00
-                    </p>
+                    <label className={screenWidth < Size.modalBreakpoint ? `${styles.label} displayBlock ${setThemeStyles("textSix")}` : (screenWidth > Size.modalBreakpoint && index === 0) ? `${styles.label} displayBlock ${setThemeStyles("textSix")}` : `${styles.label} displayNone ${setThemeStyles("textSix")}`} >Total</label>
+                    <p className={`${styles.itemPriceTotal} ${setThemeStyles("textTwo")}`}>0.00</p>
                   </div>
                   <div className={styles.deleteRow}>
-                    <Image src={Bin} alt="delete row" onClick={()=>deleteItemHandler(index)} />
+                    <Image src={Bin} alt="delete row" onClick={() => deleteItemHandler(index)} />
                   </div>
                 </div>
               </li>

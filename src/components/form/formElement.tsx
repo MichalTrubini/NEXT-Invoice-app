@@ -11,7 +11,7 @@ const FormElement = forwardRef<HTMLInputElement, MyInputProps>(({label, classNam
   const { setThemeStyles } = useContext(SiteContext)!;
 
   return (
-    <div>
+    <>
       <label className={`${styles.label} ${classNameCustom} ${setThemeStyles("textSix")}`}>{label}</label>
       <input
         className={`${styles.input} ${setThemeStyles("backgroundThree")} ${setThemeStyles("textOne")} ${setThemeStyles(
@@ -19,7 +19,7 @@ const FormElement = forwardRef<HTMLInputElement, MyInputProps>(({label, classNam
         )}`}
         {...rest} ref={ref}
       />
-    </div>
+    </>
   );
 });
 

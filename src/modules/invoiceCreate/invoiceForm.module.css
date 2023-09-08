@@ -35,6 +35,7 @@
 
 .country {
   grid-area: c;
+  margin-top: 2.4rem;
 }
 
 .discard {
@@ -86,11 +87,13 @@
 .itemRow {
   display: flex;
   flex-direction: column;
+  gap: 2.4rem;
 }
 
 .itemFlexRow {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 1.6rem;
   position: relative;
 }
@@ -107,7 +110,6 @@
   font-size: 1.2rem;
   letter-spacing: -0.25px;
   padding: 2rem 0 1.9rem;
-  margin-bottom: 2.4rem;
   font-weight: 500;
 }
 
@@ -122,16 +124,21 @@
 .itemList {
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
+  gap: 4.8rem;
 }
 
 .deleteRow {
-  display: flex;
-  align-items: center;
   position: absolute;
   right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 1.5rem;
+}
+
+.formElementWrapper {
+  margin-bottom: 2.4rem;
+}
+
+.wrapper {
+  margin-bottom: 2.4rem;
 }
 
 @media screen and (min-width: 616px) {
@@ -163,6 +170,7 @@
     display: flex;
     justify-content: space-between;
     gap: 2.4rem;
+    margin-bottom: 0rem;
   }
 
   .wrapper > div {
@@ -171,6 +179,26 @@
 
   .itemRow {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 1.6rem;
+
+  }
+
+  .country {
+    margin-top: 0rem;
+  }
+
+  .itemList {
+    gap: 1.8rem;
+  }
+
+  .itemName {
+    max-width: 21.4rem;
+    width: 100%;
+  }
+
+  .itemFlexRow {
+    gap: 1.6rem;
+    width: 100%;
   }
 }
