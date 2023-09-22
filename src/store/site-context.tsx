@@ -10,15 +10,15 @@ interface ThemeStyles {
   backgroundSeven: string;
   backgroundEight: string;
   backgroundNine: string;
+  backgroundTen: string;
   textOne: string;
   textTwo: string;
   textThree: string;
   textFour: string;
   textFive: string;
   textSix: string;
-  draft: string;
-  draftCircle: string;
   borderOne: string;
+  shadowOne: string;
 }
 
 interface SiteContextValue {
@@ -51,15 +51,15 @@ export function SiteProvider({ children }: SiteProviderProps) {
         backgroundSeven: 'b-ffffff',
         backgroundEight: 'b-f3f3f3',
         backgroundNine: 'b-373b53',
+        backgroundTen: 'b-dfe3fa',
         textOne: "c-0c0e16",
         textTwo: "c-888eb0",
         textThree: "c-858bb2",
         textFour: 'c-7E88C3',
         textFive:'c-373b53',
         textSix:'c-7E88C3',
-        draft: 'background-draft-lightTheme',
-        draftCircle: 'background-draftCircle-lightTheme',
-        borderOne:'br-DFE3FA'
+        borderOne: 'br-DFE3FA',
+        shadowOne: 'shadowOne-light'
       },
       themeDark: {
         backgroundOne: "b-141625",
@@ -71,15 +71,15 @@ export function SiteProvider({ children }: SiteProviderProps) {
         backgroundSeven: 'b-141625',
         backgroundEight: 'b-373b53',
         backgroundNine: 'b-dfe3fa',
+        backgroundTen: 'b-1e2139',
         textOne: "c-ffffff",
         textTwo: "c-dfe3fa",
         textThree: "c-ffffff",
         textFour: 'c-888eb0',
         textFive:'c-dfe3fa',
         textSix:'c-dfe3fa',
-        draft: 'background-draft-darkTheme',
-        draftCircle: 'background-draftCircle-darkTheme',
-        borderOne:'br-252945'
+        borderOne: 'br-252945',
+        shadowOne: 'shadowOne-dark'
       }
     };
 

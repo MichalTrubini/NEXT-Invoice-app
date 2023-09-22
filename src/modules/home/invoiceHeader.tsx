@@ -105,11 +105,11 @@ const InvoiceHeader: React.FC<{
                     type="checkbox"
                     id="draft"
                     name="draft"
-                    className={styles.input}
+                    className={`${styles.input} ${setThemeStyles("backgroundTen")}`}
                     onClick={props.draft}
                     defaultChecked={props.draftSelected}
                   />
-                  <label htmlFor="draft" className={styles.label}>
+                  <label htmlFor="draft" className={`${styles.label} ${setThemeStyles("textOne")}`}>
                     Draft
                   </label>
                 </div>
@@ -118,11 +118,11 @@ const InvoiceHeader: React.FC<{
                     type="checkbox"
                     id="pending"
                     name="pending"
-                    className={styles.input}
+                    className={`${styles.input} ${setThemeStyles("backgroundTen")}`}
                     onClick={props.pending}
                     defaultChecked={props.pendingSelected}
                   />
-                  <label htmlFor="pending" className={styles.label}>
+                  <label htmlFor="pending" className={`${styles.label} ${setThemeStyles("textOne")}`}>
                     Pending
                   </label>
                 </div>
@@ -131,11 +131,11 @@ const InvoiceHeader: React.FC<{
                     type="checkbox"
                     id="paid"
                     name="paid"
-                    className={styles.input}
+                    className={`${styles.input} ${setThemeStyles("backgroundTen")}`}
                     onClick={props.paid}
                     defaultChecked={props.paidSelected}
                   />
-                  <label htmlFor="paid" className={styles.label}>
+                  <label htmlFor="paid" className={`${styles.label} ${setThemeStyles("textOne")}`}>
                     Paid
                   </label>
                 </div>

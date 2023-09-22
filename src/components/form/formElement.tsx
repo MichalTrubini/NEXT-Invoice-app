@@ -4,10 +4,11 @@ import { SiteContext } from "../../store/site-context";
 
 interface MyInputProps {
   label: string;
-  classNameCustom?: string
+  classNameCustom?: string;
+  placeholder?: string;
 }
 
-const FormElement = forwardRef<HTMLInputElement, MyInputProps>(({label, classNameCustom, ...rest }, ref) => {
+const FormElement = forwardRef<HTMLInputElement, MyInputProps>(({label, classNameCustom, placeholder, ...rest }, ref) => {
   const { setThemeStyles } = useContext(SiteContext)!;
 
   return (
@@ -17,6 +18,7 @@ const FormElement = forwardRef<HTMLInputElement, MyInputProps>(({label, classNam
         className={`${styles.input} ${setThemeStyles("backgroundThree")} ${setThemeStyles("textOne")} ${setThemeStyles(
           "borderOne"
         )}`}
+        placeholder={placeholder}
         {...rest} ref={ref}
       />
     </>

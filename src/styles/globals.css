@@ -30,6 +30,10 @@ body {
   width: 100%;
 }
 
+.thumb-vertical {
+  background-color: red;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -211,6 +215,14 @@ input[type="number"] {
 
 .br-252945 {
   border: 1px solid var(--dark400);
+}
+
+.shadowOne-light {
+  box-shadow: 1px 1px 60px 30px #d8d8d8;
+}
+
+.shadowOne-dark {
+  box-shadow: 1px 1px 60px 30px rgba(0, 0, 0, 0.25);
 }
 
 .statusCTA {
