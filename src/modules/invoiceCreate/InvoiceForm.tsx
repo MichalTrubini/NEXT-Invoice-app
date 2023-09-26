@@ -33,37 +33,45 @@ type Inputs = {
 
 interface DatePickerProps {
   field: {
-    onChange: (value: string | null) => void;
-    value: string | null;
+    onChange: (date: Date | null) => void;
+    value: Date | null;
   };
-  // You can add more props specific to the input field here
 }
 
-function formatDate(date: Date): string {
+function formatDate(date: Date | null): string {
+  if (!date) return '';
   const day = date.getDate().toString().padStart(2, '0');
-  const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+  const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
   const year = date.getFullYear();
-  return `${day}.${month}.${year}`;
+  return `${year}-${month}-${day}`;
 }
 
-function DatePicker({ field, ...rest }: DatePickerProps) {
-  const { setThemeStyles } = useContext(SiteContext)!;
-  const formattedDate = field.value ? formatDate(new Date(field.value)) : '';
+const DatePicker: React.FC<DatePickerProps> = ({ field }) => {
+  const { setThemeStyles } = useContext(SiteContext) || {};  
 
   return (
-    <div style={{position: "relative"}}>
-      <label className={`${styles.label} ${setThemeStyles("textSix")}`}>Invoice date</label>
-      <input {...field} {...rest} value={formattedDate} className={`${styles.input} ${setThemeStyles("backgroundThree")} ${setThemeStyles("textOne")} ${setThemeStyles(
-          "borderOne"
-        )}`}/>
+    <div style={{ position: "relative" }}>
+      <label className={`${styles.label} ${setThemeStyles?.("textSix") || ''}`}>Invoice date</label>
+      <input
+        type="text"
+        value={formatDate(field.value)}
+        onChange={(e) => {
+          const selectedDate = e.target.value ? new Date(e.target.value) : null;
+          field.onChange(selectedDate);
+        }}
+        className={`${styles.input} ${setThemeStyles?.("backgroundThree") || ''} ${setThemeStyles?.("textOne") || ''} ${setThemeStyles?.("borderOne") || ''}`}
+      />
       <Calendar
-        onChange={(date) => field.onChange(date ? date.toString() : null)} 
-        value={field.value ? new Date(field.value) : null} 
+        onChange={(date) => field.onChange(date ? date : null)}
+        value={field.value}
         className={styles.calendar}
+        prev2Label={null}
+        next2Label={null}
       />
     </div>
   );
-}
+};
+
 
 const InvoiceForm: React.FC<{ close: any }> = (props) => {
   const {
