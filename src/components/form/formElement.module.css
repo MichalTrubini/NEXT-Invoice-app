@@ -21,10 +21,8 @@
   outline: 1px solid var(--purple200);
 }
 
-.input::placeholder {
+.placeholder-light {
   font-size: 1.2rem;
-  color: #0C0E16;
-  opacity: 0.4;
   font-weight: 700;
   letter-spacing: -0.25px;
 }

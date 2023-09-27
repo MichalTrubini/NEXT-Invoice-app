@@ -11,6 +11,7 @@ import Bin from "../../../public/assets/icon-delete.svg";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import iconCalendar from "../../../public/assets/icon-calendar.svg";
+import iconArrow from "../../../public/assets/icon-arrow-down.svg";
 
 type Inputs = {
   supplierStreetAddress: string;
@@ -40,7 +41,7 @@ interface DatePickerProps {
 }
 
 function formatDate(date: Date | null): string {
-  if (!date) return "";
+  if (!date) return formatDate(new Date());
   const day = date.getDate().toString().padStart(2, "0");
   const month = date.toLocaleString("default", { month: "short" });
   const year = date.getFullYear();
@@ -138,7 +139,10 @@ const PaymentTermsPicker: React.FC<PaymentTermsPickerProps> = ({
   useEffect(() => {
     // Add a click event listener to the document to close the dropdown when clicking outside of it
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !(dropdownRef.current  as any).contains(event.target)) {
+      if (
+        dropdownRef.current &&
+        !(dropdownRef.current as any).contains(event.target)
+      ) {
         setIsOpen(false);
       }
     };
@@ -162,27 +166,43 @@ const PaymentTermsPicker: React.FC<PaymentTermsPickerProps> = ({
   };
 
   return (
-    <div ref={dropdownRef}  style={{ position: "relative" }} >
+    <div ref={dropdownRef} style={{ position: "relative" }}>
       <label className={`${styles.label} ${setThemeStyles("textSix")}`}>
         Payment Terms
       </label>
-      <input
-        type="text"
-        readOnly
-        value={selectedValue}
-        onChange={handleInputChange}
-        onClick={() => setIsOpen(!isOpen)}
-        className={`${styles.input} ${setThemeStyles(
-          "backgroundThree"
-        )} ${setThemeStyles("textOne")} ${setThemeStyles("borderOne")}`}
-      />
+      <div style={{ position: "relative" }}>
+        <input
+          type="text"
+          readOnly
+          value={selectedValue}
+          defaultValue="Net 30 Days"
+          onChange={handleInputChange}
+          onClick={() => setIsOpen(!isOpen)}
+          className={`${styles.input} ${setThemeStyles(
+            "backgroundThree"
+          )} ${setThemeStyles("textOne")} ${setThemeStyles("borderOne")}`}
+        />
+        <Image
+          src={iconArrow}
+          alt="arrow"
+          className={
+            isOpen
+              ? `${styles.arrowUp} ${styles.arrowIcon}`
+              : `${styles.arrowDown} ${styles.arrowIcon}`
+          }
+        />
+      </div>
       {isOpen && (
-        <ul className={`${styles.dropdown} ${setThemeStyles("backgroundFour")}`}>
+        <ul
+          className={`${styles.dropdown} ${setThemeStyles("backgroundFour")}`}
+        >
           {options.map((option) => (
             <li
               key={option}
               onClick={() => handleOptionClick(option)}
-              className={`${styles.dropdownItem} ${setThemeStyles("textOne")} ${setThemeStyles("borderTwo")}`}
+              className={`${styles.dropdownItem} ${setThemeStyles(
+                "textOne"
+              )} ${setThemeStyles("borderTwo")}`}
             >
               {option}
             </li>
@@ -192,6 +212,7 @@ const PaymentTermsPicker: React.FC<PaymentTermsPickerProps> = ({
     </div>
   );
 };
+
 const InvoiceForm: React.FC<{ close: any }> = (props) => {
   const {
     register,
@@ -243,9 +264,10 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
       return [...prevItems, { name: "", qty: "", price: "" }];
     });
   };
+
   const deleteItemHandler = (index: number) => {
     setNewItems((prevItems) => {
-      console.log(index);
+
       const newItems = [
         ...prevItems.slice(0, index),
         ...prevItems.slice(index + 1),
@@ -253,8 +275,7 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
       return newItems;
     });
   };
-
-  console.log(newItems);
+console.log(newItems)
   return (
     <form
       className={styles.form}
@@ -389,6 +410,9 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
                           : "displayNone"
                       }
                       label="Qty"
+                      type="number"
+                      min={1}
+                      step={1}
                       {...register(`itemQty${index}`)}
                     />
                   </div>
@@ -434,6 +458,7 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
                   <div className={styles.deleteRow}>
                     <Image
                       style={{ cursor: "pointer" }}
+                      className={styles.bin}
                       src={Bin}
                       alt="delete row"
                       onClick={() => deleteItemHandler(index)}

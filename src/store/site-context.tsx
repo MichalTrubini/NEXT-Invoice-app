@@ -20,6 +20,7 @@ interface ThemeStyles {
   borderOne: string;
   borderTwo: string;
   shadowOne: string;
+  placeholder: string;
 }
 
 interface SiteContextValue {
@@ -61,7 +62,8 @@ export function SiteProvider({ children }: SiteProviderProps) {
         textSix:'c-7E88C3',
         borderOne: 'br-DFE3FA',
         borderTwo: 'brb-DFE3FA',
-        shadowOne: 'shadowOne-light'
+        shadowOne: 'shadowOne-light',
+        placeholder: 'placeholder-light'
       },
       themeDark: {
         backgroundOne: "b-141625",
@@ -82,7 +84,8 @@ export function SiteProvider({ children }: SiteProviderProps) {
         textSix:'c-dfe3fa',
         borderOne: 'br-252945',
         borderTwo: 'brb-1E2139',
-        shadowOne: 'shadowOne-dark'
+        shadowOne: 'shadowOne-dark',
+        placeholder: 'placeholder-dark'
       }
     };
 
