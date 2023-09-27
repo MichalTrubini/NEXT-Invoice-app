@@ -18,6 +18,7 @@ interface ThemeStyles {
   textFive: string;
   textSix: string;
   borderOne: string;
+  borderTwo: string;
   shadowOne: string;
 }
 
@@ -59,6 +60,7 @@ export function SiteProvider({ children }: SiteProviderProps) {
         textFive:'c-373b53',
         textSix:'c-7E88C3',
         borderOne: 'br-DFE3FA',
+        borderTwo: 'brb-DFE3FA',
         shadowOne: 'shadowOne-light'
       },
       themeDark: {
@@ -79,6 +81,7 @@ export function SiteProvider({ children }: SiteProviderProps) {
         textFive:'c-dfe3fa',
         textSix:'c-dfe3fa',
         borderOne: 'br-252945',
+        borderTwo: 'brb-1E2139',
         shadowOne: 'shadowOne-dark'
       }
     };

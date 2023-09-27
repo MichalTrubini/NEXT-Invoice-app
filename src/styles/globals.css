@@ -154,7 +154,7 @@ input[type="number"] {
 }
 
 .b-1e2139 {
-  background-color: var(--dark300);
+  background-color: var(--dark300)!important;
 }
 
 .b-252945 {
@@ -173,7 +173,7 @@ input[type="number"] {
 }
 
 .b-ffffff {
-  background-color: var(--light100);
+  background-color: var(--light100)!important;
 }
 .b-F9FAFE {
   background-color: var(--light200);
@@ -213,8 +213,16 @@ input[type="number"] {
   border: 1px solid var(--light300);
 }
 
+.brb-DFE3FA {
+  border-bottom: 1px solid var(--light300);
+}
+
 .br-252945 {
   border: 1px solid var(--dark400);
+}
+
+.brb-1E2139 {
+  border-bottom: 1px solid var(--dark300);
 }
 
 .shadowOne-light {
@@ -243,6 +251,10 @@ input[type="number"] {
 
 .react-calendar__month-view__weekdays {
   display: none!important;
+}
+
+.react-calendar__tile--now {
+  background: none!important;
 }
 
 @media screen and (min-width: 768px) {
