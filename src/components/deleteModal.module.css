@@ -1,0 +1,32 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+    background-color: white;
+    border-radius: 0.8rem;
+    padding: 3.2rem;
+    max-width: 48rem;
+    margin: 0 2.4rem;
+}
+
+.heading {
+   font-size: 2rem;
+   margin-bottom: 0.8rem; 
+}
+
+.text {
+    font-size: 1.2rem;
+    line-height: 2.2rem;
+    margin-bottom: 2.4rem;
+    font-weight: 500;
+}

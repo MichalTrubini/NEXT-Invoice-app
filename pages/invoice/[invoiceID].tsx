@@ -6,13 +6,19 @@ import InvoiceCTA from "../../src/modules/invoiceView/invoiceCTA";
 import { useMediaQuery } from "../../src/utils/hooks";
 import InvoiceDetails from "../../src/modules/invoiceView/invoiceDetails";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { SiteContext } from "../../src/store/site-context";
+import Portal from "../../src/layout/portal";
+import DeleteModal from "../../src/components/deleteModal";
 
 const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const tabletBreakpoint = 768;
   const matches = useMediaQuery(tabletBreakpoint);
   const { setThemeStyles } = useContext(SiteContext)!;
+  const [showModal, setShowModal] = useState(false)
+  const handleDelete = () => {
+    setShowModal(true)
+  }
 
   return (
     <>
@@ -22,10 +28,11 @@ const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getSe
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="wrapper">
+      <Portal selector={"#Portal"}>{showModal && <DeleteModal />}</Portal>
         <GoBack />
         <div className={`${setThemeStyles("backgroundThree")} statusCTA`}>
           <InvoiceStatus status={invoiceItem.status} />
-          {matches && <InvoiceCTA />}
+          {matches && <InvoiceCTA handleDelete={handleDelete}/>}
         </div>
         <InvoiceDetails
           _id={invoiceItem._id}
@@ -45,7 +52,7 @@ const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getSe
           items={invoiceItem.items}
         />
       </div>
-      {!matches && <InvoiceCTA />}
+      {!matches && <InvoiceCTA handleDelete={handleDelete}/>}
     </>
   );
 };
