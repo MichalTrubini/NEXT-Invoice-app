@@ -6,7 +6,7 @@ import InvoiceCTA from "../../src/modules/invoiceView/invoiceCTA";
 import { useMediaQuery } from "../../src/utils/hooks";
 import InvoiceDetails from "../../src/modules/invoiceView/invoiceDetails";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SiteContext } from "../../src/store/site-context";
 import Portal from "../../src/layout/portal";
 import DeleteModal from "../../src/components/deleteModal";
@@ -16,9 +16,25 @@ const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getSe
   const matches = useMediaQuery(tabletBreakpoint);
   const { setThemeStyles } = useContext(SiteContext)!;
   const [showModal, setShowModal] = useState(false)
-  const handleDelete = () => {
-    setShowModal(true)
+
+  const deleteHandler = () => {
+    console.log("delete")
+    setShowModal(false)
   }
+
+  const disableBodyScroll = () => {
+    document.body.classList.add('modal-open');
+  };
+
+  // Function to remove the CSS class to enable scrolling
+  const enableBodyScroll = () => {
+    document.body.classList.remove('modal-open');
+  };
+
+  // Add and remove the CSS class when the component mounts and unmounts
+  useEffect(() => {
+    if (showModal) disableBodyScroll(); else enableBodyScroll();
+  }, [showModal]);
 
   return (
     <>
@@ -28,11 +44,11 @@ const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getSe
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="wrapper">
-      <Portal selector={"#Portal"}>{showModal && <DeleteModal />}</Portal>
+      <Portal selector={"#Portal"}>{showModal && <DeleteModal closeHandler={() => setShowModal(false)} deleteHandler={deleteHandler}/>}</Portal>
         <GoBack />
         <div className={`${setThemeStyles("backgroundThree")} statusCTA`}>
           <InvoiceStatus status={invoiceItem.status} />
-          {matches && <InvoiceCTA handleDelete={handleDelete}/>}
+          {matches && <InvoiceCTA showModal={() => setShowModal(true)}/>}
         </div>
         <InvoiceDetails
           _id={invoiceItem._id}
@@ -52,7 +68,7 @@ const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getSe
           items={invoiceItem.items}
         />
       </div>
-      {!matches && <InvoiceCTA handleDelete={handleDelete}/>}
+      {!matches && <InvoiceCTA showModal={() => setShowModal(true)}/>}
     </>
   );
 };

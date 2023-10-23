@@ -65,6 +65,10 @@ main {
   position: relative;
 }
 
+.modal-open {
+  overflow: hidden;
+}
+
 .wrapper {
   padding: 3.2rem 2.4rem 5.6rem;
 }
