@@ -13,7 +13,6 @@ const InvoiceDetails: React.FC<IDetails> = (props) => {
   }, 0);
 
   const matches = useMediaQuery(Size.tabletBreakpoint);
-  console.log(matches);
   return (
     <div className={`${styles.invoiceContainer} ${setThemeStyles("backgroundThree")}`}>
       <div className={styles.top}>

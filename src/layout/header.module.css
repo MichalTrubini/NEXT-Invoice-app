@@ -61,6 +61,11 @@
   background-color: #494e6e;
 }
 
+.avatar {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
 @media screen and (min-width: 768px) {
   .imageLogoContainer {
     padding: 2.4rem 2.5rem 2.5rem;
@@ -111,5 +116,10 @@
   .imageAvatar {
     margin-right: 0;
     margin-bottom: 2.4rem;
+  }
+
+  .avatar {
+    width: 4rem;
+    height: 4rem;
   }
 }

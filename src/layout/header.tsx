@@ -32,7 +32,7 @@ const Header = () => {
         </div>
         <div className={styles.divider}></div>
         <div className={`${styles.imageContainer} ${styles.imageAvatar}`}>
-          <Image src={avatar} alt="avatar" layout="fill" />
+          <Image src={avatar} alt="avatar" className={styles.avatar} />
         </div>
       </div>
     </header>

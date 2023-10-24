@@ -109,7 +109,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ field }) => {
             }
             setDateClicked(false);
           }}
-          value={field.value}
+          value={formatDate(field.value)}
           className={`${styles.calendar} ${setThemeStyles("backgroundThree")}`}
           tileClassName={`${styles.calendarTile} ${setThemeStyles("textOne")}`}
           prev2Label={null}
@@ -175,7 +175,6 @@ const PaymentTermsPicker: React.FC<PaymentTermsPickerProps> = ({
           type="text"
           readOnly
           value={selectedValue}
-          defaultValue="Net 30 Days"
           onChange={handleInputChange}
           onClick={() => setIsOpen(!isOpen)}
           className={`${styles.input} ${setThemeStyles(
@@ -219,7 +218,13 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    defaultValues: {
+      invoiceDate: new Date() as any as string,
+      paymentTerms: "Net 30 Days", // Set the default value here
+      // other form fields...
+    },
+  });
 
   const [formHeight, setFormHeight] = useState(0);
   const [bottomWidth, setBottomWidth] = useState(0);
@@ -267,7 +272,6 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
 
   const deleteItemHandler = (index: number) => {
     setNewItems((prevItems) => {
-
       const newItems = [
         ...prevItems.slice(0, index),
         ...prevItems.slice(index + 1),
@@ -275,7 +279,7 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
       return newItems;
     });
   };
-console.log(newItems)
+  console.log(newItems);
   return (
     <form
       className={styles.form}

@@ -10,30 +10,47 @@ import { useContext, useEffect, useState } from "react";
 import { SiteContext } from "../../src/store/site-context";
 import Portal from "../../src/layout/portal";
 import DeleteModal from "../../src/components/deleteModal";
+import InvoiceBody from "../../src/modules/invoiceCreate/invoiceBody";
+import Overlay from "../../src/components/overlay";
 
-const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const InvoiceSingle = ({
+  invoiceItem,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const tabletBreakpoint = 768;
   const matches = useMediaQuery(tabletBreakpoint);
   const { setThemeStyles } = useContext(SiteContext)!;
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+  const [editInvoice, setEditInvoice] = useState(false);
+  const [animate, setAnimate] = useState(false)
 
   const deleteHandler = () => {
-    console.log("delete")
-    setShowModal(false)
-  }
+    setShowModal(false);
+  };
+
+  const editHandler = () => {
+    setEditInvoice(true);
+    setAnimate(true);
+  };
+
+  const closeEditHandler = () => {
+    setTimeout(()=>{setEditInvoice(false);},200)
+    setAnimate(false);
+    window.scrollTo(0, 0);
+  };
 
   const disableBodyScroll = () => {
-    document.body.classList.add('modal-open');
+    document.body.classList.add("modal-open");
   };
 
   // Function to remove the CSS class to enable scrolling
   const enableBodyScroll = () => {
-    document.body.classList.remove('modal-open');
+    document.body.classList.remove("modal-open");
   };
 
   // Add and remove the CSS class when the component mounts and unmounts
   useEffect(() => {
-    if (showModal) disableBodyScroll(); else enableBodyScroll();
+    if (showModal) disableBodyScroll();
+    else enableBodyScroll();
   }, [showModal]);
 
   return (
@@ -44,11 +61,24 @@ const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getSe
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="wrapper">
-      <Portal selector={"#Portal"}>{showModal && <DeleteModal closeHandler={() => setShowModal(false)} deleteHandler={deleteHandler}/>}</Portal>
+        <Portal selector={"#Portal"}>
+          {showModal && (
+            <DeleteModal
+              closeHandler={() => setShowModal(false)}
+              deleteHandler={deleteHandler}
+            />
+          )}
+        </Portal>
+        <Portal selector={"#Portal"}>
+          {editInvoice && (
+            <InvoiceBody animation={animate} close={closeEditHandler}/>
+          )}
+        </Portal>
+        <Portal selector={"#Overlay"}>{editInvoice && <Overlay onClick={closeEditHandler}/>}</Portal>
         <GoBack />
         <div className={`${setThemeStyles("backgroundThree")} statusCTA`}>
           <InvoiceStatus status={invoiceItem.status} />
-          {matches && <InvoiceCTA showModal={() => setShowModal(true)}/>}
+          {matches && <InvoiceCTA showModal={() => setShowModal(true)} editInvoice={editHandler}/>}
         </div>
         <InvoiceDetails
           _id={invoiceItem._id}
@@ -68,7 +98,7 @@ const InvoiceSingle = ({ invoiceItem }: InferGetServerSidePropsType<typeof getSe
           items={invoiceItem.items}
         />
       </div>
-      {!matches && <InvoiceCTA showModal={() => setShowModal(true)}/>}
+      {!matches && <InvoiceCTA showModal={() => setShowModal(true)} editInvoice={editHandler}/>}
     </>
   );
 };

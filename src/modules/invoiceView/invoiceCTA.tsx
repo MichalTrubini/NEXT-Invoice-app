@@ -3,7 +3,7 @@ import styles from "./invoiceCTA.module.css";
 import { useContext } from "react";
 import Button from "../../components/button";
 
-const invoiceCTA: React.FC<{showModal: () => void}> = (props) => {
+const invoiceCTA: React.FC<{showModal: () => void, editInvoice: () => void} > = (props) => {
   const { setThemeStyles } = useContext(SiteContext)!;
   const handleClick = () => {
     console.log("clicked")
@@ -11,7 +11,7 @@ const invoiceCTA: React.FC<{showModal: () => void}> = (props) => {
 
   return (
     <div className={`${styles.container} ${setThemeStyles("backgroundThree")}`}>
-      <Button description="Edit" buttonType={`${setThemeStyles("backgroundFive")} ${setThemeStyles("textSix")} ${styles.edit}`} onClick={handleClick}/>
+      <Button description="Edit" buttonType={`${setThemeStyles("backgroundFive")} ${setThemeStyles("textSix")} ${styles.edit}`} onClick={props.editInvoice}/>
       <Button description="Delete" buttonType={styles.delete} onClick={props.showModal}/>
       <Button description="Mark as Paid" buttonType={styles.paid} onClick={handleClick}/>
     </div>
