@@ -1,15 +1,7 @@
 import { forwardRef, useContext } from "react";
 import styles from "./formElement.module.css";
 import { SiteContext } from "../../store/site-context";
-
-interface MyInputProps {
-  label: string;
-  classNameCustom?: string;
-  placeholder?: string;
-  min?: number | string;
-  type?: string;
-  step?: number | string;
-}
+import { MyInputProps } from "../../types/types";
 
 const FormElement = forwardRef<HTMLInputElement, MyInputProps>(({label, min, type, step, classNameCustom, placeholder, ...rest }, ref) => {
   const { setThemeStyles } = useContext(SiteContext)!;

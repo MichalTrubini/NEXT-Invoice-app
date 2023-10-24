@@ -21,7 +21,7 @@ const InvoiceSingle = ({
   const { setThemeStyles } = useContext(SiteContext)!;
   const [showModal, setShowModal] = useState(false);
   const [editInvoice, setEditInvoice] = useState(false);
-  const [animate, setAnimate] = useState(false)
+  const [animate, setAnimate] = useState(false);
 
   const deleteHandler = () => {
     setShowModal(false);
@@ -33,7 +33,9 @@ const InvoiceSingle = ({
   };
 
   const closeEditHandler = () => {
-    setTimeout(()=>{setEditInvoice(false);},200)
+    setTimeout(() => {
+      setEditInvoice(false);
+    }, 200);
     setAnimate(false);
     window.scrollTo(0, 0);
   };
@@ -71,14 +73,25 @@ const InvoiceSingle = ({
         </Portal>
         <Portal selector={"#Portal"}>
           {editInvoice && (
-            <InvoiceBody animation={animate} close={closeEditHandler}/>
+            <InvoiceBody
+              animation={animate}
+              close={closeEditHandler}
+              data={invoiceItem}
+            />
           )}
         </Portal>
-        <Portal selector={"#Overlay"}>{editInvoice && <Overlay onClick={closeEditHandler}/>}</Portal>
+        <Portal selector={"#Overlay"}>
+          {editInvoice && <Overlay onClick={closeEditHandler} />}
+        </Portal>
         <GoBack />
         <div className={`${setThemeStyles("backgroundThree")} statusCTA`}>
           <InvoiceStatus status={invoiceItem.status} />
-          {matches && <InvoiceCTA showModal={() => setShowModal(true)} editInvoice={editHandler}/>}
+          {matches && (
+            <InvoiceCTA
+              showModal={() => setShowModal(true)}
+              editInvoice={editHandler}
+            />
+          )}
         </div>
         <InvoiceDetails
           _id={invoiceItem._id}
@@ -98,7 +111,12 @@ const InvoiceSingle = ({
           items={invoiceItem.items}
         />
       </div>
-      {!matches && <InvoiceCTA showModal={() => setShowModal(true)} editInvoice={editHandler}/>}
+      {!matches && (
+        <InvoiceCTA
+          showModal={() => setShowModal(true)}
+          editInvoice={editHandler}
+        />
+      )}
     </>
   );
 };

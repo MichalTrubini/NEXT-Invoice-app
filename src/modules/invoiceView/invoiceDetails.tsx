@@ -1,11 +1,11 @@
 import styles from "./invoiceDetails.module.css";
-import IDetails from "../../types/types";
+import {InvoiceProps} from "../../types/types";
 import { useContext } from "react";
 import { SiteContext } from "../../store/site-context";
 import { useMediaQuery } from "../../utils/hooks";
 import { Size } from "../../types/enums";
 
-const InvoiceDetails: React.FC<IDetails> = (props) => {
+const InvoiceDetails: React.FC<InvoiceProps> = (props) => {
   const { setThemeStyles } = useContext(SiteContext)!;
 
   const totalPrice = props.items.reduce((total, item) => {

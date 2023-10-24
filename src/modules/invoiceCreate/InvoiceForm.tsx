@@ -12,33 +12,13 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import iconCalendar from "../../../public/assets/icon-calendar.svg";
 import iconArrow from "../../../public/assets/icon-arrow-down.svg";
-
-type Inputs = {
-  supplierStreetAddress: string;
-  supplierCity: string;
-  supplierPostcode: string;
-  supplierCountry: string;
-  clientName: string;
-  clientEmail: string;
-  clientStreetAddress: string;
-  clientCity: string;
-  clientPostcode: string;
-  clientCountry: string;
-  invoiceDate: string;
-  paymentTerms: string;
-  project: string;
-} & {
-  [key: `itemName${number}`]: string;
-  [key: `itemQty${number}`]: number;
-  [key: `itemPrice${number}`]: number;
-};
-
-interface DatePickerProps {
-  field: {
-    onChange: (date: Date | null) => void;
-    value: Date | null;
-  };
-}
+import {
+  DatePickerProps,
+  DefaultValues,
+  Inputs,
+  InvoiceData,
+  PaymentTermsPickerProps,
+} from "../../types/types";
 
 function formatDate(date: Date | null): string {
   if (!date) return formatDate(new Date());
@@ -119,12 +99,6 @@ const DatePicker: React.FC<DatePickerProps> = ({ field }) => {
     </div>
   );
 };
-
-interface PaymentTermsPickerProps {
-  options: string[];
-  value: string;
-  onChange: (value: string) => void;
-}
 
 const PaymentTermsPicker: React.FC<PaymentTermsPickerProps> = ({
   options,
@@ -212,18 +186,65 @@ const PaymentTermsPicker: React.FC<PaymentTermsPickerProps> = ({
   );
 };
 
-const InvoiceForm: React.FC<{ close: any }> = (props) => {
+const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
+  const [invoiceData, setInvoiceData] = useState({
+    description: props.data ? props.data.description : "",
+    senderAddress: {
+      street: props.data ? props.data.senderAddress.street : "",
+      city: props.data ? props.data.senderAddress.city : "",
+      postCode: props.data ? props.data.senderAddress.postCode : "",
+      country: props.data ? props.data.senderAddress.country : "",
+    },
+    createdAt: props.data ? props.data.createdAt : "",
+    paymentDue: props.data ? props.data.paymentDue : "",
+    clientAddress: {
+      street: props.data ? props.data.clientAddress.street : "",
+      city: props.data ? props.data.clientAddress.city : "",
+      postCode: props.data ? props.data.clientAddress.postCode : "",
+      country: props.data ? props.data.clientAddress.country : "",
+    },
+    clientName: props.data ? props.data.clientName : "",
+    clientEmail: props.data ? props.data.clientEmail : "",
+    items: props.data
+      ? props.data.items.map((item) => (
+       {name: item.name, quantity: item.quantity, price: item.price }
+        ))
+      : [{ name: "", quantity: "", price: "" }],
+  });
+  console.log(invoiceData)
+  const getDefaultValues = (invoiceData: InvoiceData): DefaultValues => {
+    const defaultValues: DefaultValues  = {
+      clientCity: invoiceData.clientAddress.city,
+      clientCountry: invoiceData.clientAddress.country,
+      clientEmail: invoiceData.clientEmail,
+      clientName: invoiceData.clientName,
+      clientPostcode: invoiceData.clientAddress.postCode,
+      clientStreetAddress: invoiceData.clientAddress.street,
+      project: invoiceData.description,
+      supplierCity: invoiceData.senderAddress.city,
+      supplierCountry: invoiceData.senderAddress.country,
+      supplierPostcode: invoiceData.senderAddress.postCode,
+      supplierStreetAddress: invoiceData.senderAddress.street,
+      invoiceDate: new Date() as any as string,
+      paymentTerms: "Net 30 Days",
+    };
+
+    invoiceData.items.forEach((item, index) => {
+      console.log('item',item)
+      defaultValues[`name-${index}`] = item.name;
+      defaultValues[`quantity-${index}`] = item.quantity.toString();
+      defaultValues[`price-${index}`] = item.price.toString();
+    });
+    return defaultValues;
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
   } = useForm<Inputs>({
-    defaultValues: {
-      invoiceDate: new Date() as any as string,
-      paymentTerms: "Net 30 Days", // Set the default value here
-      // other form fields...
-    },
+    defaultValues: getDefaultValues(invoiceData),
   });
 
   const [formHeight, setFormHeight] = useState(0);
@@ -279,7 +300,7 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
       return newItems;
     });
   };
-  console.log(newItems);
+
   return (
     <form
       className={styles.form}
@@ -388,7 +409,7 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
         <div className={styles.addItemSection}>
           <h3 className={styles.listHeader}>Item List</h3>
           <ul className={styles.itemList}>
-            {newItems.map((item, index) => (
+            {invoiceData.items.map((item, index) => (
               <li key={index} className={styles.itemRow}>
                 <div className={styles.itemName}>
                   <FormElement
@@ -400,7 +421,7 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
                         : "displayNone"
                     }
                     label="Item Name"
-                    {...register(`itemName${index}`)}
+                    {...register(`name-${index}`)}
                   />
                 </div>
                 <div className={styles.itemFlexRow}>
@@ -417,7 +438,7 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
                       type="number"
                       min={1}
                       step={1}
-                      {...register(`itemQty${index}`)}
+                      {...register(`quantity-${index}`)}
                     />
                   </div>
                   <div className={styles.itemPrice}>
@@ -430,7 +451,7 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
                           : "displayNone"
                       }
                       label="Price"
-                      {...register(`itemPrice${index}`)}
+                      {...register(`price-${index}`)}
                     />
                   </div>
                   <div>
@@ -456,7 +477,7 @@ const InvoiceForm: React.FC<{ close: any }> = (props) => {
                         "textTwo"
                       )}`}
                     >
-                      0.00
+                      {Number(item.price) * Number(item.quantity)}
                     </p>
                   </div>
                   <div className={styles.deleteRow}>
