@@ -1,17 +1,17 @@
 import Head from "next/head";
 import { MongoClient } from "mongodb";
-import GoBack from "../../src/components/goBack";
-import InvoiceStatus from "../../src/modules/invoiceView/invoiceStatus";
-import InvoiceCTA from "../../src/modules/invoiceView/invoiceCTA";
+import GoBack from "../../src/components/GoBack";
+import InvoiceStatus from "../../src/modules/invoiceView/InvoiceStatus";
+import InvoiceCTA from "../../src/modules/invoiceView/InvoiceCTA";
 import { useMediaQuery } from "../../src/utils/hooks";
-import InvoiceDetails from "../../src/modules/invoiceView/invoiceDetails";
+import InvoiceDetails from "../../src/modules/invoiceView/InvoiceDetails";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useContext, useEffect, useState } from "react";
 import { SiteContext } from "../../src/store/site-context";
-import Portal from "../../src/layout/portal";
-import DeleteModal from "../../src/components/deleteModal";
-import InvoiceBody from "../../src/modules/invoiceCreate/invoiceBody";
-import Overlay from "../../src/components/overlay";
+import Portal from "../../src/layout/Portal";
+import DeleteModal from "../../src/components/DeleteModal";
+import InvoiceBody from "../../src/modules/invoiceCreate/InvoiceBody";
+import Overlay from "../../src/components/Overlay";
 
 const InvoiceSingle = ({
   invoiceItem,

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Button from "./button";
+import Button from "./Button";
 import styles from "./deleteModal.module.css";
 import { SiteContext } from "../store/site-context";
 
@@ -10,8 +10,13 @@ const DeleteModal: React.FC<{
   const { setThemeStyles } = useContext(SiteContext)!;
   return (
     <div className={styles.overlay} onClick={props.closeHandler}>
-      <div className={`${styles.modal} ${setThemeStyles("backgroundThree")}`} onClick={(e) => e.stopPropagation()}>
-        <h2 className={`${styles.heading} ${setThemeStyles("textOne")}`}>Confirm Deletion</h2>
+      <div
+        className={`${styles.modal} ${setThemeStyles("backgroundThree")}`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <h2 className={`${styles.heading} ${setThemeStyles("textOne")}`}>
+          Confirm Deletion
+        </h2>
         <p className={`${styles.text} ${setThemeStyles("textFour")}`}>
           Are you sure you want to delete invoice #XM9141? This action cannot be
           undone.
@@ -20,7 +25,9 @@ const DeleteModal: React.FC<{
           <Button
             description="Cancel"
             onClick={props.closeHandler}
-            buttonType={`${styles.cancel} ${setThemeStyles("textSix")} ${setThemeStyles("backgroundFive")}`}
+            buttonType={`${styles.cancel} ${setThemeStyles(
+              "textSix"
+            )} ${setThemeStyles("backgroundFive")}`}
           />
           <Button
             description="Delete"

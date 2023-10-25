@@ -1,107 +1,26 @@
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import styles from "./invoiceForm.module.css";
-import FormElement from "../../components/form/formElement";
-import Button from "../../components/button";
-import { useContext, useEffect, useRef, useState } from "react";
+import FormElement from "../../components/form/FormElement";
+import Button from "../../components/Button";
+import { useContext, useEffect, useState } from "react";
 import { SiteContext } from "../../store/site-context";
 import { Size } from "../../types/enums";
 import { useScreenWidth } from "../../utils/hooks";
 import Image from "next/image";
 import Bin from "../../../public/assets/icon-delete.svg";
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import iconCalendar from "../../../public/assets/icon-calendar.svg";
-import {
-  DatePickerProps,
-  DefaultValues,
-  Inputs,
-  InvoiceData,
-} from "../../types/types";
-import getItemValues from "../../utils/getItemValues";
-import PaymentTermsPicker from "../../components/form/paymentTermsPicker";
-
-function formatDate(date: Date | null): string {
-  if (!date) return formatDate(new Date());
-  const day = date.getDate().toString().padStart(2, "0");
-  const month = date.toLocaleString("default", { month: "short" });
-  const year = date.getFullYear();
-  return `${day} ${month} ${year}`;
-}
-
-const DatePicker: React.FC<DatePickerProps> = ({ field }) => {
-  const { setThemeStyles } = useContext(SiteContext)!;
-  const [dateClicked, setDateClicked] = useState(false);
-  const datePickerRef = useRef(null);
-
-  useEffect(() => {
-    const handleDocumentClick = (event: MouseEvent) => {
-      if (
-        datePickerRef.current &&
-        !(datePickerRef.current as any).contains(event.target)
-      ) {
-        // Click occurred outside the DatePicker, so close the calendar
-        setDateClicked(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleDocumentClick);
-
-    return () => {
-      // Remove the event listener when the component unmounts
-      document.removeEventListener("mousedown", handleDocumentClick);
-    };
-  }, []);
-
-  return (
-    <div style={{ position: "relative" }} ref={datePickerRef}>
-      <label className={`${styles.label} ${setThemeStyles("textSix")}`}>
-        Invoice date
-      </label>
-      <div style={{ position: "relative" }}>
-        <input
-          type="text"
-          readOnly
-          value={formatDate(field.value)}
-          onClick={() => setDateClicked((prev) => !prev)}
-          onChange={(e) => {
-            const selectedDate = e.target.value
-              ? new Date(e.target.value)
-              : null;
-            field.onChange(selectedDate);
-          }}
-          className={`${styles.input} ${setThemeStyles(
-            "backgroundThree"
-          )} ${setThemeStyles("textOne")} ${setThemeStyles("borderOne")}`}
-        />
-        <Image
-          src={iconCalendar}
-          alt="calendar"
-          className={styles.calendarIcon}
-        />
-      </div>
-      {dateClicked && (
-        <Calendar
-          onChange={(date) => {
-            if (date instanceof Date) {
-              field.onChange(date);
-            } else {
-              field.onChange(null);
-            }
-            setDateClicked(false);
-          }}
-          value={formatDate(field.value)}
-          className={`${styles.calendar} ${setThemeStyles("backgroundThree")}`}
-          tileClassName={`${styles.calendarTile} ${setThemeStyles("textOne")}`}
-          prev2Label={null}
-          next2Label={null}
-        />
-      )}
-    </div>
-  );
-};
+import { Inputs, InvoiceData } from "../../types/types";
+import { getItemValues, getDefaultValues } from "../../utils/functions";
+import PaymentTermsPicker from "../../components/form/PaymentTermsPicker";
+import DatePicker from "../../components/form/DatePicker";
 
 const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
   const { setThemeStyles } = useContext(SiteContext)!;
+  const screenWidth = useScreenWidth();
+
+  const [formHeight, setFormHeight] = useState(0);
+  const [bottomWidth, setBottomWidth] = useState(0);
+  const [bottomPaddingLeft, setBottomPaddingLeft] = useState(0);
   const [invoiceData, setInvoiceData] = useState({
     description: props.data ? props.data.description : "",
     senderAddress: {
@@ -129,30 +48,7 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
       : [{ name: "", quantity: "", price: "" }],
   });
 
-  const getDefaultValues = (invoiceData: InvoiceData): DefaultValues => {
-    const defaultValues: DefaultValues = {
-      clientCity: invoiceData.clientAddress.city,
-      clientCountry: invoiceData.clientAddress.country,
-      clientEmail: invoiceData.clientEmail,
-      clientName: invoiceData.clientName,
-      clientPostcode: invoiceData.clientAddress.postCode,
-      clientStreetAddress: invoiceData.clientAddress.street,
-      project: invoiceData.description,
-      supplierCity: invoiceData.senderAddress.city,
-      supplierCountry: invoiceData.senderAddress.country,
-      supplierPostcode: invoiceData.senderAddress.postCode,
-      supplierStreetAddress: invoiceData.senderAddress.street,
-      invoiceDate: new Date() as any as string,
-      paymentTerms: "Net 30 Days",
-    };
-
-    invoiceData.items.forEach((item, index) => {
-      defaultValues[`name_${index}`] = item.name;
-      defaultValues[`quantity_${index}`] = item.quantity.toString();
-      defaultValues[`price_${index}`] = item.price.toString();
-    });
-    return defaultValues;
-  };
+  const formDefaultValues = getDefaultValues(invoiceData);
 
   const {
     register,
@@ -162,18 +58,12 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
     reset,
     getValues,
   } = useForm<Inputs>({
-    defaultValues: getDefaultValues(invoiceData),
+    defaultValues: formDefaultValues,
   });
 
   useEffect(() => {
-    reset(getDefaultValues(invoiceData));
+    reset(formDefaultValues);
   }, [invoiceData, reset]);
-
-  const [formHeight, setFormHeight] = useState(0);
-  const [bottomWidth, setBottomWidth] = useState(0);
-  const [bottomPaddingLeft, setBottomPaddingLeft] = useState(0);
-
-  const screenWidth = useScreenWidth();
 
   useEffect(() => {
     const appHeaderHeight = document.getElementById("appHeader")!.clientHeight;
@@ -205,7 +95,6 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
     console.log();
   };
 
-
   const addItemHandler = () => {
     const allFormValues = getValues();
     const itemValuesArray = getItemValues(allFormValues);
@@ -217,7 +106,6 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
   };
 
   const deleteItemHandler = (index: number) => {
-    
     setInvoiceData((prevData) => {
       const newItems = [
         ...prevData.items.slice(0, index),

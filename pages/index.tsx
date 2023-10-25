@@ -1,7 +1,7 @@
 import Head from "next/head";
-import InvoiceHeader from "../src/modules/home/invoiceHeader";
+import InvoiceHeader from "../src/modules/home/InvoiceHeader";
 import { MongoClient } from "mongodb";
-import InvoiceItems from "../src/modules/home/invoiceItems";
+import InvoiceItems from "../src/modules/home/InvoiceItems";
 import { useState } from "react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 

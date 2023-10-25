@@ -1,4 +1,4 @@
-import Header from "./header";
+import Header from "./Header";
 import {SiteContext} from "../store/site-context";
 import { useContext } from "react";
 

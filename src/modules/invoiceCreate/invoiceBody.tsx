@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import InvoiceForm from "./InvoiceForm";
 import styles from "./invoiceBody.module.css";
 import { SiteContext } from "../../store/site-context";
-import GoBack from "../../components/goBack";
+import GoBack from "../../components/GoBack";
 import { Size } from "../../types/enums";
 import { useScreenWidth } from "../../utils/hooks";
 import { InvoiceData } from "../../types/types";
