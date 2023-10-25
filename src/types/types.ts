@@ -51,7 +51,7 @@ export interface InvoiceData {
   };
   clientName: string;
   clientEmail: string;
-  items: { name: string; quantity: string; price: number}[];
+  items: { name: string; quantity: string; price: string}[];
 }
 
 export interface DatePickerProps {
@@ -75,10 +75,11 @@ export type Inputs = {
   invoiceDate: string;
   paymentTerms: string;
   project: string;
+  [key: string]: string;
 } & {
-  [key: `name-${number}`]: string;
-  [key: `quantity-${number}`]: string;
-  [key: `price-${number}`]: string;
+  [key: `name_${number}`]: string;
+  [key: `quantity_${number}`]: string;
+  [key: `price_${number}`]: string;
 };
 
 export interface PaymentTermsPickerProps {

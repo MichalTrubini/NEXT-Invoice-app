@@ -5,7 +5,6 @@ import { MyInputProps } from "../../types/types";
 
 const FormElement = forwardRef<HTMLInputElement, MyInputProps>(({label, min, type, step, classNameCustom, placeholder, ...rest }, ref) => {
   const { setThemeStyles } = useContext(SiteContext)!;
-
   return (
     <>
       <label className={`${styles.label} ${classNameCustom} ${setThemeStyles("textSix")}`}>{label}</label>

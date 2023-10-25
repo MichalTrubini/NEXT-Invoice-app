@@ -282,41 +282,6 @@
   pointer-events: none;
 }
 
- .arrowIcon {
-  position: absolute;
-  top: 2rem;
-  right: 1.6rem;
-  pointer-events: none;
-}
-
-.arrowUp {
-  transform: rotate(-180deg);
-  transition: all 0.5s ease;
-}
-
-.arrowDown {
-  transition: all 0.5s ease;
-}
-
-.dropdown {
-  position: absolute;
-  top: 8rem;
-  width: 100%;
-  border-radius: 8px;
-  box-shadow: 0px 10px 20px 0px rgba(72, 84, 159, 0.25);
-}
-
-.dropdownItem {
-  font-size: 1.2rem;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 1.5rem 2.4rem;
-}
-
-.dropdownItem:hover {
-  color: var(--purple100);
-}
-
 .bin:hover {
   filter: brightness(0) saturate(100%) invert(45%) sepia(26%) saturate(1705%) hue-rotate(316deg) brightness(97%) contrast(90%);
 }

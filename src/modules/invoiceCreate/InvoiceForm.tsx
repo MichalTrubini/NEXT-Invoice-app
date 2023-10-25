@@ -11,14 +11,14 @@ import Bin from "../../../public/assets/icon-delete.svg";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import iconCalendar from "../../../public/assets/icon-calendar.svg";
-import iconArrow from "../../../public/assets/icon-arrow-down.svg";
 import {
   DatePickerProps,
   DefaultValues,
   Inputs,
   InvoiceData,
-  PaymentTermsPickerProps,
 } from "../../types/types";
+import getItemValues from "../../utils/getItemValues";
+import PaymentTermsPicker from "../../components/form/paymentTermsPicker";
 
 function formatDate(date: Date | null): string {
   if (!date) return formatDate(new Date());
@@ -100,93 +100,8 @@ const DatePicker: React.FC<DatePickerProps> = ({ field }) => {
   );
 };
 
-const PaymentTermsPicker: React.FC<PaymentTermsPickerProps> = ({
-  options,
-  value,
-  onChange,
-}) => {
-  const { setThemeStyles } = useContext(SiteContext)!;
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(value);
-  const dropdownRef = useRef(null);
-
-  useEffect(() => {
-    // Add a click event listener to the document to close the dropdown when clicking outside of it
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !(dropdownRef.current as any).contains(event.target)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      // Clean up the event listener when the component unmounts
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedValue(event.target.value);
-  };
-
-  const handleOptionClick = (option: string) => {
-    setSelectedValue(option);
-    setIsOpen(false);
-    onChange(option);
-  };
-
-  return (
-    <div ref={dropdownRef} style={{ position: "relative" }}>
-      <label className={`${styles.label} ${setThemeStyles("textSix")}`}>
-        Payment Terms
-      </label>
-      <div style={{ position: "relative" }}>
-        <input
-          type="text"
-          readOnly
-          value={selectedValue}
-          onChange={handleInputChange}
-          onClick={() => setIsOpen(!isOpen)}
-          className={`${styles.input} ${setThemeStyles(
-            "backgroundThree"
-          )} ${setThemeStyles("textOne")} ${setThemeStyles("borderOne")}`}
-        />
-        <Image
-          src={iconArrow}
-          alt="arrow"
-          className={
-            isOpen
-              ? `${styles.arrowUp} ${styles.arrowIcon}`
-              : `${styles.arrowDown} ${styles.arrowIcon}`
-          }
-        />
-      </div>
-      {isOpen && (
-        <ul
-          className={`${styles.dropdown} ${setThemeStyles("backgroundFour")}`}
-        >
-          {options.map((option) => (
-            <li
-              key={option}
-              onClick={() => handleOptionClick(option)}
-              className={`${styles.dropdownItem} ${setThemeStyles(
-                "textOne"
-              )} ${setThemeStyles("borderTwo")}`}
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-};
-
 const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
+  const { setThemeStyles } = useContext(SiteContext)!;
   const [invoiceData, setInvoiceData] = useState({
     description: props.data ? props.data.description : "",
     senderAddress: {
@@ -206,14 +121,16 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
     clientName: props.data ? props.data.clientName : "",
     clientEmail: props.data ? props.data.clientEmail : "",
     items: props.data
-      ? props.data.items.map((item) => (
-       {name: item.name, quantity: item.quantity, price: item.price }
-        ))
+      ? props.data.items.map((item) => ({
+          name: item.name,
+          quantity: item.quantity,
+          price: item.price,
+        }))
       : [{ name: "", quantity: "", price: "" }],
   });
-  console.log(invoiceData)
+
   const getDefaultValues = (invoiceData: InvoiceData): DefaultValues => {
-    const defaultValues: DefaultValues  = {
+    const defaultValues: DefaultValues = {
       clientCity: invoiceData.clientAddress.city,
       clientCountry: invoiceData.clientAddress.country,
       clientEmail: invoiceData.clientEmail,
@@ -230,10 +147,9 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
     };
 
     invoiceData.items.forEach((item, index) => {
-      console.log('item',item)
-      defaultValues[`name-${index}`] = item.name;
-      defaultValues[`quantity-${index}`] = item.quantity.toString();
-      defaultValues[`price-${index}`] = item.price.toString();
+      defaultValues[`name_${index}`] = item.name;
+      defaultValues[`quantity_${index}`] = item.quantity.toString();
+      defaultValues[`price_${index}`] = item.price.toString();
     });
     return defaultValues;
   };
@@ -243,14 +159,19 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
     handleSubmit,
     formState: { errors },
     control,
+    reset,
+    getValues,
   } = useForm<Inputs>({
     defaultValues: getDefaultValues(invoiceData),
   });
 
+  useEffect(() => {
+    reset(getDefaultValues(invoiceData));
+  }, [invoiceData, reset]);
+
   const [formHeight, setFormHeight] = useState(0);
   const [bottomWidth, setBottomWidth] = useState(0);
   const [bottomPaddingLeft, setBottomPaddingLeft] = useState(0);
-  const [newItems, setNewItems] = useState([{ name: "", qty: "", price: "" }]);
 
   const screenWidth = useScreenWidth();
 
@@ -274,8 +195,6 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
 
   const onSubmit: SubmitHandler<Inputs> = (values) => console.log(values);
 
-  const { setThemeStyles, darkTheme } = useContext(SiteContext)!;
-
   const handleDiscardInvoice = () => {
     props.close();
   };
@@ -285,19 +204,30 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
   const handleCreateInvoice = () => {
     console.log();
   };
+
+
   const addItemHandler = () => {
-    setNewItems((prevItems) => {
-      return [...prevItems, { name: "", qty: "", price: "" }];
-    });
+    const allFormValues = getValues();
+    const itemValuesArray = getItemValues(allFormValues);
+
+    setInvoiceData((prevData) => ({
+      ...prevData,
+      items: [...itemValuesArray, { name: "", quantity: "", price: "" }],
+    }));
   };
 
   const deleteItemHandler = (index: number) => {
-    setNewItems((prevItems) => {
+    
+    setInvoiceData((prevData) => {
       const newItems = [
-        ...prevItems.slice(0, index),
-        ...prevItems.slice(index + 1),
+        ...prevData.items.slice(0, index),
+        ...prevData.items.slice(index + 1),
       ];
-      return newItems;
+
+      return {
+        ...prevData,
+        items: newItems,
+      };
     });
   };
 
@@ -421,7 +351,7 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
                         : "displayNone"
                     }
                     label="Item Name"
-                    {...register(`name-${index}`)}
+                    {...register(`name_${index}`)}
                   />
                 </div>
                 <div className={styles.itemFlexRow}>
@@ -438,7 +368,7 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
                       type="number"
                       min={1}
                       step={1}
-                      {...register(`quantity-${index}`)}
+                      {...register(`quantity_${index}`)}
                     />
                   </div>
                   <div className={styles.itemPrice}>
@@ -451,7 +381,7 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
                           : "displayNone"
                       }
                       label="Price"
-                      {...register(`price-${index}`)}
+                      {...register(`price_${index}`)}
                     />
                   </div>
                   <div>
