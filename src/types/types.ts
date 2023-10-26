@@ -90,7 +90,8 @@ export interface PaymentTermsPickerProps {
 
 export interface MyInputProps {
   label: string;
-  classNameCustom?: string;
+  labelCustomClass?: string;
+  inputCustomClass?: string;
   placeholder?: string;
   min?: number | string;
   type?: string;

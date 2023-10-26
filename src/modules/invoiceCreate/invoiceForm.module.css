@@ -161,6 +161,7 @@
 @media screen and (min-width: 616px) {
   .form {
     overflow: scroll;
+    width: 95%;
   }
 
   .form::-webkit-scrollbar {

@@ -166,14 +166,14 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
           console.log("error", values);
           return;
         }
-        mapToPayload(values);
+        console.log("no error");
+        //mapToPayload(values);
       }
     }
   };
   useEffect(() => {
     const subscription = watch((value, { name, type }) => {
       setIsError((prevState) => ({ ...prevState, [name as string]: false }));
-      console.log(name);
     });
     return () => subscription.unsubscribe();
   }, [watch]);
@@ -213,6 +213,7 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
           ? { height: formHeight }
           : { height: "auto" }
       }
+      autoComplete="off"
     >
       <div className={styles.formTop}>
         <div className={styles.mgBottom}>
@@ -223,6 +224,12 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
             )}
             <FormElement
               label="Street Address"
+              labelCustomClass={
+                isError.supplierStreetAddress ? "errorLabel" : ""
+              }
+              inputCustomClass={
+                isError.supplierStreetAddress ? "errorInput" : ""
+              }
               {...register("supplierStreetAddress")}
             />
           </div>
@@ -231,7 +238,12 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
               {isError.supplierCity && (
                 <p className={styles.errorMessage}>cant't be empty</p>
               )}
-              <FormElement label="City" {...register("supplierCity")} />
+              <FormElement
+                label="City"
+                labelCustomClass={isError.supplierCity ? "errorLabel" : ""}
+                inputCustomClass={isError.supplierCity ? "errorInput" : ""}
+                {...register("supplierCity")}
+              />
             </div>
             <div className={styles.postCode}>
               {isError.supplierPostcode && (
@@ -239,41 +251,93 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
               )}
               <FormElement
                 label="Post Code"
+                labelCustomClass={isError.supplierPostcode ? "errorLabel" : ""}
+                inputCustomClass={isError.supplierPostcode ? "errorInput" : ""}
                 {...register("supplierPostcode")}
               />
             </div>
             <div className={styles.country}>
-              <FormElement label="Country" {...register("supplierCountry")} />
+              {isError.supplierCountry && (
+                <p className={styles.errorMessage}>cant't be empty</p>
+              )}
+              <FormElement
+                label="Country"
+                labelCustomClass={isError.supplierCountry ? "errorLabel" : ""}
+                inputCustomClass={isError.supplierCountry ? "errorInput" : ""}
+                {...register("supplierCountry")}
+              />
             </div>
           </div>
         </div>
         <div className={styles.mgBottom}>
           <h3 className={styles.formHeader}>Bill To</h3>
           <div className={styles.formElementWrapper}>
-            <FormElement label="Client's Name" {...register("clientName")} />
+            {isError.clientName && (
+              <p className={styles.errorMessage}>cant't be empty</p>
+            )}
+            <FormElement
+              label="Client's Name"
+              labelCustomClass={isError.clientName ? "errorLabel" : ""}
+              inputCustomClass={isError.clientName ? "errorInput" : ""}
+              {...register("clientName")}
+            />
           </div>
           <div className={styles.formElementWrapper}>
+            {isError.clientEmail && (
+              <p className={styles.errorMessage}>cant't be empty</p>
+            )}
             <FormElement
               label="Client's Email"
               placeholder="e.g. email@example.com"
+              labelCustomClass={isError.clientEmail ? "errorLabel" : ""}
+              inputCustomClass={isError.clientEmail ? "errorInput" : ""}
               {...register("clientEmail")}
             />
           </div>
           <div className={styles.formElementWrapper}>
+            {isError.clientStreetAddress && (
+              <p className={styles.errorMessage}>cant't be empty</p>
+            )}
             <FormElement
               label="Street Address"
+              labelCustomClass={isError.clientStreetAddress ? "errorLabel" : ""}
+              inputCustomClass={isError.clientStreetAddress ? "errorInput" : ""}
               {...register("clientStreetAddress")}
             />
           </div>
           <div className={styles.gridArea}>
             <div className={styles.city}>
-              <FormElement label="City" {...register("clientCity")} />
+              {isError.clientCity && (
+                <p className={styles.errorMessage}>cant't be empty</p>
+              )}
+              <FormElement
+                label="City"
+                labelCustomClass={isError.clientCity ? "errorLabel" : ""}
+                inputCustomClass={isError.clientCity ? "errorInput" : ""}
+                {...register("clientCity")}
+              />
             </div>
             <div className={styles.postCode}>
-              <FormElement label="Post Code" {...register("clientPostcode")} />
+              {isError.clientPostcode && (
+                <p className={styles.errorMessage}>cant't be empty</p>
+              )}
+              <FormElement
+                label="Post Code"
+                labelCustomClass={isError.clientPostcode ? "errorLabel" : ""}
+                inputCustomClass={isError.clientPostcode ? "errorInput" : ""}
+                {...register("clientPostcode")}
+              />
             </div>
             <div className={styles.country}>
-              <FormElement label="Country" {...register("clientCountry")} />
+              {isError.clientCountry && (
+                <p className={styles.errorMessage}>cant't be empty</p>
+              )}
+              <FormElement
+                label="Country"
+                labelCustomClass={isError.clientCountry ? "errorLabel" : ""}
+                inputCustomClass={isError.clientCountry ? "errorInput" : ""}
+                {...register("clientCountry")}
+              />
             </div>
           </div>
         </div>
@@ -312,11 +376,18 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
               />
             </div>
           </div>
-          <FormElement
-            label="Project Description"
-            placeholder="e.g. Graphic Design Service"
-            {...register("project")}
-          />
+          <div className={styles.formElementWrapper}>
+            {isError.clientCountry && (
+              <p className={styles.errorMessage}>cant't be empty</p>
+            )}
+            <FormElement
+              label="Project Description"
+              placeholder="e.g. Graphic Design Service"
+              labelCustomClass={isError.project ? "errorLabel" : ""}
+              inputCustomClass={isError.project ? "errorInput" : ""}
+              {...register("project")}
+            />
+          </div>
         </div>
         <div className={styles.addItemSection}>
           <h3 className={styles.listHeader}>Item List</h3>
@@ -325,7 +396,7 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
               <li key={index} className={styles.itemRow}>
                 <div className={styles.itemName}>
                   <FormElement
-                    classNameCustom={
+                    labelCustomClass={
                       screenWidth < Size.modalBreakpoint
                         ? "displayBlock"
                         : screenWidth > Size.modalBreakpoint && index === 0
@@ -339,7 +410,7 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
                 <div className={styles.itemFlexRow}>
                   <div className={styles.itemQty}>
                     <FormElement
-                      classNameCustom={
+                      labelCustomClass={
                         screenWidth < Size.modalBreakpoint
                           ? "displayBlock"
                           : screenWidth > Size.modalBreakpoint && index === 0
@@ -355,7 +426,7 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
                   </div>
                   <div className={styles.itemPrice}>
                     <FormElement
-                      classNameCustom={
+                      labelCustomClass={
                         screenWidth < Size.modalBreakpoint
                           ? "displayBlock"
                           : screenWidth > Size.modalBreakpoint && index === 0
