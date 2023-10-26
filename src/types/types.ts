@@ -96,3 +96,7 @@ export interface MyInputProps {
   type?: string;
   step?: number | string;
 }
+
+export interface MyNativeEvent extends Event {
+  submitter: HTMLButtonElement;
+}

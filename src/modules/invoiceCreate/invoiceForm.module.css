@@ -1,5 +1,5 @@
 .form {
-  width: 95%;
+  width: 100%;
 }
 
 .formTop {
@@ -31,15 +31,18 @@
 
 .city {
   grid-area: a;
+  position: relative;
 }
 
 .postCode {
   grid-area: b;
+  position: relative;
 }
 
 .country {
   grid-area: c;
   margin-top: 2.4rem;
+  position: relative;
 }
 
 .discard {
@@ -139,6 +142,14 @@
 
 .formElementWrapper {
   margin-bottom: 2.4rem;
+  position: relative;
+}
+
+.errorMessage {
+  font-size: 1rem;
+  position: absolute;
+  right: 0;
+  color: red;
 }
 
 .wrapper {
@@ -156,14 +167,14 @@
     width: 10px;
     display: block;
   }
-  
+
   .form::-webkit-scrollbar-track-piece {
     background-color: inherit;
   }
-  
+
   .form::-webkit-scrollbar-track {
     background-color: transparent;
-}
+  }
 
   .form::-webkit-scrollbar-thumb {
     background-color: #c2ced6;
@@ -205,7 +216,6 @@
     flex-direction: row;
     justify-content: flex-start;
     gap: 1.6rem;
-
   }
 
   .country {
@@ -234,16 +244,17 @@
   letter-spacing: -0.25px;
   padding: 1.7rem 2rem 1.6rem;
   border-radius: 4px;
-  cursor: pointer ;
+  cursor: pointer;
 }
 
-.input:focus, .input:hover {
+.input:focus,
+.input:hover {
   outline: 1px solid var(--purple200);
 }
 
 .input::placeholder {
   font-size: 1.2rem;
-  color: #0C0E16;
+  color: #0c0e16;
   opacity: 0.4;
   font-weight: 700;
   letter-spacing: -0.25px;
@@ -257,5 +268,6 @@
 }
 
 .bin:hover {
-  filter: brightness(0) saturate(100%) invert(45%) sepia(26%) saturate(1705%) hue-rotate(316deg) brightness(97%) contrast(90%);
+  filter: brightness(0) saturate(100%) invert(45%) sepia(26%) saturate(1705%)
+    hue-rotate(316deg) brightness(97%) contrast(90%);
 }

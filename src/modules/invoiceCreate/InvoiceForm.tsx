@@ -9,7 +9,7 @@ import { useScreenWidth } from "../../utils/hooks";
 import Image from "next/image";
 import Bin from "../../../public/assets/icon-delete.svg";
 import "react-calendar/dist/Calendar.css";
-import { Inputs, InvoiceData } from "../../types/types";
+import { Inputs, InvoiceData, MyNativeEvent } from "../../types/types";
 import { getItemValues, getDefaultValues } from "../../utils/functions";
 import PaymentTermsPicker from "../../components/form/PaymentTermsPicker";
 import DatePicker from "../../components/form/DatePicker";
@@ -57,6 +57,7 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
     control,
     reset,
     getValues,
+    watch,
   } = useForm<Inputs>({
     defaultValues: formDefaultValues,
   });
@@ -83,17 +84,99 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
     );
   }, [screenWidth]);
 
-  const onSubmit: SubmitHandler<Inputs> = (values) => console.log(values);
+  const mapToPayload = (data: Inputs) => {
+    const payload = {
+      description: data.project,
+      senderAddress: {
+        street: data.supplierStreetAddress,
+        city: data.supplierCity,
+        postCode: data.supplierPostcode,
+        country: data.supplierCountry,
+      },
+      clientAddress: {
+        street: data.clientStreetAddress,
+        city: data.clientCity,
+        postCode: data.clientPostcode,
+        country: data.clientCountry,
+      },
+      clientName: data.clientName,
+      clientEmail: data.clientEmail,
+      createdAt: data.invoiceDate,
+      paymentDue: data.paymentTerms,
+      items: invoiceData.items,
+    };
 
-  const handleDiscardInvoice = () => {
-    props.close();
+    return payload;
   };
-  const handleSaveDraft = () => {
-    console.log();
+
+  const [isError, setIsError] = useState({
+    supplierCity: false,
+    supplierPostcode: false,
+    supplierCountry: false,
+    supplierStreetAddress: false,
+    clientName: false,
+    clientEmail: false,
+    clientStreetAddress: false,
+    clientCity: false,
+    clientPostcode: false,
+    clientCountry: false,
+    project: false,
+  });
+  console.log(isError);
+  const validateForm = (data: Inputs) => {
+    const requiredFields = [
+      "supplierCity",
+      "supplierPostcode",
+      "supplierCountry",
+      "supplierStreetAddress",
+      "clientName",
+      "clientEmail",
+      "clientStreetAddress",
+      "clientCity",
+      "clientPostcode",
+      "clientCountry",
+      "project",
+    ];
+
+    let errors = false;
+
+    requiredFields.forEach((field) => {
+      if (!data[field]) {
+        errors = true;
+        setIsError((prevState) => ({ ...prevState, [field]: true }));
+      } else {
+        setIsError((prevState) => ({ ...prevState, [field]: false }));
+      }
+    });
+
+    return errors;
   };
-  const handleCreateInvoice = () => {
-    console.log();
+
+  const onSubmit: SubmitHandler<Inputs> = (values, event) => {
+    if (event && event.nativeEvent) {
+      const buttonName = (event.nativeEvent as MyNativeEvent).submitter?.name;
+
+      if (buttonName === "discardButton") {
+        props.close();
+      } else if (buttonName === "draftButton") {
+        mapToPayload(values);
+        console.log("draft");
+      } else if (buttonName === "saveButton") {
+        if (validateForm(values)) {
+          console.log("error", values);
+          return;
+        }
+        mapToPayload(values);
+      }
+    }
   };
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) => {
+      setIsError((prevState) => ({ ...prevState, [name as string]: false }));
+      console.log(name);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   const addItemHandler = () => {
     const allFormValues = getValues();
@@ -106,10 +189,12 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
   };
 
   const deleteItemHandler = (index: number) => {
+    const allFormValues = getValues();
+    const itemValuesArray = getItemValues(allFormValues);
     setInvoiceData((prevData) => {
       const newItems = [
-        ...prevData.items.slice(0, index),
-        ...prevData.items.slice(index + 1),
+        ...itemValuesArray.slice(0, index),
+        ...itemValuesArray.slice(index + 1),
       ];
 
       return {
@@ -133,6 +218,9 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
         <div className={styles.mgBottom}>
           <h3 className={styles.formHeader}>Bill From</h3>
           <div className={styles.formElementWrapper}>
+            {isError.supplierStreetAddress && (
+              <p className={styles.errorMessage}>cant't be empty</p>
+            )}
             <FormElement
               label="Street Address"
               {...register("supplierStreetAddress")}
@@ -140,9 +228,15 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
           </div>
           <div className={styles.gridArea}>
             <div className={styles.city}>
+              {isError.supplierCity && (
+                <p className={styles.errorMessage}>cant't be empty</p>
+              )}
               <FormElement label="City" {...register("supplierCity")} />
             </div>
             <div className={styles.postCode}>
+              {isError.supplierPostcode && (
+                <p className={styles.errorMessage}>cant't be empty</p>
+              )}
               <FormElement
                 label="Post Code"
                 {...register("supplierPostcode")}
@@ -333,17 +427,17 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
             buttonType={`${setThemeStyles("backgroundFive")} ${setThemeStyles(
               "textSix"
             )} ${styles.discard}`}
-            onClick={handleDiscardInvoice}
+            name="discardButton"
           />
           <Button
             description="Save as Draft"
             buttonType={`${setThemeStyles("textTwo")} ${styles.saveDraft}`}
-            onClick={handleSaveDraft}
+            name="draftButton"
           />
           <Button
-            description="Create invoice"
+            description="Save & Send"
             buttonType={styles.saveInvoice}
-            onClick={handleCreateInvoice}
+            name="saveButton"
           />
         </div>
       </div>
