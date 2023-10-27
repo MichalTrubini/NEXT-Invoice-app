@@ -10,7 +10,9 @@ import { InvoiceData } from "../../types/types";
 const InvoiceBody: React.FC<{
   close: any;
   animation: boolean;
-  data: InvoiceData;
+  data?: InvoiceData;
+  title: string;
+  edit: boolean;
 }> = (props) => {
   const { setThemeStyles } = useContext(SiteContext)!;
   const [headerHeight, setHeaderHeight] = useState("");
@@ -46,10 +48,10 @@ const InvoiceBody: React.FC<{
       <div className={styles.section} id="invoiceHeader">
         <GoBack onClick={props.close} />
         <h2 className={`${styles.header} ${setThemeStyles("textOne")}`}>
-          New Invoice
+          {props.title}
         </h2>
       </div>
-      <InvoiceForm close={props.close} data={props.data} />
+      <InvoiceForm close={props.close} data={props.data} edit={props.edit}/>
     </div>
   );
 };

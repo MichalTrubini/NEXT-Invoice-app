@@ -69,7 +69,7 @@ const InvoiceHeader: React.FC<{
       <div className={styles.header}>
         <Portal selector={"#Portal"}>
           {newInvoice && (
-            <InvoiceBody animation={animate} close={modalCloseHandler} />
+            <InvoiceBody animation={animate} close={modalCloseHandler} title='New Invoice' edit={false}/>
           )}
         </Portal>
         <Portal selector={"#Overlay"}>

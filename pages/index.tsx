@@ -40,6 +40,7 @@ const Home = ({ invoiceItems }: InferGetServerSidePropsType<typeof getServerSide
           pendingSelected={pendingSelected}
           paidSelected={paidSelected}
           invoiceQty={invoiceQty}
+          data={invoiceItems}
         />
         <InvoiceItems invoiceItems={sourceData()} />
       </div>

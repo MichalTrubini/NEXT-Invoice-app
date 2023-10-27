@@ -64,6 +64,7 @@
   padding: 1.6rem 2.4rem;
   display: grid;
   grid-template-areas: "a b c";
+  gap: 0.8rem;
 }
 
 .formBottomShadow {
@@ -162,12 +163,14 @@
   margin-bottom: 2.4rem;
 }
 
-
-
 @media screen and (min-width: 616px) {
   .form {
     overflow: scroll;
     width: 95%;
+  }
+
+  .discard {
+    width: 96px;
   }
 
   .form::-webkit-scrollbar {
@@ -189,7 +192,7 @@
   }
 
   .formTop {
-    padding: 0 5.6rem 13.4rem;
+    padding: 0 2rem 13.4rem 5.6rem;
   }
 
   .formBottom {
@@ -197,7 +200,20 @@
     bottom: 0;
     width: 100%;
     border-radius: 0 20px 0 0;
+    gap: 0.8rem;
+    padding-left: 5.6rem;
+    padding-right: 5.6rem;
   }
+
+  .formBottomFix {
+    grid-template-columns: 50% 1fr 1fr;
+  }
+
+  .formBottomEdit {
+    display: flex;
+    justify-content: flex-end;
+  }
+
   .gridArea {
     display: grid;
     grid-template-areas: "a b c";
@@ -241,6 +257,12 @@
   .itemFlexRow {
     gap: 1.6rem;
     width: 100%;
+  }
+}
+
+@media screen and (min-width: 616px) { 
+  .formBottom {
+    padding-left: 13rem;
   }
 }
 

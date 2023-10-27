@@ -77,6 +77,8 @@ const InvoiceSingle = ({
               animation={animate}
               close={closeEditHandler}
               data={invoiceItem}
+              title={`Edit #${invoiceItem._id}`}
+              edit={true}
             />
           )}
         </Portal>

@@ -18,7 +18,7 @@ import {
 import PaymentTermsPicker from "../../components/form/PaymentTermsPicker";
 import DatePicker from "../../components/form/DatePicker";
 
-const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
+const InvoiceForm: React.FC<{ close: any; data?: InvoiceData; edit: boolean }> = (props) => {
   const { setThemeStyles } = useContext(SiteContext)!;
   const screenWidth = useScreenWidth();
 
@@ -97,7 +97,7 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
       screenWidth < Size.desktopBreakpoint ? 616 : 616 + appHeaderWidth
     );
     setBottomPaddingLeft(
-      screenWidth < Size.desktopBreakpoint ? 24 : appHeaderWidth + 24
+      screenWidth < Size.modalBreakpoint ? 24 : screenWidth < Size.desktopBreakpoint ? 45 : appHeaderWidth + 45
     );
   }, [screenWidth]);
 
@@ -254,7 +254,7 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
         props.close();
       } else if (buttonName === "draftButton") {
         const dataAPI = mapToPayload(trimmedData);
-        console.log(dataAPI)
+        console.log(dataAPI);
       } else if (buttonName === "saveButton") {
         if (validateForm(trimmedData)) {
           return;
@@ -278,7 +278,7 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
         country: allFormValues.supplierCountry,
       },
       createdAt: allFormValues.invoiceDate,
-      paymentDue: '',
+      paymentDue: "",
       clientAddress: {
         street: allFormValues.clientStreetAddress,
         city: allFormValues.clientCity,
@@ -617,25 +617,27 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
       </div>
       <div style={{ maxWidth: bottomWidth + "px" }}>
         <div
-          style={{ left: "0px", paddingLeft: bottomPaddingLeft + "px" }}
+          style={{ left: "0px"}}
           className={`${styles.formBottom} ${setThemeStyles(
             "backgroundSeven"
-          )} ${setThemeStyles("shadowOne")}`}
+          )} ${setThemeStyles("shadowOne")} ${props.edit ? styles.formBottomEdit : styles.formBottomFix}`}
         >
           <Button
-            description="Discard"
+            description={props.edit ? "Cancel" : "Discard"}
             buttonType={`${setThemeStyles("backgroundFive")} ${setThemeStyles(
               "textSix"
             )} ${styles.discard}`}
             name="discardButton"
           />
+          {!props.edit && (
+            <Button
+              description="Save as Draft"
+              buttonType={`${setThemeStyles("textTwo")} ${styles.saveDraft}`}
+              name="draftButton"
+            />
+          )}
           <Button
-            description="Save as Draft"
-            buttonType={`${setThemeStyles("textTwo")} ${styles.saveDraft}`}
-            name="draftButton"
-          />
-          <Button
-            description="Save & Send"
+            description={props.edit ? "Save Changes" : "Save & Send"}
             buttonType={styles.saveInvoice}
             name="saveButton"
           />
