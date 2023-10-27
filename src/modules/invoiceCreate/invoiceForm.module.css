@@ -152,6 +152,12 @@
   color: red;
 }
 
+.errorMessageGeneric {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: red;
+}
+
 .wrapper {
   margin-bottom: 2.4rem;
 }

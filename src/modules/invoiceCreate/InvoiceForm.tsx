@@ -10,7 +10,11 @@ import Image from "next/image";
 import Bin from "../../../public/assets/icon-delete.svg";
 import "react-calendar/dist/Calendar.css";
 import { Inputs, InvoiceData, MyNativeEvent } from "../../types/types";
-import { getItemValues, getDefaultValues } from "../../utils/functions";
+import {
+  getItemValues,
+  getDefaultValues,
+  convertDateToString,
+} from "../../utils/functions";
 import PaymentTermsPicker from "../../components/form/PaymentTermsPicker";
 import DatePicker from "../../components/form/DatePicker";
 
@@ -116,13 +120,18 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
     supplierStreetAddress: false,
     clientName: false,
     clientEmail: false,
+    clientEmailFormat: false,
     clientStreetAddress: false,
     clientCity: false,
     clientPostcode: false,
     clientCountry: false,
     project: false,
   });
-  console.log(isError);
+
+  const hasAtLeastOneError = Object.values(isError).some(
+    (value) => value === true
+  );
+  console.log("error", isError);
   const validateForm = (data: Inputs) => {
     const requiredFields = [
       "supplierCity",
@@ -139,12 +148,16 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
     ];
 
     let errors = false;
+    const regex =
+      /^[\w]{1,}[\w.+-]{0,}@[\w-]{2,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,})$/;
 
     requiredFields.forEach((field) => {
       if (!data[field]) {
         errors = true;
         setIsError((prevState) => ({ ...prevState, [field]: true }));
-      } else {
+      } else if (regex.test(data.clientEmail) === false)
+        setIsError((prevState) => ({ ...prevState, clientEmailFormat: true }));
+      else {
         setIsError((prevState) => ({ ...prevState, [field]: false }));
       }
     });
@@ -153,20 +166,40 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
   };
 
   const onSubmit: SubmitHandler<Inputs> = (values, event) => {
+    // Use trimAndConvertDateToString function to process all values
+    const trimmedData: Inputs = {
+      supplierStreetAddress: "",
+      supplierCity: "",
+      supplierPostcode: "",
+      supplierCountry: "",
+      clientName: "",
+      clientEmail: "",
+      clientStreetAddress: "",
+      clientCity: "",
+      clientPostcode: "",
+      clientCountry: "",
+      invoiceDate: "",
+      paymentTerms: "",
+      project: "",
+    };
+    for (const key in values) {
+      if (values.hasOwnProperty(key)) {
+        trimmedData[key] = convertDateToString(values[key]).trim();
+      }
+    }
+
     if (event && event.nativeEvent) {
       const buttonName = (event.nativeEvent as MyNativeEvent).submitter?.name;
 
       if (buttonName === "discardButton") {
         props.close();
       } else if (buttonName === "draftButton") {
-        mapToPayload(values);
-        console.log("draft");
+        mapToPayload(trimmedData);
       } else if (buttonName === "saveButton") {
-        if (validateForm(values)) {
-          console.log("error", values);
+        if (validateForm(trimmedData)) {
           return;
         }
-        console.log("no error");
+
         //mapToPayload(values);
       }
     }
@@ -174,6 +207,8 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
   useEffect(() => {
     const subscription = watch((value, { name, type }) => {
       setIsError((prevState) => ({ ...prevState, [name as string]: false }));
+      name === "clientEmail" &&
+        setIsError((prevState) => ({ ...prevState, clientEmailFormat: false }));
     });
     return () => subscription.unsubscribe();
   }, [watch]);
@@ -286,11 +321,22 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
             {isError.clientEmail && (
               <p className={styles.errorMessage}>cant't be empty</p>
             )}
+            {isError.clientEmailFormat && (
+              <p className={styles.errorMessage}>wrong format</p>
+            )}
             <FormElement
               label="Client's Email"
               placeholder="e.g. email@example.com"
-              labelCustomClass={isError.clientEmail ? "errorLabel" : ""}
-              inputCustomClass={isError.clientEmail ? "errorInput" : ""}
+              labelCustomClass={
+                isError.clientEmail || isError.clientEmailFormat
+                  ? "errorLabel"
+                  : ""
+              }
+              inputCustomClass={
+                isError.clientEmail || isError.clientEmailFormat
+                  ? "errorInput"
+                  : ""
+              }
               {...register("clientEmail")}
             />
           </div>
@@ -483,8 +529,10 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
             )} ${setThemeStyles("textFour")}`}
             onClick={addItemHandler}
           />
+          {hasAtLeastOneError && (
+            <p className={styles.errorMessageGeneric}>- All fields must be added</p>
+          )}
         </div>
-        {errors.supplierCity && <span>This field is required</span>}
       </div>
       <div style={{ maxWidth: bottomWidth + "px" }}>
         <div

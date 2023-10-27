@@ -72,3 +72,10 @@ export function getDefaultValues(invoiceData: InvoiceData): DefaultValues {
   });
   return defaultValues;
 }
+
+export function convertDateToString(value: any) {
+  if (value instanceof Date) {
+    return value.toISOString();
+  }
+  return value;
+}
