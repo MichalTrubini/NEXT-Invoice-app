@@ -11,7 +11,7 @@ import Bin from "../../../public/assets/icon-delete.svg";
 import "react-calendar/dist/Calendar.css";
 import { Inputs, InvoiceData, MyNativeEvent } from "../../types/types";
 import {
-  getItemValues,
+  getItemsArray,
   getDefaultValues,
   convertDateToString,
 } from "../../utils/functions";
@@ -54,17 +54,10 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
 
   const formDefaultValues = getDefaultValues(invoiceData);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    control,
-    reset,
-    getValues,
-    watch,
-  } = useForm<Inputs>({
-    defaultValues: formDefaultValues,
-  });
+  const { register, handleSubmit, control, reset, getValues, watch } =
+    useForm<Inputs>({
+      defaultValues: formDefaultValues,
+    });
 
   useEffect(() => {
     reset(formDefaultValues);
@@ -126,12 +119,38 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
     clientPostcode: false,
     clientCountry: false,
     project: false,
+    items: [] as Array<{ name: boolean; quantity: boolean; price: boolean }>,
   });
+
+  function getItemValueBoolean(name: string, index: number) {
+    let error = false;
+
+    if (isError.items.length > 0 && isError.items[index]) {
+      error = (isError.items[index] as { [key: string]: boolean })[name];
+    }
+
+    return error;
+  }
+
+  useEffect(() => {
+    setIsError((prevIsError) => ({
+      ...prevIsError,
+      items: [
+        ...prevIsError.items,
+        {
+          name: false,
+          quantity: false,
+          price: false,
+        },
+      ],
+    }));
+  }, [invoiceData.items]);
 
   const hasAtLeastOneError = Object.values(isError).some(
     (value) => value === true
   );
   console.log("error", isError);
+
   const validateForm = (data: Inputs) => {
     const requiredFields = [
       "supplierCity",
@@ -146,27 +165,38 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
       "clientCountry",
       "project",
     ];
-
+    const updatedIsError: any = { ...isError };
     let errors = false;
     const regex =
       /^[\w]{1,}[\w.+-]{0,}@[\w-]{2,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,})$/;
 
     requiredFields.forEach((field) => {
-      if (!data[field]) {
+      if (data[field] === "") {
         errors = true;
-        setIsError((prevState) => ({ ...prevState, [field]: true }));
-      } else if (regex.test(data.clientEmail) === false)
-        setIsError((prevState) => ({ ...prevState, clientEmailFormat: true }));
-      else {
-        setIsError((prevState) => ({ ...prevState, [field]: false }));
+        updatedIsError[field] = true;
+      } else if (regex.test(data.clientEmail) === false) {
+        errors = true;
+        updatedIsError.clientEmailFormat = true;
+      } else {
+        errors = false;
+        updatedIsError[field] = false;
       }
     });
+    const allFormValues = getValues();
+    const itemValuesArray = getItemsArray(allFormValues);
 
+    updatedIsError.items = itemValuesArray.map((item) => ({
+      name: item.name === "",
+      quantity: item.quantity === "",
+      price: item.price === "",
+    }));
+    console.log("updatedIsError", updatedIsError);
+
+    setIsError(updatedIsError);
     return errors;
   };
 
   const onSubmit: SubmitHandler<Inputs> = (values, event) => {
-    // Use trimAndConvertDateToString function to process all values
     const trimmedData: Inputs = {
       supplierStreetAddress: "",
       supplierCity: "",
@@ -209,13 +239,24 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
       setIsError((prevState) => ({ ...prevState, [name as string]: false }));
       name === "clientEmail" &&
         setIsError((prevState) => ({ ...prevState, clientEmailFormat: false }));
+      if (name && (name.includes("name") || name.includes("quantity") || name.includes("price"))) {
+        const index = Number(name!.split("_")[1]);
+        setIsError((prevState) => {
+          const newItems = [...prevState.items];
+          (newItems[index] as { [key: string]: boolean })[name.split("_")[0]] = false;
+          return {
+            ...prevState,
+            items: newItems,
+          };
+        });
+      }
     });
     return () => subscription.unsubscribe();
   }, [watch]);
 
   const addItemHandler = () => {
     const allFormValues = getValues();
-    const itemValuesArray = getItemValues(allFormValues);
+    const itemValuesArray = getItemsArray(allFormValues);
 
     setInvoiceData((prevData) => ({
       ...prevData,
@@ -225,7 +266,7 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
 
   const deleteItemHandler = (index: number) => {
     const allFormValues = getValues();
-    const itemValuesArray = getItemValues(allFormValues);
+    const itemValuesArray = getItemsArray(allFormValues);
     setInvoiceData((prevData) => {
       const newItems = [
         ...itemValuesArray.slice(0, index),
@@ -449,6 +490,9 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
                         ? "displayBlock"
                         : "displayNone"
                     }
+                    inputCustomClass={
+                      getItemValueBoolean("name", index) ? "errorInput" : ""
+                    }
                     label="Item Name"
                     {...register(`name_${index}`)}
                   />
@@ -462,6 +506,11 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
                           : screenWidth > Size.modalBreakpoint && index === 0
                           ? "displayBlock"
                           : "displayNone"
+                      }
+                      inputCustomClass={
+                        getItemValueBoolean("quantity", index)
+                          ? "errorInput"
+                          : ""
                       }
                       label="Qty"
                       type="number"
@@ -478,6 +527,9 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
                           : screenWidth > Size.modalBreakpoint && index === 0
                           ? "displayBlock"
                           : "displayNone"
+                      }
+                      inputCustomClass={
+                        getItemValueBoolean("price", index) ? "errorInput" : ""
                       }
                       label="Price"
                       {...register(`price_${index}`)}
@@ -530,7 +582,9 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
             onClick={addItemHandler}
           />
           {hasAtLeastOneError && (
-            <p className={styles.errorMessageGeneric}>- All fields must be added</p>
+            <p className={styles.errorMessageGeneric}>
+              - All fields must be added
+            </p>
           )}
         </div>
       </div>

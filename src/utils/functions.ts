@@ -7,7 +7,7 @@ type FormValues = {
   [key: string]: string;
 };
 
-export function getItemValues(obj: any) {
+export function getItemsArray(obj: any) {
   const allFormItemValues = Object.keys(obj)
     .filter(
       (fieldName) =>
