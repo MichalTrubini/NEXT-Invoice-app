@@ -22,6 +22,8 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
   const { setThemeStyles } = useContext(SiteContext)!;
   const screenWidth = useScreenWidth();
 
+  //STATES
+
   const [formHeight, setFormHeight] = useState(0);
   const [bottomWidth, setBottomWidth] = useState(0);
   const [bottomPaddingLeft, setBottomPaddingLeft] = useState(0);
@@ -52,12 +54,30 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
       : [{ name: "", quantity: "", price: "" }],
   });
 
+  const [isError, setIsError] = useState({
+    supplierCity: false,
+    supplierPostcode: false,
+    supplierCountry: false,
+    supplierStreetAddress: false,
+    clientName: false,
+    clientEmail: false,
+    clientEmailFormat: false,
+    clientStreetAddress: false,
+    clientCity: false,
+    clientPostcode: false,
+    clientCountry: false,
+    project: false,
+    items: [] as Array<{ name: boolean; quantity: boolean; price: boolean }>,
+  });
+
   const formDefaultValues = getDefaultValues(invoiceData);
 
   const { register, handleSubmit, control, reset, getValues, watch } =
     useForm<Inputs>({
       defaultValues: formDefaultValues,
     });
+
+  //EFFECTS
 
   useEffect(() => {
     reset(formDefaultValues);
@@ -80,6 +100,46 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
       screenWidth < Size.desktopBreakpoint ? 24 : appHeaderWidth + 24
     );
   }, [screenWidth]);
+
+  useEffect(() => {
+    setIsError((prevIsError) => ({
+      ...prevIsError,
+      items: [
+        ...prevIsError.items,
+        {
+          name: false,
+          quantity: false,
+          price: false,
+        },
+      ],
+    }));
+  }, [invoiceData.items]);
+
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) => {
+      setIsError((prevState) => ({ ...prevState, [name as string]: false }));
+      name === "clientEmail" &&
+        setIsError((prevState) => ({ ...prevState, clientEmailFormat: false }));
+      if (
+        name &&
+        (name.includes("name") ||
+          name.includes("quantity") ||
+          name.includes("price"))
+      ) {
+        const index = Number(name!.split("_")[1]);
+        setIsError((prevState) => {
+          const newItems = [...prevState.items];
+          (newItems[index] as { [key: string]: boolean })[name.split("_")[0]] =
+            false;
+          return {
+            ...prevState,
+            items: newItems,
+          };
+        });
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   const mapToPayload = (data: Inputs) => {
     const payload = {
@@ -106,22 +166,6 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
     return payload;
   };
 
-  const [isError, setIsError] = useState({
-    supplierCity: false,
-    supplierPostcode: false,
-    supplierCountry: false,
-    supplierStreetAddress: false,
-    clientName: false,
-    clientEmail: false,
-    clientEmailFormat: false,
-    clientStreetAddress: false,
-    clientCity: false,
-    clientPostcode: false,
-    clientCountry: false,
-    project: false,
-    items: [] as Array<{ name: boolean; quantity: boolean; price: boolean }>,
-  });
-
   function getItemValueBoolean(name: string, index: number) {
     let error = false;
 
@@ -132,24 +176,9 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
     return error;
   }
 
-  useEffect(() => {
-    setIsError((prevIsError) => ({
-      ...prevIsError,
-      items: [
-        ...prevIsError.items,
-        {
-          name: false,
-          quantity: false,
-          price: false,
-        },
-      ],
-    }));
-  }, [invoiceData.items]);
-
   const hasAtLeastOneError = Object.values(isError).some(
     (value) => value === true
   );
-  console.log("error", isError);
 
   const validateForm = (data: Inputs) => {
     const requiredFields = [
@@ -224,7 +253,8 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
       if (buttonName === "discardButton") {
         props.close();
       } else if (buttonName === "draftButton") {
-        mapToPayload(trimmedData);
+        const dataAPI = mapToPayload(trimmedData);
+        console.log(dataAPI)
       } else if (buttonName === "saveButton") {
         if (validateForm(trimmedData)) {
           return;
@@ -234,34 +264,31 @@ const InvoiceForm: React.FC<{ close: any; data: InvoiceData }> = (props) => {
       }
     }
   };
-  useEffect(() => {
-    const subscription = watch((value, { name, type }) => {
-      setIsError((prevState) => ({ ...prevState, [name as string]: false }));
-      name === "clientEmail" &&
-        setIsError((prevState) => ({ ...prevState, clientEmailFormat: false }));
-      if (name && (name.includes("name") || name.includes("quantity") || name.includes("price"))) {
-        const index = Number(name!.split("_")[1]);
-        setIsError((prevState) => {
-          const newItems = [...prevState.items];
-          (newItems[index] as { [key: string]: boolean })[name.split("_")[0]] = false;
-          return {
-            ...prevState,
-            items: newItems,
-          };
-        });
-      }
-    });
-    return () => subscription.unsubscribe();
-  }, [watch]);
 
   const addItemHandler = () => {
     const allFormValues = getValues();
     const itemValuesArray = getItemsArray(allFormValues);
 
-    setInvoiceData((prevData) => ({
-      ...prevData,
+    setInvoiceData({
+      description: allFormValues.project,
+      senderAddress: {
+        street: allFormValues.supplierStreetAddress,
+        city: allFormValues.supplierCity,
+        postCode: allFormValues.supplierPostcode,
+        country: allFormValues.supplierCountry,
+      },
+      createdAt: allFormValues.invoiceDate,
+      paymentDue: '',
+      clientAddress: {
+        street: allFormValues.clientStreetAddress,
+        city: allFormValues.clientCity,
+        postCode: allFormValues.clientPostcode,
+        country: allFormValues.clientCountry,
+      },
+      clientName: allFormValues.clientName,
+      clientEmail: allFormValues.clientEmail,
       items: [...itemValuesArray, { name: "", quantity: "", price: "" }],
-    }));
+    });
   };
 
   const deleteItemHandler = (index: number) => {
