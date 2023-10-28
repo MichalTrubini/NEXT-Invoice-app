@@ -18,7 +18,11 @@ import {
 import PaymentTermsPicker from "../../components/form/PaymentTermsPicker";
 import DatePicker from "../../components/form/DatePicker";
 
-const InvoiceForm: React.FC<{ close: any; data?: InvoiceData; edit: boolean }> = (props) => {
+const InvoiceForm: React.FC<{
+  close: any;
+  data?: InvoiceData;
+  edit: boolean;
+}> = (props) => {
   const { setThemeStyles } = useContext(SiteContext)!;
   const screenWidth = useScreenWidth();
 
@@ -26,7 +30,6 @@ const InvoiceForm: React.FC<{ close: any; data?: InvoiceData; edit: boolean }> =
 
   const [formHeight, setFormHeight] = useState(0);
   const [bottomWidth, setBottomWidth] = useState(0);
-  const [bottomPaddingLeft, setBottomPaddingLeft] = useState(0);
   const [invoiceData, setInvoiceData] = useState({
     description: props.data ? props.data.description : "",
     senderAddress: {
@@ -96,9 +99,6 @@ const InvoiceForm: React.FC<{ close: any; data?: InvoiceData; edit: boolean }> =
     setBottomWidth(
       screenWidth < Size.desktopBreakpoint ? 616 : 616 + appHeaderWidth
     );
-    setBottomPaddingLeft(
-      screenWidth < Size.modalBreakpoint ? 24 : screenWidth < Size.desktopBreakpoint ? 45 : appHeaderWidth + 45
-    );
   }, [screenWidth]);
 
   useEffect(() => {
@@ -142,6 +142,25 @@ const InvoiceForm: React.FC<{ close: any; data?: InvoiceData; edit: boolean }> =
   }, [watch]);
 
   const mapToPayload = (data: Inputs) => {
+    const itemsArray = [];
+
+    for (const key in data) {
+      if (
+        key.startsWith("name_") ||
+        key.startsWith("quantity_") ||
+        key.startsWith("price_")
+      ) {
+        const [field, index] = key.split("_");
+        const objIndex = parseInt(index);
+
+        if (!itemsArray[objIndex]) {
+          itemsArray[objIndex] = {};
+        }
+
+        (itemsArray[objIndex] as { [key: string]: string })[field] = data[key];
+      }
+    }
+
     const payload = {
       description: data.project,
       senderAddress: {
@@ -160,7 +179,7 @@ const InvoiceForm: React.FC<{ close: any; data?: InvoiceData; edit: boolean }> =
       clientEmail: data.clientEmail,
       createdAt: data.invoiceDate,
       paymentDue: data.paymentTerms,
-      items: invoiceData.items,
+      items: itemsArray,
     };
 
     return payload;
@@ -253,8 +272,10 @@ const InvoiceForm: React.FC<{ close: any; data?: InvoiceData; edit: boolean }> =
       if (buttonName === "discardButton") {
         props.close();
       } else if (buttonName === "draftButton") {
+        console.log("values", values);
+        console.log("trimmed data", trimmedData);
         const dataAPI = mapToPayload(trimmedData);
-        console.log(dataAPI);
+        console.log("dataAPI", dataAPI);
       } else if (buttonName === "saveButton") {
         if (validateForm(trimmedData)) {
           return;
@@ -316,7 +337,6 @@ const InvoiceForm: React.FC<{ close: any; data?: InvoiceData; edit: boolean }> =
           ? { height: formHeight }
           : { height: "auto" }
       }
-      autoComplete="off"
     >
       <div className={styles.formTop}>
         <div className={styles.mgBottom}>
@@ -617,10 +637,12 @@ const InvoiceForm: React.FC<{ close: any; data?: InvoiceData; edit: boolean }> =
       </div>
       <div style={{ maxWidth: bottomWidth + "px" }}>
         <div
-          style={{ left: "0px"}}
+          style={{ left: "0px" }}
           className={`${styles.formBottom} ${setThemeStyles(
             "backgroundSeven"
-          )} ${setThemeStyles("shadowOne")} ${props.edit ? styles.formBottomEdit : styles.formBottomFix}`}
+          )} ${setThemeStyles("shadowOne")} ${
+            props.edit ? styles.formBottomEdit : styles.formBottomFix
+          }`}
         >
           <Button
             description={props.edit ? "Cancel" : "Discard"}
