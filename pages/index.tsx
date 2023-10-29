@@ -40,7 +40,6 @@ const Home = ({ invoiceItems }: InferGetServerSidePropsType<typeof getServerSide
           pendingSelected={pendingSelected}
           paidSelected={paidSelected}
           invoiceQty={invoiceQty}
-          data={invoiceItems}
         />
         <InvoiceItems invoiceItems={sourceData()} />
       </div>
@@ -61,7 +60,12 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   const documents = db.collection("invoiceItems");
 
-  const invoiceItems = await documents.find().toArray();
+  const invoiceItemsRaw = await documents.find().toArray();
+
+  const invoiceItems = invoiceItemsRaw.map(item => ({
+    ...item,
+    _id: item._id.toString(),
+  }));
 
   client.close();
 

@@ -1,5 +1,5 @@
 export interface InvoiceProps {
-  _id: string;
+  invoiceNumber: string;
   description: string;
   senderStreet: string;
   senderCity: string;
@@ -35,6 +35,7 @@ export interface DefaultValues {
 export interface InvoiceData {
   _id?: string;
   description: string;
+  invoiceNumber?: string;
   senderAddress: {
     street: string;
     city: string;
@@ -42,6 +43,7 @@ export interface InvoiceData {
     country: string;
   };
   createdAt: string;
+  status?: string;
   paymentDue: string;
   clientAddress: {
     street: string;

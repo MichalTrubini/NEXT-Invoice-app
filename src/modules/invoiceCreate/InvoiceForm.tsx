@@ -274,14 +274,14 @@ const InvoiceForm: React.FC<{
       } else if (buttonName === "draftButton") {
         console.log("values", values);
         console.log("trimmed data", trimmedData);
-        const dataAPI = mapToPayload(trimmedData);
-        console.log("dataAPI", dataAPI);
+        const dataDraft = mapToPayload(trimmedData);
+        console.log("dataAPI", dataDraft);
       } else if (buttonName === "saveButton") {
         if (validateForm(trimmedData)) {
           return;
         }
 
-        //mapToPayload(values);
+        const dataSave = mapToPayload(trimmedData);
       }
     }
   };

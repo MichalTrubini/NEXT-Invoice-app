@@ -80,4 +80,9 @@ export function convertDateToString(value: any) {
   return value;
 }
 
-
+export function getTotal(items: any) {
+  return items.reduce(
+    (acc: number, item: any) => acc + item.quantity * item.price,
+    0
+  );
+}

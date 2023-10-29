@@ -6,8 +6,10 @@ import Image from "next/image";
 import { useMediaQuery } from "../../utils/hooks";
 import Link from "next/link";
 import { Size } from "../../types/enums";
+import { getTotal } from "../../utils/functions";
+import { InvoiceData } from "../../types/types";
 
-const InvoiceItems: React.FC<{ invoiceItems: { _id: string; clientName: string; total: number; status: string }[] }> = (
+const InvoiceItems: React.FC<{ invoiceItems: InvoiceData[] }> = (
   props
 ) => {
   const { setThemeStyles } = useContext(SiteContext)!;
@@ -16,12 +18,12 @@ const InvoiceItems: React.FC<{ invoiceItems: { _id: string; clientName: string; 
   return (
     <div className={styles.invoiceItems}>
       {props.invoiceItems.map((item) => (
-        <Link href={`/invoice/${item._id}`} key={item._id}>
+        <Link href={`/invoice/${item.invoiceNumber}`} key={item._id}>
           <div className={`${styles.invoiceItem} ${setThemeStyles("backgroundThree")}`}>
             <div className={styles.topRow}>
               <h2 className={styles.invoiceHeader}>
                 <span className={setThemeStyles("textTwo")}>#</span>
-                <span className={setThemeStyles("textOne")}>{item._id}</span>
+                <span className={setThemeStyles("textOne")}>{item.invoiceNumber}</span>
               </h2>
               {matches && <p className={`${styles.date} ${setThemeStyles("textTwo")}`}>Due 19 Aug 2021</p>}
               <p className={`${styles.name} ${setThemeStyles("textThree")}`}>{item.clientName}</p>
@@ -29,9 +31,7 @@ const InvoiceItems: React.FC<{ invoiceItems: { _id: string; clientName: string; 
             <div className={styles.bottomRow}>
               <div>
                 {!matches && <p className={`${styles.date} ${setThemeStyles("textTwo")}`}>Due 19 Aug 2021</p>}
-                <p className={`${styles.price} ${setThemeStyles("textOne")}`}>{`€ ${item.total.toLocaleString(
-                  "sk"
-                )}`}</p>
+                <p className={`${styles.price} ${setThemeStyles("textOne")}`}>{getTotal(item.items)}</p>
               </div>
               <div
                 className={`${styles.statusContainer} ${

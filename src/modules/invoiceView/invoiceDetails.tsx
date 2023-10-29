@@ -19,7 +19,7 @@ const InvoiceDetails: React.FC<InvoiceProps> = (props) => {
         <div>
           <p className={styles.invoiceNumber}>
             <span className={`${styles.hash} ${setThemeStyles("textTwo")}`}>#</span>
-            <span className={`${styles.invoiceID} ${setThemeStyles("textOne")}`}>{props._id}</span>
+            <span className={`${styles.invoiceID} ${setThemeStyles("textOne")}`}>{props.invoiceNumber}</span>
           </p>
           <p className={`${styles.text} ${setThemeStyles("textTwo")}`}>{props.description}</p>
         </div>

@@ -77,7 +77,7 @@ const InvoiceSingle = ({
               animation={animate}
               close={closeEditHandler}
               data={invoiceItem}
-              title={`Edit #${invoiceItem._id}`}
+              title={`Edit #${invoiceItem.invoiceNumber}`}
               edit={true}
             />
           )}
@@ -96,7 +96,7 @@ const InvoiceSingle = ({
           )}
         </div>
         <InvoiceDetails
-          _id={invoiceItem._id}
+          invoiceNumber={invoiceItem.invoiceNumber}
           description={invoiceItem.description}
           senderStreet={invoiceItem.senderAddress.street}
           senderCity={invoiceItem.senderAddress.city}
@@ -140,7 +140,8 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
 
   const documents = db.collection("invoiceItems");
 
-  const invoiceItem = await documents.findOne({ _id: page });
+  const invoiceItemRaw = await documents.findOne({ invoiceNumber: page });
+  const invoiceItem = {...invoiceItemRaw, _id: invoiceItemRaw!._id.toString()};
 
   client.close();
 
