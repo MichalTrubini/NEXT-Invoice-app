@@ -103,3 +103,8 @@ export interface MyInputProps {
 export interface MyNativeEvent extends Event {
   submitter: HTMLButtonElement;
 }
+
+export interface Counter {
+  _id: string;
+  seq: number;
+}

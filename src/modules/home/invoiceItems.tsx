@@ -31,7 +31,9 @@ const InvoiceItems: React.FC<{ invoiceItems: InvoiceData[] }> = (
             <div className={styles.bottomRow}>
               <div>
                 {!matches && <p className={`${styles.date} ${setThemeStyles("textTwo")}`}>Due 19 Aug 2021</p>}
-                <p className={`${styles.price} ${setThemeStyles("textOne")}`}>{getTotal(item.items)}</p>
+                <p className={`${styles.price} ${setThemeStyles("textOne")}`}>{`€ ${getTotal(item.items).toLocaleString(
+                  "sk"
+                )}`}</p>
               </div>
               <div
                 className={`${styles.statusContainer} ${

@@ -18,6 +18,16 @@ import {
 import PaymentTermsPicker from "../../components/form/PaymentTermsPicker";
 import DatePicker from "../../components/form/DatePicker";
 
+async function fetchData(data: any) {
+  const response = await fetch("/api/invoice", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+}
+
 const InvoiceForm: React.FC<{
   close: any;
   data?: InvoiceData;
@@ -240,6 +250,18 @@ const InvoiceForm: React.FC<{
     }));
     console.log("updatedIsError", updatedIsError);
 
+    const hasTrueKeyValuePair = updatedIsError.items.some(item => {
+      for (const key in item) {
+        if (item[key] === true) {
+          return true; // If any key-value pair is true, return true
+        }
+      }
+      return false;
+    });
+
+    if (hasTrueKeyValuePair) {
+      errors = true;
+    }
     setIsError(updatedIsError);
     return errors;
   };
@@ -265,23 +287,23 @@ const InvoiceForm: React.FC<{
         trimmedData[key] = convertDateToString(values[key]).trim();
       }
     }
-
+    const payload = mapToPayload(trimmedData);
     if (event && event.nativeEvent) {
       const buttonName = (event.nativeEvent as MyNativeEvent).submitter?.name;
 
       if (buttonName === "discardButton") {
         props.close();
       } else if (buttonName === "draftButton") {
-        console.log("values", values);
-        console.log("trimmed data", trimmedData);
-        const dataDraft = mapToPayload(trimmedData);
-        console.log("dataAPI", dataDraft);
+        const dataSaveDraft = { ...payload, status: "draft" };
+        fetchData(dataSaveDraft);
+        props.close();
       } else if (buttonName === "saveButton") {
         if (validateForm(trimmedData)) {
           return;
         }
-
-        const dataSave = mapToPayload(trimmedData);
+        const dataCreateInvoice = { ...payload, status: "pending" };
+        fetchData(dataCreateInvoice);
+        props.close();
       }
     }
   };

@@ -86,3 +86,9 @@ export function getTotal(items: any) {
     0
   );
 }
+
+export function invoiceNumberGenerator(invoiceNumber: number) {
+  const year = new Date().getFullYear();
+  const zeros = "0".repeat(3 - invoiceNumber.toString().length);
+  return `IN${year}${zeros}${invoiceNumber}`;
+}
