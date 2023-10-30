@@ -13,6 +13,7 @@ const InvoiceBody: React.FC<{
   data?: InvoiceData;
   title: string;
   edit: boolean;
+  triggerFetch: (data: any, method: string, id?: string) => void;
 }> = (props) => {
   const { setThemeStyles } = useContext(SiteContext)!;
   const [headerHeight, setHeaderHeight] = useState("");
@@ -51,7 +52,7 @@ const InvoiceBody: React.FC<{
           {props.title}
         </h2>
       </div>
-      <InvoiceForm close={props.close} data={props.data} edit={props.edit}/>
+      <InvoiceForm close={props.close} data={props.data} edit={props.edit}  triggerFetch={props.triggerFetch}/>
     </div>
   );
 };

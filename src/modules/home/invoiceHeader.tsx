@@ -5,10 +5,7 @@ import Image from "next/image";
 import arrow from "../../../public/assets/icon-arrow-down.svg";
 import plus from "../../../public/assets/icon-plus.svg";
 import { useScreenWidth } from "../../utils/hooks";
-import Portal from "../../layout/Portal";
-import InvoiceBody from "../invoiceCreate/InvoiceBody";
 import { Size } from "../../types/enums";
-import Overlay from "../../components/Overlay";
 
 const InvoiceHeader: React.FC<{
   draft: () => void;
@@ -18,29 +15,15 @@ const InvoiceHeader: React.FC<{
   pendingSelected: boolean;
   paidSelected: boolean;
   invoiceQty: number;
+  newInvoiceHandler: () => void;
 }> = (props) => {
   const { setThemeStyles } = useContext(SiteContext)!;
   const tabletBreakpoint = Size.tabletBreakpoint;
 
   const [showCheckbox, setShowCheckbox] = useState(false);
-  const [newInvoice, setNewInvoice] = useState(false);
-  const [animate, setAnimate] = useState(false);
 
   const showCheckboxHandler = () => {
     setShowCheckbox((prevValue) => !prevValue);
-  };
-
-  const newInvoiceHandler = () => {
-    setNewInvoice(true);
-    setAnimate(true);
-  };
-
-  const modalCloseHandler = () => {
-    setTimeout(() => {
-      setNewInvoice(false);
-    }, 200);
-    setAnimate(false);
-    window.scrollTo(0, 0);
   };
 
   const ref = useRef<HTMLFormElement>(null);
@@ -67,14 +50,6 @@ const InvoiceHeader: React.FC<{
   return (
     <>
       <div className={styles.header}>
-        <Portal selector={"#Portal"}>
-          {newInvoice && (
-            <InvoiceBody animation={animate} close={modalCloseHandler} title='New Invoice' edit={false}/>
-          )}
-        </Portal>
-        <Portal selector={"#Overlay"}>
-          {newInvoice && <Overlay onClick={modalCloseHandler} />}
-        </Portal>
         <div>
           <h1 className={`${styles.heading} ${setThemeStyles("textOne")}`}>
             Invoices
@@ -192,7 +167,7 @@ const InvoiceHeader: React.FC<{
               </form>
             )}
           </div>
-          <div className={styles.addContainer} onClick={newInvoiceHandler}>
+          <div className={styles.addContainer} onClick={props.newInvoiceHandler}>
             <div className={styles.plusContainer}>
               <Image src={plus} alt="plus" />
             </div>

@@ -12,6 +12,8 @@ import Portal from "../../src/layout/Portal";
 import DeleteModal from "../../src/components/DeleteModal";
 import InvoiceBody from "../../src/modules/invoiceCreate/InvoiceBody";
 import Overlay from "../../src/components/Overlay";
+import fetchData from "../../src/core/fetchData";
+import { useRouter } from "next/router";
 
 const InvoiceSingle = ({
   invoiceItem,
@@ -22,9 +24,42 @@ const InvoiceSingle = ({
   const [showModal, setShowModal] = useState(false);
   const [editInvoice, setEditInvoice] = useState(false);
   const [animate, setAnimate] = useState(false);
+  const [invoiceData, setInvoiceData] = useState({
+    _id: "",
+    invoiceNumber: "",
+    clientName: "",
+    clientEmail: "",
+    supplierAddress: {
+      street: "",
+      city: "",
+      postCode: "",
+      country: "",
+    },
+    clientAddress: {
+      street: "",
+      city: "",
+      postCode: "",
+      country: "",
+    },
+    createdAt: "",
+    paymentDue: "",
+    paymentTerms: "",
+    description: "",
+    items: [
+      {
+        name: "",
+        quantity: "",
+        price: "",
+      },
+    ],
+    status: "",
+  });
+  const router = useRouter();
 
   const deleteHandler = () => {
     setShowModal(false);
+    fetchData(null, "DELETE", invoiceItem._id);
+    router.push("/");
   };
 
   const editHandler = () => {
@@ -55,6 +90,16 @@ const InvoiceSingle = ({
     else enableBodyScroll();
   }, [showModal]);
 
+  useEffect(() => {
+    setInvoiceData(invoiceItem);
+  }, [invoiceItem]);
+
+  const triggerFetchHandler = async (data: any, method: string, id?: string) => {
+    const fetchedData = await fetchData(data, method, id);
+    console.log(fetchedData)
+    setInvoiceData(fetchedData);
+  };
+
   return (
     <>
       <Head>
@@ -68,6 +113,7 @@ const InvoiceSingle = ({
             <DeleteModal
               closeHandler={() => setShowModal(false)}
               deleteHandler={deleteHandler}
+              invoiceNumber={invoiceItem.invoiceNumber}
             />
           )}
         </Portal>
@@ -79,6 +125,7 @@ const InvoiceSingle = ({
               data={invoiceItem}
               title={`Edit #${invoiceItem.invoiceNumber}`}
               edit={true}
+              triggerFetch={triggerFetchHandler}
             />
           )}
         </Portal>
@@ -96,21 +143,21 @@ const InvoiceSingle = ({
           )}
         </div>
         <InvoiceDetails
-          invoiceNumber={invoiceItem.invoiceNumber}
-          description={invoiceItem.description}
-          senderStreet={invoiceItem.senderAddress.street}
-          senderCity={invoiceItem.senderAddress.city}
-          senderPostCode={invoiceItem.senderAddress.postCode}
-          senderCountry={invoiceItem.senderAddress.country}
-          createdAt={invoiceItem.createdAt}
-          paymentDue={invoiceItem.paymentDue}
-          clientName={invoiceItem.clientName}
-          clientStreet={invoiceItem.clientAddress.street}
-          clientCity={invoiceItem.clientAddress.city}
-          clientPostCode={invoiceItem.clientAddress.postCode}
-          clientCountry={invoiceItem.clientAddress.country}
-          clientEmail={invoiceItem.clientEmail}
-          items={invoiceItem.items}
+          invoiceNumber={invoiceData.invoiceNumber}
+          description={invoiceData.description}
+          supplierStreet={invoiceData.supplierAddress.street}
+          supplierCity={invoiceData.supplierAddress.city}
+          supplierPostCode={invoiceData.supplierAddress.postCode}
+          supplierCountry={invoiceData.supplierAddress.country}
+          createdAt={invoiceData.createdAt}
+          paymentDue={invoiceData.paymentDue}
+          clientName={invoiceData.clientName}
+          clientStreet={invoiceData.clientAddress.street}
+          clientCity={invoiceData.clientAddress.city}
+          clientPostCode={invoiceData.clientAddress.postCode}
+          clientCountry={invoiceData.clientAddress.country}
+          clientEmail={invoiceData.clientEmail}
+          items={invoiceData.items}
         />
       </div>
       {!matches && (
@@ -141,7 +188,10 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const documents = db.collection("invoiceItems");
 
   const invoiceItemRaw = await documents.findOne({ invoiceNumber: page });
-  const invoiceItem = {...invoiceItemRaw, _id: invoiceItemRaw!._id.toString()};
+  const invoiceItem = {
+    ...invoiceItemRaw,
+    _id: invoiceItemRaw!._id.toString(),
+  };
 
   client.close();
 

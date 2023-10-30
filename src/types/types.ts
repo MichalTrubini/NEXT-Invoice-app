@@ -1,10 +1,10 @@
 export interface InvoiceProps {
   invoiceNumber: string;
   description: string;
-  senderStreet: string;
-  senderCity: string;
-  senderPostCode: string;
-  senderCountry: string;
+  supplierStreet: string;
+  supplierCity: string;
+  supplierPostCode: string;
+  supplierCountry: string;
   createdAt: string;
   paymentDue: string;
   clientName: string;
@@ -13,7 +13,7 @@ export interface InvoiceProps {
   clientCity: string;
   clientCountry: string;
   clientEmail: string;
-  items: { name: string; quantity: number; price: number }[];
+  items: { name: string; quantity: string; price: string }[];
 }
 
 export interface DefaultValues {
@@ -36,7 +36,7 @@ export interface InvoiceData {
   _id?: string;
   description: string;
   invoiceNumber?: string;
-  senderAddress: {
+  supplierAddress: {
     street: string;
     city: string;
     postCode: string;

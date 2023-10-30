@@ -6,6 +6,7 @@ import { SiteContext } from "../store/site-context";
 const DeleteModal: React.FC<{
   closeHandler: () => void;
   deleteHandler: () => void;
+  invoiceNumber: string;
 }> = (props) => {
   const { setThemeStyles } = useContext(SiteContext)!;
   return (
@@ -18,8 +19,8 @@ const DeleteModal: React.FC<{
           Confirm Deletion
         </h2>
         <p className={`${styles.text} ${setThemeStyles("textFour")}`}>
-          Are you sure you want to delete invoice #XM9141? This action cannot be
-          undone.
+          {`Are you sure you want to delete invoice #${props.invoiceNumber}? This action cannot be
+          undone.`}
         </p>
         <div className={styles.buttons}>
           <Button

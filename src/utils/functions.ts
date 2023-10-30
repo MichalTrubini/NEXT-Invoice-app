@@ -57,10 +57,10 @@ export function getDefaultValues(invoiceData: InvoiceData): DefaultValues {
     clientPostcode: invoiceData.clientAddress.postCode,
     clientStreetAddress: invoiceData.clientAddress.street,
     project: invoiceData.description,
-    supplierCity: invoiceData.senderAddress.city,
-    supplierCountry: invoiceData.senderAddress.country,
-    supplierPostcode: invoiceData.senderAddress.postCode,
-    supplierStreetAddress: invoiceData.senderAddress.street,
+    supplierCity: invoiceData.supplierAddress.city,
+    supplierCountry: invoiceData.supplierAddress.country,
+    supplierPostcode: invoiceData.supplierAddress.postCode,
+    supplierStreetAddress: invoiceData.supplierAddress.street,
     invoiceDate: new Date() as any as string,
     paymentTerms: "Net 30 Days",
   };
@@ -91,4 +91,16 @@ export function invoiceNumberGenerator(invoiceNumber: number) {
   const year = new Date().getFullYear();
   const zeros = "0".repeat(3 - invoiceNumber.toString().length);
   return `IN${year}${zeros}${invoiceNumber}`;
+}
+
+export function calculatedDueDate(createdAt: string, paymentTerms: string) {
+
+  const dueDays = parseInt(paymentTerms.split(" ")[1], 10);
+
+  const createdDate = new Date(createdAt);
+  // Add x number of days (x * 24 hours * 60 minutes * 60 seconds * 1000 milliseconds)
+  const someDaysLater = new Date(createdDate.getTime() + dueDays * 24 * 60 * 60 * 1000);
+
+  const dueDate = someDaysLater.toISOString();
+  return dueDate;
 }

@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import { Counter } from "../../src/types/types";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { invoiceNumberGenerator } from "../../src/utils/functions";
@@ -25,7 +25,23 @@ export default async function handler(
   // Start a transaction
   session.startTransaction();
 
-  if (req.method === "POST") {
+  if (req.method === "GET") {
+    try {
+      return res
+        .status(200)
+        .json((await invoicesCollection.find().toArray()) || []);
+    } catch {
+      await session.abortTransaction();
+
+      res
+        .status(500)
+        .json({ error: "An error occurred while fetching invoices" });
+    } finally {
+      session.endSession();
+
+      client.close();
+    }
+  } else if (req.method === "POST") {
     try {
       // Get the last invoice number
       const counter = await countersCollection.findOne(
@@ -55,7 +71,7 @@ export default async function handler(
       );
 
       // Insert a document with the invoiceNumber as updatedCounter.seq
-      const result = await invoicesCollection.insertOne(
+      await invoicesCollection.insertOne(
         {
           invoiceNumber: invoiceNumberGenerator(updatedCounter!.seq),
           ...req.body.data,
@@ -66,7 +82,7 @@ export default async function handler(
       // Commit the transaction
       await session.commitTransaction();
 
-      res.status(200).json({ id: result.insertedId });
+      res.status(200).json((await invoicesCollection.find().toArray()) || []);
     } catch (error) {
       // If an error occurred, abort the transaction
       await session.abortTransaction();
@@ -79,7 +95,42 @@ export default async function handler(
 
       client.close();
     }
-  } else {
-    // Handle any other HTTP method
+  } else if (req.method === "PUT") {
+    try {
+      await invoicesCollection.updateOne(
+        { _id: new ObjectId(req.body.id) },
+        { $set: req.body.data }
+      );
+      res
+        .status(200)
+        .json(
+          await invoicesCollection.findOne({ _id: new ObjectId(req.body.id) })
+        );
+    } catch {
+      await session.abortTransaction();
+
+      res
+        .status(500)
+        .json({ error: "An error occurred while updating invoice" });
+    } finally {
+      session.endSession();
+
+      client.close();
+    }
+  } else if (req.method === "DELETE") {
+    try {
+      await invoicesCollection.deleteOne({ _id: new ObjectId(req.body.id) });
+      res.json({ message: "Document deleted" });
+    } catch {
+      await session.abortTransaction();
+
+      res
+        .status(500)
+        .json({ error: "An error occurred while deleting invoice" });
+    } finally {
+      session.endSession();
+
+      client.close();
+    }
   }
 }
