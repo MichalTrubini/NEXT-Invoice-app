@@ -10,7 +10,11 @@ const InvoiceStatus: React.FC<{ status: string }> = (props) => {
       <p className={`${styles.title} ${setThemeStyles("textTwo")}`}>Status</p>
       <div
         className={`${styles.statusContainer} ${
-          props.status === "paid" ? styles.paid : props.status === "pending" ? styles.pending : setThemeStyles("backgroundEight")
+          props.status === "paid"
+            ? styles.paid
+            : props.status === "pending"
+            ? styles.pending
+            : setThemeStyles("backgroundEight")
         }`}
       >
         <div
@@ -19,10 +23,18 @@ const InvoiceStatus: React.FC<{ status: string }> = (props) => {
               ? styles.paidCircle
               : props.status === "pending"
               ? styles.pendingCircle
-              : setThemeStyles("textFive")
+              : setThemeStyles("backgroundNine")
           }`}
         ></div>
-        <p className={styles.status}>{props.status}</p>
+        <p
+          className={
+            props.status === "draft"
+              ? `${styles.status} ${setThemeStyles("textFive")}`
+              : styles.status
+          }
+        >
+          {props.status}
+        </p>
       </div>
     </div>
   );

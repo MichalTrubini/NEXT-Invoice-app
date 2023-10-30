@@ -246,6 +246,14 @@ input[type="number"] {
   color: white;
 }
 
+.hoverOne-light:hover {
+  background-color: #DFE3FA;
+}
+
+.hoverOne-dark:hover {
+  background-color: #fff;
+}
+
 .statusCTA {
   padding: 2.4rem;
   box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);

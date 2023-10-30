@@ -20,6 +20,7 @@ interface ThemeStyles {
   borderOne: string;
   borderTwo: string;
   shadowOne: string;
+  hoverOne: string;
   placeholder: string;
 }
 
@@ -63,6 +64,7 @@ export function SiteProvider({ children }: SiteProviderProps) {
         borderOne: 'br-DFE3FA',
         borderTwo: 'brb-DFE3FA',
         shadowOne: 'shadowOne-light',
+        hoverOne: 'hoverOne-light',
         placeholder: 'placeholder-light'
       },
       themeDark: {
@@ -85,6 +87,7 @@ export function SiteProvider({ children }: SiteProviderProps) {
         borderOne: 'br-252945',
         borderTwo: 'brb-1E2139',
         shadowOne: 'shadowOne-dark',
+        hoverOne: 'hoverOne-dark',
         placeholder: 'placeholder-dark'
       }
     };

@@ -10,10 +10,7 @@
 
 .edit {
     padding: 1.7rem 2.4rem;
-}
-
-.edit:hover {
-    background-color: var(--light300);
+    color: #7E88C3;
 }
 
 .delete {

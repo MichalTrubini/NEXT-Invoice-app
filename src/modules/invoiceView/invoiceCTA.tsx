@@ -17,8 +17,7 @@ const invoiceCTA: React.FC<{
       <Button
         description="Edit"
         buttonType={`${setThemeStyles("backgroundFive")} ${setThemeStyles(
-          "textSix"
-        )} ${styles.edit}`}
+            "hoverOne")} ${styles.edit}`}
         onClick={props.editInvoice}
       />
       <Button
