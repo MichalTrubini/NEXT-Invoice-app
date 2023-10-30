@@ -18,13 +18,19 @@ import {
 import PaymentTermsPicker from "../../components/form/PaymentTermsPicker";
 import DatePicker from "../../components/form/DatePicker";
 
-async function fetchData(data: any) {
-  const response = await fetch("/api/invoice", {
-    method: "POST",
+async function fetchData(data: any, method: string, id?: string) {
+
+  const bodyData = {
+    data,
+    id
+  };
+
+  await fetch("/api/invoice", {
+    method: method,
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(bodyData),
   });
 }
 
@@ -41,7 +47,9 @@ const InvoiceForm: React.FC<{
   const [formHeight, setFormHeight] = useState(0);
   const [bottomWidth, setBottomWidth] = useState(0);
   const [invoiceData, setInvoiceData] = useState({
+    id: props.data ? props.data._id : "",
     description: props.data ? props.data.description : "",
+    status: props.data ? props.data.status : "",
     senderAddress: {
       street: props.data ? props.data.senderAddress.street : "",
       city: props.data ? props.data.senderAddress.city : "",
@@ -243,16 +251,21 @@ const InvoiceForm: React.FC<{
     const allFormValues = getValues();
     const itemValuesArray = getItemsArray(allFormValues);
 
-    updatedIsError.items = itemValuesArray.map((item) => ({
+    interface Item {
+      name: string;
+      quantity: string;
+      price: string;
+    }
+
+    updatedIsError.items = itemValuesArray.map((item: Item) => ({
       name: item.name === "",
       quantity: item.quantity === "",
       price: item.price === "",
     }));
-    console.log("updatedIsError", updatedIsError);
 
-    const hasTrueKeyValuePair = updatedIsError.items.some(item => {
+    const hasTrueKeyValuePair = updatedIsError.items.some((item: Item) => {
       for (const key in item) {
-        if (item[key] === true) {
+        if ((item as any)[key] === true) {
           return true; // If any key-value pair is true, return true
         }
       }
@@ -295,14 +308,22 @@ const InvoiceForm: React.FC<{
         props.close();
       } else if (buttonName === "draftButton") {
         const dataSaveDraft = { ...payload, status: "draft" };
-        fetchData(dataSaveDraft);
+        fetchData(dataSaveDraft, "POST");
         props.close();
       } else if (buttonName === "saveButton") {
         if (validateForm(trimmedData)) {
           return;
         }
         const dataCreateInvoice = { ...payload, status: "pending" };
-        fetchData(dataCreateInvoice);
+        fetchData(dataCreateInvoice, "POST");
+        props.close();
+      } else if (buttonName === "updateButton") {
+        if (validateForm(trimmedData)) {
+          return;
+        }
+        const dataUpdateInvoice = { ...payload, status: invoiceData.status };
+        console.log(dataUpdateInvoice, invoiceData.id)
+        fetchData(dataUpdateInvoice, "PUT", invoiceData.id);
         props.close();
       }
     }
@@ -313,6 +334,7 @@ const InvoiceForm: React.FC<{
     const itemValuesArray = getItemsArray(allFormValues);
 
     setInvoiceData({
+      id: invoiceData.id,
       description: allFormValues.project,
       senderAddress: {
         street: allFormValues.supplierStreetAddress,
@@ -321,7 +343,8 @@ const InvoiceForm: React.FC<{
         country: allFormValues.supplierCountry,
       },
       createdAt: allFormValues.invoiceDate,
-      paymentDue: "",
+      paymentDue: invoiceData.paymentDue,
+      status: invoiceData.status,
       clientAddress: {
         street: allFormValues.clientStreetAddress,
         city: allFormValues.clientCity,
@@ -683,7 +706,7 @@ const InvoiceForm: React.FC<{
           <Button
             description={props.edit ? "Save Changes" : "Save & Send"}
             buttonType={styles.saveInvoice}
-            name="saveButton"
+            name={props.edit ? "updateButton" : "saveButton"}
           />
         </div>
       </div>

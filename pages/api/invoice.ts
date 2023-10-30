@@ -58,7 +58,7 @@ export default async function handler(
       const result = await invoicesCollection.insertOne(
         {
           invoiceNumber: invoiceNumberGenerator(updatedCounter!.seq),
-          ...req.body,
+          ...req.body.data,
         },
         { session }
       );
