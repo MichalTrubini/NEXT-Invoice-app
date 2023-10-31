@@ -4,14 +4,10 @@ import { useContext } from "react";
 import { SiteContext } from "../../store/site-context";
 import { useMediaQuery } from "../../utils/hooks";
 import { Size } from "../../types/enums";
-import { formatDate } from "../../utils/functions";
+import { formatDate, getTotal } from "../../utils/functions";
 
 const InvoiceDetails: React.FC<InvoiceProps> = (props) => {
   const { setThemeStyles } = useContext(SiteContext)!;
-
-  const totalPrice = props.items.reduce((total, item) => {
-    return total + Number(item.quantity) * Number(item.price);
-  }, 0);
 
   const matches = useMediaQuery(Size.tabletBreakpoint);
   return (
@@ -188,7 +184,7 @@ const InvoiceDetails: React.FC<InvoiceProps> = (props) => {
                             className={`${styles.item} ${setThemeStyles(
                               "textFour"
                             )}`}
-                          >{`${item.quantity} x € ${item.price}`}</p>
+                          >{`${Number(item.quantity)} x € ${Number(item.price)}`}</p>
                         </div>
                       </td>
                     )}
@@ -235,7 +231,7 @@ const InvoiceDetails: React.FC<InvoiceProps> = (props) => {
             )}`}
           >
             <p className={styles.grandTotalText}>Grand Total</p>
-            <p className={styles.grandTotal}>{`€ ${totalPrice.toLocaleString(
+            <p className={styles.grandTotal}>{`€ ${(getTotal(props.items)).toLocaleString(
               "sk"
             )}`}</p>
           </div>

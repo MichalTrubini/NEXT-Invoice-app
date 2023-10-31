@@ -67,6 +67,11 @@ const InvoiceSingle = ({
     setAnimate(true);
   };
 
+  const handleStatus = async (status: string) => {
+    const data = { status: status };
+    const response = await fetchData(data, "PUT", invoiceItem._id);
+    setInvoiceData(response);
+  };
   const closeEditHandler = () => {
     setTimeout(() => {
       setEditInvoice(false);
@@ -122,8 +127,8 @@ const InvoiceSingle = ({
             <InvoiceBody
               animation={animate}
               close={closeEditHandler}
-              data={invoiceItem}
-              title={`Edit #${invoiceItem.invoiceNumber}`}
+              data={invoiceData}
+              title={`Edit #${invoiceData.invoiceNumber}`}
               edit={true}
               triggerFetch={triggerFetchHandler}
             />
@@ -134,11 +139,13 @@ const InvoiceSingle = ({
         </Portal>
         <GoBack />
         <div className={`${setThemeStyles("backgroundThree")} statusCTA`}>
-          <InvoiceStatus status={invoiceItem.status} />
+          <InvoiceStatus status={invoiceData.status} />
           {matches && (
             <InvoiceCTA
               showModal={() => setShowModal(true)}
               editInvoice={editHandler}
+              status={invoiceData.status}
+              handleStatus={handleStatus}
             />
           )}
         </div>
@@ -164,6 +171,8 @@ const InvoiceSingle = ({
         <InvoiceCTA
           showModal={() => setShowModal(true)}
           editInvoice={editHandler}
+          status={invoiceData.status}
+          handleStatus={handleStatus}
         />
       )}
     </>

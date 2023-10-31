@@ -6,11 +6,10 @@ import Button from "../../components/Button";
 const invoiceCTA: React.FC<{
   showModal: () => void;
   editInvoice: () => void;
+  handleStatus: (status: string) => void;
+  status: string
 }> = (props) => {
   const { setThemeStyles } = useContext(SiteContext)!;
-  const handleClick = () => {
-    console.log("clicked");
-  };
 
   return (
     <div className={`${styles.container} ${setThemeStyles("backgroundThree")}`}>
@@ -26,9 +25,9 @@ const invoiceCTA: React.FC<{
         onClick={props.showModal}
       />
       <Button
-        description="Mark as Paid"
+        description={props.status === "paid" ? "Mark as Pending" : props.status === "pending" ? "Mark as Paid" : "Mark as Pending"}
         buttonType={styles.paid}
-        onClick={handleClick}
+        onClick={() => props.handleStatus(props.status === "paid" ? "pending" : props.status === "pending" ? "paid" : "pending")}
       />
     </div>
   );

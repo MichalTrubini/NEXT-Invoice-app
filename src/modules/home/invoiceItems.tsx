@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useMediaQuery } from "../../utils/hooks";
 import Link from "next/link";
 import { Size } from "../../types/enums";
-import { getTotal } from "../../utils/functions";
+import { formatDate, getTotal } from "../../utils/functions";
 import { InvoiceData } from "../../types/types";
 
 const InvoiceItems: React.FC<{ invoiceItems: InvoiceData[] }> = (
@@ -25,12 +25,12 @@ const InvoiceItems: React.FC<{ invoiceItems: InvoiceData[] }> = (
                 <span className={setThemeStyles("textTwo")}>#</span>
                 <span className={setThemeStyles("textOne")}>{item.invoiceNumber}</span>
               </h2>
-              {matches && <p className={`${styles.date} ${setThemeStyles("textTwo")}`}>Due 19 Aug 2021</p>}
+              {matches && <p className={`${styles.date} ${setThemeStyles("textTwo")}`}>{formatDate(new Date(item.paymentDue))}</p>}
               <p className={`${styles.name} ${setThemeStyles("textThree")}`}>{item.clientName}</p>
             </div>
             <div className={styles.bottomRow}>
               <div>
-                {!matches && <p className={`${styles.date} ${setThemeStyles("textTwo")}`}>Due 19 Aug 2021</p>}
+                {!matches && <p className={`${styles.date} ${setThemeStyles("textTwo")}`}>{formatDate(new Date(item.paymentDue))}</p>}
                 <p className={`${styles.price} ${setThemeStyles("textOne")}`}>{`€ ${getTotal(item.items).toLocaleString(
                   "sk"
                 )}`}</p>
