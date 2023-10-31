@@ -22,4 +22,6 @@ const FormElement = forwardRef<HTMLInputElement, MyInputProps>(({label, min, typ
   );
 });
 
+FormElement.displayName = "FormElement";
+
 export default FormElement;

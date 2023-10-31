@@ -1,15 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
 
-export const useHasMounted = () => {
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  return hasMounted;
-};
-
 export const useScreenWidth = () => {
     const [screenWidth, setScreenWidth] = useState(0);
 
@@ -52,7 +42,7 @@ export const useMediaQuery = (width:number) =>
     if (media.matches) setTargetReached(true)
 
     return () => media.removeEventListener('change', updateTarget)
-  }, [])
+  }, [width, updateTarget])
 
   return targetReached
 }

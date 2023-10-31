@@ -3,7 +3,7 @@ import styles from "./invoiceCTA.module.css";
 import { useContext } from "react";
 import Button from "../../components/Button";
 
-const invoiceCTA: React.FC<{
+const InvoiceCTA: React.FC<{
   showModal: () => void;
   editInvoice: () => void;
   handleStatus: (status: string) => void;
@@ -33,4 +33,4 @@ const invoiceCTA: React.FC<{
   );
 };
 
-export default invoiceCTA;
+export default InvoiceCTA;

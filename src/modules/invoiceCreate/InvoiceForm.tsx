@@ -374,7 +374,7 @@ const InvoiceForm: React.FC<{
           <h3 className={styles.formHeader}>Bill From</h3>
           <div className={styles.formElementWrapper}>
             {isError.supplierStreetAddress && (
-              <p className={styles.errorMessage}>cant't be empty</p>
+              <p className={styles.errorMessage}>cant&apos;t be empty</p>
             )}
             <FormElement
               label="Street Address"
@@ -390,7 +390,7 @@ const InvoiceForm: React.FC<{
           <div className={styles.gridArea}>
             <div className={styles.city}>
               {isError.supplierCity && (
-                <p className={styles.errorMessage}>cant't be empty</p>
+                <p className={styles.errorMessage}>cant&apos;t be empty</p>
               )}
               <FormElement
                 label="City"
@@ -401,7 +401,7 @@ const InvoiceForm: React.FC<{
             </div>
             <div className={styles.postCode}>
               {isError.supplierPostcode && (
-                <p className={styles.errorMessage}>cant't be empty</p>
+                <p className={styles.errorMessage}>cant&apos;t be empty</p>
               )}
               <FormElement
                 label="Post Code"
@@ -412,7 +412,7 @@ const InvoiceForm: React.FC<{
             </div>
             <div className={styles.country}>
               {isError.supplierCountry && (
-                <p className={styles.errorMessage}>cant't be empty</p>
+                <p className={styles.errorMessage}>cant&apos;t be empty</p>
               )}
               <FormElement
                 label="Country"
@@ -427,7 +427,7 @@ const InvoiceForm: React.FC<{
           <h3 className={styles.formHeader}>Bill To</h3>
           <div className={styles.formElementWrapper}>
             {isError.clientName && (
-              <p className={styles.errorMessage}>cant't be empty</p>
+              <p className={styles.errorMessage}>cant&apos;t be empty</p>
             )}
             <FormElement
               label="Client's Name"
@@ -438,7 +438,7 @@ const InvoiceForm: React.FC<{
           </div>
           <div className={styles.formElementWrapper}>
             {isError.clientEmail && (
-              <p className={styles.errorMessage}>cant't be empty</p>
+              <p className={styles.errorMessage}>cant&apos;t be empty</p>
             )}
             {isError.clientEmailFormat && (
               <p className={styles.errorMessage}>wrong format</p>
@@ -461,7 +461,7 @@ const InvoiceForm: React.FC<{
           </div>
           <div className={styles.formElementWrapper}>
             {isError.clientStreetAddress && (
-              <p className={styles.errorMessage}>cant't be empty</p>
+              <p className={styles.errorMessage}>cant&apos;t be empty</p>
             )}
             <FormElement
               label="Street Address"
@@ -473,7 +473,7 @@ const InvoiceForm: React.FC<{
           <div className={styles.gridArea}>
             <div className={styles.city}>
               {isError.clientCity && (
-                <p className={styles.errorMessage}>cant't be empty</p>
+                <p className={styles.errorMessage}>cant&apos;t be empty</p>
               )}
               <FormElement
                 label="City"
@@ -484,7 +484,7 @@ const InvoiceForm: React.FC<{
             </div>
             <div className={styles.postCode}>
               {isError.clientPostcode && (
-                <p className={styles.errorMessage}>cant't be empty</p>
+                <p className={styles.errorMessage}>cant&apos;t be empty</p>
               )}
               <FormElement
                 label="Post Code"
@@ -495,7 +495,7 @@ const InvoiceForm: React.FC<{
             </div>
             <div className={styles.country}>
               {isError.clientCountry && (
-                <p className={styles.errorMessage}>cant't be empty</p>
+                <p className={styles.errorMessage}>cant&apos;t be empty</p>
               )}
               <FormElement
                 label="Country"
@@ -543,7 +543,7 @@ const InvoiceForm: React.FC<{
           </div>
           <div className={styles.formElementWrapper}>
             {isError.clientCountry && (
-              <p className={styles.errorMessage}>cant't be empty</p>
+              <p className={styles.errorMessage}>cant&apos;t be empty</p>
             )}
             <FormElement
               label="Project Description"
@@ -611,6 +611,7 @@ const InvoiceForm: React.FC<{
                       }
                       label="Price"
                       type="number"
+                      step={0.01}
                       {...register(`price_${index}`)}
                     />
                   </div>

@@ -5,20 +5,11 @@ import { useEffect } from "react";
 const ErrorPage = ({ statusCode }: { statusCode: number | null }) => {
   const router = useRouter();
 
-  if (statusCode === 404) {
-    // Redirect to the root ("/") for 404 errors
-    useEffect(() => {
-        router.push('/')
-      }, [])
-    return null;
-  }
-
-  // Handle other error status codes or display a custom error page
-  return (
-    <div>
-      <p>Error {statusCode || "An error occurred"}</p>
-    </div>
-  );
+  // Redirect to the root ("/") for 404 errors
+  useEffect(() => {
+    if (statusCode === 404) router.push("/");
+  }, [router, statusCode]);
+  return null;
 };
 
 ErrorPage.getInitialProps = ({ res, err }: NextPageContext) => {
