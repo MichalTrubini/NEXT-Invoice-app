@@ -53,6 +53,10 @@
   height: 32px;
 }
 
+.addContainer:hover {
+  background-color: #9277FF;
+}
+
 .addInvoice {
   color: var(--light100);
   font-size: 1.5rem;

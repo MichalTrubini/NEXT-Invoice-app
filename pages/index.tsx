@@ -8,6 +8,7 @@ import Portal from "../src/layout/Portal";
 import InvoiceBody from "../src/modules/invoiceCreate/InvoiceBody";
 import Overlay from "../src/components/Overlay";
 import fetchData from "../src/core/fetchData";
+import NothingFound from "../src/modules/home/NothingFound";
 
 const Home = ({
   invoiceItems,
@@ -75,7 +76,6 @@ const Home = ({
 
   useEffect(() => {
     setInvoiceData(invoiceItems);
-
   }, [invoiceItems]);
 
   const newInvoiceHandler = () => {
@@ -94,7 +94,7 @@ const Home = ({
   const fetchDataHandler = async (data: any, method: string, id?: string) => {
     const fetchedData = await fetchData(data, method, id);
     setInvoiceData(fetchedData);
-  }
+  };
 
   return (
     <div>
@@ -128,7 +128,11 @@ const Home = ({
           invoiceQty={invoiceQty}
           newInvoiceHandler={newInvoiceHandler}
         />
-        <InvoiceItems invoiceItems={sourceData()} />
+        {sourceData().length === 0 ? (
+          <NothingFound />
+        ) : (
+          <InvoiceItems invoiceItems={sourceData()} />
+        )}
       </div>
     </div>
   );
