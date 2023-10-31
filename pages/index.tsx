@@ -9,6 +9,7 @@ import InvoiceBody from "../src/modules/invoiceCreate/InvoiceBody";
 import Overlay from "../src/components/Overlay";
 import fetchData from "../src/core/fetchData";
 import NothingFound from "../src/modules/home/NothingFound";
+import { useRouter } from "next/router";
 
 const Home = ({
   invoiceItems,
@@ -61,7 +62,7 @@ const Home = ({
   const data = invoiceData.filter((item: any) =>
     selectedByFilter.includes(item.status)
   );
-
+  const router = useRouter();
   const sourceData = () => {
     if (
       draftSelected === false &&
@@ -77,6 +78,16 @@ const Home = ({
   useEffect(() => {
     setInvoiceData(invoiceItems);
   }, [invoiceItems]);
+
+  useEffect(() => {
+    const fetchDataAndSetInvoiceData = async () => {
+      if (router.query.deleted === 'true') {
+        const response = await fetchData(null, "GET");
+        setInvoiceData(response);
+      }
+    };
+    fetchDataAndSetInvoiceData();
+  }, [router.query.deleted]);
 
   const newInvoiceHandler = () => {
     setNewInvoice(true);

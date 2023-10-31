@@ -224,7 +224,7 @@ const InvoiceForm: React.FC<{
       /^[\w]{1,}[\w.+-]{0,}@[\w-]{2,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,})$/;
 
     requiredFields.forEach((field) => {
-      if (data[field] === "") {
+      if (data[field] === "" && invoiceData.status !== "draft") {
         errors = true;
         updatedIsError[field] = true;
       } else if (regex.test(data.clientEmail) === false) {
@@ -305,7 +305,7 @@ const InvoiceForm: React.FC<{
         props.triggerFetch(dataCreateInvoice, "POST");
         props.close();
       } else if (buttonName === "updateButton") {
-        if (validateForm(trimmedData)) {
+        if (validateForm(trimmedData) && invoiceData.status !== "draft") {
           return;
         }
         const dataUpdateInvoice = { ...payload, status: invoiceData.status };
@@ -610,6 +610,7 @@ const InvoiceForm: React.FC<{
                         getItemValueBoolean("price", index) ? "errorInput" : ""
                       }
                       label="Price"
+                      type="number"
                       {...register(`price_${index}`)}
                     />
                   </div>

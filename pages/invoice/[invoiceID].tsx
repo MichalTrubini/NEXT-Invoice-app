@@ -59,7 +59,7 @@ const InvoiceSingle = ({
   const deleteHandler = () => {
     setShowModal(false);
     fetchData(null, "DELETE", invoiceItem._id);
-    router.push("/");
+    router.push({ pathname: '/', query: { deleted: 'true' } });
   };
 
   const editHandler = () => {
@@ -101,7 +101,6 @@ const InvoiceSingle = ({
 
   const triggerFetchHandler = async (data: any, method: string, id?: string) => {
     const fetchedData = await fetchData(data, method, id);
-    console.log(fetchedData)
     setInvoiceData(fetchedData);
   };
 
