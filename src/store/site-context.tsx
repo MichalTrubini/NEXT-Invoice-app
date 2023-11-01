@@ -22,6 +22,7 @@ interface ThemeStyles {
   shadowOne: string;
   hoverOne: string;
   placeholder: string;
+  spinner : string;
 }
 
 interface SiteContextValue {
@@ -65,7 +66,8 @@ export function SiteProvider({ children }: SiteProviderProps) {
         borderTwo: 'brb-DFE3FA',
         shadowOne: 'shadowOne-light',
         hoverOne: 'hoverOne-light',
-        placeholder: 'placeholder-light'
+        placeholder: 'placeholder-light',
+        spinner: 'spinner-light'
       },
       themeDark: {
         backgroundOne: "b-141625",
@@ -88,7 +90,8 @@ export function SiteProvider({ children }: SiteProviderProps) {
         borderTwo: 'brb-1E2139',
         shadowOne: 'shadowOne-dark',
         hoverOne: 'hoverOne-dark',
-        placeholder: 'placeholder-dark'
+        placeholder: 'placeholder-dark',
+        spinner: 'spinner-dark'
       }
     };
 
