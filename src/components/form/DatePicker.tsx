@@ -4,7 +4,7 @@ import { SiteContext } from "../../store/site-context";
 import Calendar from "react-calendar";
 import Image from "next/image";
 import iconCalendar from "../../../public/assets/icon-calendar.svg";
-import styles from "./DatePicker.module.css";
+import styles from "./datePicker.module.css";
 import { formatDate } from "../../utils/functions";
 
 const DatePicker: React.FC<DatePickerProps> = ({ field }) => {
