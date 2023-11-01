@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import styles from "./InvoiceForm.module.css";
-import FormElement from "../../components/form/FormElement";
-import Button from "../../components/Button";
+import FormElement from "../../components/form/formElement";
+import Button from "../../components/button";
 import { useContext, useEffect, useState } from "react";
 import { SiteContext } from "../../store/site-context";
 import { Size } from "../../types/enums";
@@ -16,8 +16,8 @@ import {
   convertDateToString,
   calculatedDueDate,
 } from "../../utils/functions";
-import PaymentTermsPicker from "../../components/form/PaymentTermsPicker";
-import DatePicker from "../../components/form/DatePicker";
+import PaymentTermsPicker from "../../components/form/paymentTermsPicker";
+import DatePicker from "../../components/form/datePicker";
 
 const InvoiceForm: React.FC<{
   close: any;

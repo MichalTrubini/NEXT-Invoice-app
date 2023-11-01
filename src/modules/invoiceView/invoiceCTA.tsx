@@ -1,13 +1,13 @@
 import { SiteContext } from "../../store/site-context";
 import styles from "./InvoiceCTA.module.css";
 import { useContext } from "react";
-import Button from "../../components/Button";
+import Button from "../../components/button";
 
 const InvoiceCTA: React.FC<{
   showModal: () => void;
   editInvoice: () => void;
   handleStatus: (status: string) => void;
-  status: string
+  status: string;
 }> = (props) => {
   const { setThemeStyles } = useContext(SiteContext)!;
 
@@ -16,7 +16,8 @@ const InvoiceCTA: React.FC<{
       <Button
         description="Edit"
         buttonType={`${setThemeStyles("backgroundFive")} ${setThemeStyles(
-            "hoverOne")} ${styles.edit}`}
+          "hoverOne"
+        )} ${styles.edit}`}
         onClick={props.editInvoice}
       />
       <Button
@@ -25,9 +26,23 @@ const InvoiceCTA: React.FC<{
         onClick={props.showModal}
       />
       <Button
-        description={props.status === "paid" ? "Mark as Pending" : props.status === "pending" ? "Mark as Paid" : "Mark as Pending"}
+        description={
+          props.status === "paid"
+            ? "Mark as Pending"
+            : props.status === "pending"
+            ? "Mark as Paid"
+            : "Mark as Pending"
+        }
         buttonType={styles.paid}
-        onClick={() => props.handleStatus(props.status === "paid" ? "pending" : props.status === "pending" ? "paid" : "pending")}
+        onClick={() =>
+          props.handleStatus(
+            props.status === "paid"
+              ? "pending"
+              : props.status === "pending"
+              ? "paid"
+              : "pending"
+          )
+        }
       />
     </div>
   );

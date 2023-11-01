@@ -1,14 +1,14 @@
 import Head from "next/head";
-import InvoiceHeader from "../src/modules/home/InvoiceHeader";
+import InvoiceHeader from "../src/modules/home/invoiceHeader";
 import { MongoClient } from "mongodb";
-import InvoiceItems from "../src/modules/home/InvoiceItems";
+import InvoiceItems from "../src/modules/home/invoiceItems";
 import { useEffect, useState } from "react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import Portal from "../src/layout/Portal";
-import InvoiceBody from "../src/modules/invoiceCreate/InvoiceBody";
-import Overlay from "../src/components/Overlay";
+import Portal from "../src/layout/portal";
+import InvoiceBody from "../src/modules/invoiceCreate/invoiceBody";
+import Overlay from "../src/components/overlay";
 import fetchData from "../src/core/fetchData";
-import NothingFound from "../src/modules/home/NothingFound";
+import NothingFound from "../src/modules/home/nothingFound";
 import { useRouter } from "next/router";
 
 const Home = ({
@@ -81,7 +81,7 @@ const Home = ({
 
   useEffect(() => {
     const fetchDataAndSetInvoiceData = async () => {
-      if (router.query.deleted === 'true') {
+      if (router.query.deleted === "true") {
         const response = await fetchData(null, "GET");
         setInvoiceData(response);
       }

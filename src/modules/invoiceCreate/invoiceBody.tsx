@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import InvoiceForm from "./InvoiceForm";
-import styles from "./InvoiceBody.module.css";
+import InvoiceForm from "./invoiceForm";
+import styles from "./invoiceBody.module.css";
 import { SiteContext } from "../../store/site-context";
-import GoBack from "../../components/GoBack";
+import GoBack from "../../components/goBack";
 import { Size } from "../../types/enums";
 import { useScreenWidth } from "../../utils/hooks";
 import { InvoiceData } from "../../types/types";
@@ -52,7 +52,12 @@ const InvoiceBody: React.FC<{
           {props.title}
         </h2>
       </div>
-      <InvoiceForm close={props.close} data={props.data} edit={props.edit}  triggerFetch={props.triggerFetch}/>
+      <InvoiceForm
+        close={props.close}
+        data={props.data}
+        edit={props.edit}
+        triggerFetch={props.triggerFetch}
+      />
     </div>
   );
 };
