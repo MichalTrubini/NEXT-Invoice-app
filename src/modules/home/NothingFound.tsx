@@ -1,6 +1,6 @@
 import Image from "next/image";
 import nothingHere from "../../../public/assets/nothingFound.svg";
-import styles from "./NothingFound.module.css";
+import styles from "./nothingFound.module.css";
 import { useContext } from "react";
 import { SiteContext } from "../../store/site-context";
 

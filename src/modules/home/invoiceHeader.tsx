@@ -1,4 +1,4 @@
-import styles from "./InvoiceHeader.module.css";
+import styles from "./invoiceHeader.module.css";
 import { SiteContext } from "../../store/site-context";
 import { useContext, useEffect, useRef, useState } from "react";
 import Image from "next/image";

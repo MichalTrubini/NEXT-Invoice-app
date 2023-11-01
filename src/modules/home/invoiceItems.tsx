@@ -1,4 +1,4 @@
-import styles from "./InvoiceItems.module.css";
+import styles from "./invoiceItems.module.css";
 import { SiteContext} from "../../store/site-context";
 import { useContext } from "react";
 import arrow from "../../../public/assets/icon-arrow-right.svg";

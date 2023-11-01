@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import styles from "./InvoiceForm.module.css";
+import styles from "./invoiceForm.module.css";
 import FormElement from "../../components/form/formElement";
 import Button from "../../components/button";
 import { useContext, useEffect, useState } from "react";

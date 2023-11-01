@@ -1,5 +1,5 @@
 import { SiteContext } from "../../store/site-context";
-import styles from "./InvoiceCTA.module.css";
+import styles from "./invoiceCTA.module.css";
 import { useContext } from "react";
 import Button from "../../components/button";
 

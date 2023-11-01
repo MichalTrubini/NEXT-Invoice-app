@@ -1,4 +1,4 @@
-import styles from "./InvoiceDetails.module.css";
+import styles from "./invoiceDetails.module.css";
 import { InvoiceProps } from "../../types/types";
 import { useContext } from "react";
 import { SiteContext } from "../../store/site-context";

@@ -1,7 +1,7 @@
 import "../src/styles/globals.css";
 import type { AppProps } from "next/app";
 import { SiteProvider } from "../src/store/site-context";
-import Layout from "../src/layout/layout";
+import Layout from "../src";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

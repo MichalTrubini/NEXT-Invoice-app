@@ -1,4 +1,4 @@
-import styles from "./Header.module.css";
+import styles from "./header.module.css";
 import logo from "../../public/assets/logo.svg";
 import moon from "../../public/assets/icon-moon.svg";
 import sun from "../../public/assets/icon-sun.svg";

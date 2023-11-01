@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import Button from "./button";
-import styles from "./DeleteModal.module.css";
+import styles from "./deleteModal.module.css";
 import { SiteContext } from "../store/site-context";
 
 const DeleteModal: React.FC<{

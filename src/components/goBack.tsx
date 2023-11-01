@@ -1,4 +1,4 @@
-import styles from "./GoBack.module.css";
+import styles from "./goBack.module.css";
 import Image from "next/image";
 import arrow from "../../public/assets/icon-arrow-left.svg";
 import Link from "next/link";
