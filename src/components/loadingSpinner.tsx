@@ -1,4 +1,4 @@
-import { PropagateLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 import styles from "./loadingSpinner.module.css";
 import { useContext } from "react";
 import { SiteContext } from "store/site-context";
@@ -10,7 +10,7 @@ const LoadingSpinner = () => {
   return (
     <div className={styles.loadingSpinner}>
       <div className={styles.overlay}></div>
-      <PropagateLoader color={setThemeStyles('spinner') === 'spinner-light' ? '#0c0e16' : '#fff'} loading={true} size={50} />
+      <PulseLoader color={setThemeStyles('spinner') === 'spinner-light' ? '#0c0e16' : '#fff'} loading={true} size={50} />
     </div>
   );
 };
