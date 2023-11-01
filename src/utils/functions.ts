@@ -43,7 +43,7 @@ export function getItemsArray(obj: any) {
 export function formatDate(date: Date | null): string {
   if (!date) return formatDate(new Date());
   const day = date.getDate().toString().padStart(2, "0");
-  const month = date.toLocaleString("default", { month: "short" });
+  const month = date.toLocaleString("default", { month: "short" }).replace(/^\w/, (c) => c.toUpperCase());
   const year = date.getFullYear();
   return `${day} ${month} ${year}`;
 }
