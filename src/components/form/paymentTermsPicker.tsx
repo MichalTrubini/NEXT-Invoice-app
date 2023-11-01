@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { PaymentTermsPickerProps } from "../../types/types";
 import { SiteContext } from "../../store/site-context";
-import styles from "./paymentTermsPicker.module.css";
+import styles from "./PaymentTermsPicker.module.css";
 import iconArrow from "../../../public/assets/icon-arrow-down.svg";
 import Image from "next/image";
 

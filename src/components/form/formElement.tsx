@@ -1,5 +1,5 @@
 import { forwardRef, useContext } from "react";
-import styles from "./formElement.module.css";
+import styles from "./FormElement.module.css";
 import { SiteContext } from "../../store/site-context";
 import { MyInputProps } from "../../types/types";
 
