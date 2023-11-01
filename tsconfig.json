@@ -13,18 +13,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "baseUrl": ".", 
+    "paths": {
+      "*": ["src/*"]
+    }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
-    "src/components/home/invoiceHeader.tsx",
-    "src/components/home/invoiceItems.tsx",
-    "pages/index.tsx",
-    "src/shared/utils/hooks.ts",
-    "src/shared/layout/header.tsx",
-    "src/shared/store/site-context.js"
+    "**/*.tsx"
   ],
   "exclude": ["node_modules"]
 }
