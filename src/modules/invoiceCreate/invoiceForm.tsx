@@ -270,6 +270,8 @@ const InvoiceForm: React.FC<{
     const qty = watch(`quantity_${index}`) || 0;
     const price = watch(`price_${index}`) || 0;
     const total = Number(qty) * Number(price);
+    console.log(`quantity_${index}`)
+    console.log(`price_${index}`)
     return total.toFixed(2);
   };
 

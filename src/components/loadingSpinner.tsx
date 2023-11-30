@@ -6,7 +6,6 @@ import { SiteContext } from "store/site-context";
 const LoadingSpinner = () => {
   const { setThemeStyles } = useContext(SiteContext)!;
 
-  console.log(setThemeStyles('spinner'));
   return (
     <div className={styles.loadingSpinner}>
       <div className={styles.overlay}></div>
