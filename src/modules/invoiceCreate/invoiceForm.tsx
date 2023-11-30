@@ -528,14 +528,16 @@ const InvoiceForm: React.FC<{
               <Controller
                 name="invoiceDate"
                 control={control}
-                render={({ field }) => (
-                  <DatePicker
-                    field={{
-                      ...field,
-                      value: field.value ? new Date(field.value) : null,
-                    }}
-                  />
-                )}
+                render={({ field }) => {
+                  return (
+                    <DatePicker
+                      field={{
+                        ...field,
+                        value: field.value ? new Date(field.value) : null,
+                      }}
+                    />
+                  );
+                }}
               />
             </div>
             <div className={styles.formElementWrapper}>

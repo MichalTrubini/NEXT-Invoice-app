@@ -61,7 +61,7 @@ export function getDefaultValues(invoiceData: InvoiceData): DefaultValues {
     supplierCountry: invoiceData.supplierAddress.country,
     supplierPostcode: invoiceData.supplierAddress.postCode,
     supplierStreetAddress: invoiceData.supplierAddress.street,
-    invoiceDate: new Date() as any as string,
+    invoiceDate: invoiceData.createdAt ? invoiceData.createdAt : new Date() as any as string,
     paymentTerms: "Net 30 Days",
   };
 
