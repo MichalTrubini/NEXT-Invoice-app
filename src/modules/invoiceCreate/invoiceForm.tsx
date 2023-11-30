@@ -74,7 +74,13 @@ const InvoiceForm: React.FC<{
     clientPostcode: false,
     clientCountry: false,
     project: false,
-    items: [] as Array<{ name: boolean; quantity: boolean; price: boolean }>,
+    items: props.data
+    ? props.data.items.map((item) => ({
+        name: false,
+        quantity: false,
+        price: false,
+      }))
+    : [] as Array<{ name: boolean; quantity: boolean; price: boolean }>,
   });
 
   const formDefaultValues = getDefaultValues(invoiceData);
@@ -120,6 +126,7 @@ const InvoiceForm: React.FC<{
   }, [invoiceData.items]);
 
   useEffect(() => {
+    
     const subscription = watch((value, { name, type }) => {
       setIsError((prevState) => ({ ...prevState, [name as string]: false }));
       name === "clientEmail" &&
@@ -270,8 +277,6 @@ const InvoiceForm: React.FC<{
     const qty = watch(`quantity_${index}`) || 0;
     const price = watch(`price_${index}`) || 0;
     const total = Number(qty) * Number(price);
-    console.log(`quantity_${index}`)
-    console.log(`price_${index}`)
     return total.toFixed(2);
   };
 
