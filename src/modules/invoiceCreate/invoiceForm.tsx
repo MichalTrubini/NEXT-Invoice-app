@@ -266,6 +266,13 @@ const InvoiceForm: React.FC<{
     return errors;
   };
 
+  const calculateTotal = (index: number) => {
+    const qty = watch(`quantity_${index}`) || 0;
+    const price = watch(`price_${index}`) || 0;
+    const total = Number(qty) * Number(price);
+    return total.toFixed(2);
+  };
+
   const onSubmit: SubmitHandler<Inputs> = (values, event) => {
     const trimmedData: Inputs = {
       supplierStreetAddress: "",
@@ -298,6 +305,7 @@ const InvoiceForm: React.FC<{
         props.triggerFetch(dataSaveDraft, "POST");
         props.close();
       } else if (buttonName === "saveButton") {
+        console.log(trimmedData)
         if (validateForm(trimmedData)) {
           return;
         }
@@ -305,6 +313,7 @@ const InvoiceForm: React.FC<{
         props.triggerFetch(dataCreateInvoice, "POST");
         props.close();
       } else if (buttonName === "updateButton") {
+        console.log(trimmedData, values)
         if (validateForm(trimmedData) && invoiceData.status !== "draft") {
           return;
         }
@@ -638,7 +647,7 @@ const InvoiceForm: React.FC<{
                         "textTwo"
                       )}`}
                     >
-                      {Number(item.price) * Number(item.quantity)}
+                      {calculateTotal(index)}
                     </p>
                   </div>
                   <div className={styles.deleteRow}>
