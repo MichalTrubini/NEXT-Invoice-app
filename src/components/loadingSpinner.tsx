@@ -9,7 +9,16 @@ const LoadingSpinner = () => {
   return (
     <div className={styles.loadingSpinner}>
       <div className={styles.overlay}></div>
-      <PuffLoader color={setThemeStyles('spinner') === 'spinner-light' ? '#0c0e16' : '#fff'} loading={true} size={120} />
+      <div className={styles.wrapper}>
+        <p className={`${setThemeStyles("spinner")} ${styles.text}` }>Loading...</p>
+        <PuffLoader
+          color={
+            setThemeStyles("spinner") === "spinner-light" ? "#0c0e16" : "#fff"
+          }
+          loading={true}
+          size={120}
+        />
+      </div>
     </div>
   );
 };

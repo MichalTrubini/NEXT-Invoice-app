@@ -6,14 +6,25 @@
   position: relative;
 }
 
-.loadingSpinner > div {
-  display: block;
-  margin: 0 auto;
-}
-
 .overlay {
   position: absolute;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
