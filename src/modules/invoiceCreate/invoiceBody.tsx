@@ -28,7 +28,7 @@ const InvoiceBody: React.FC<{
       screenWidth < Size.desktopBreakpoint ? appHeaderHeight + "px" : "0px"
     );
     setHeaderWidth(
-      screenWidth > Size.desktopBreakpoint ? appHeaderWidth + "px" : "0px"
+      screenWidth >= Size.desktopBreakpoint ? appHeaderWidth + "px" : "0px"
     );
     setInvoiceWidth(
       screenWidth < Size.desktopBreakpoint ? 616 : 639 + appHeaderWidth
